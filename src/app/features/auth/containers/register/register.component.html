@@ -1,0 +1,34 @@
+<form [formGroup]="registerationForm" (ngSubmit)="onSubmit()" class="registeration-form">
+    <h1 class="registeration-form-title">Register CMS</h1>
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email">
+        <mat-error *ngIf="registerationFormControl.email.hasError('email') && !registerationFormControl.email.hasError('required')">
+            Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="registerationFormControl.email.hasError('required')">
+            Email is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password">
+        <mat-error *ngIf="registerationFormControl.password.hasError('required')">
+            Password is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Confirm Password</mat-label>
+        <input type="password" matInput formControlName="passwordConfirmation">
+        <mat-error *ngIf="registerationFormControl.passwordConfirmation.hasError('required')">
+           Please confirm your password
+        </mat-error>
+    </mat-form-field>
+    
+    <mat-checkbox formControlName="terms">I agree to all <a href="#">terms</a>.</mat-checkbox>
+
+    <button type="submit" mat-raised-button>Create your account</button>
+    <div class="registeration-form-notice">
+        Already have an account? <a [routerLink]="['/auth/login']">Login</a>
+    </div>
+</form>

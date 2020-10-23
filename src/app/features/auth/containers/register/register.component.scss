@@ -1,0 +1,23 @@
+.registeration-form {
+  .registeration-form-title {
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+  }
+
+  .mat-form-field,
+  .mat-raised-button {
+    width: 100%;
+  }
+
+  .mat-raised-button {
+    margin-top: 1rem;
+  }
+
+  .registeration-form-notice{
+      margin-top: 1rem;
+      text-align: center;
+      font-size: .8rem;
+  }
+}

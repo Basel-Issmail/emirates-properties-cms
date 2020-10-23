@@ -1,0 +1,31 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="login-form">
+    <h1 class="login-form-title">Login CMS</h1>
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email">
+        <mat-error *ngIf="loginFormControl.email.hasError('email') && !loginFormControl.email.hasError('required')">
+            Please enter a valid email address
+        </mat-error>
+        <mat-error *ngIf="loginFormControl.email.hasError('required')">
+            Email is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Password</mat-label>
+        <input type="password" matInput formControlName="password">
+        <mat-error *ngIf="loginFormControl.password.hasError('required')">
+            Password is <strong>required</strong>
+        </mat-error>
+    </mat-form-field>
+
+    <div class="login-options">
+        <div class="remember">
+            <mat-checkbox formControlName="remember">Remember me</mat-checkbox>
+        </div>
+        <div class="forget">
+            <a [routerLink]="['/auth/forget-password']">Forgot password?</a>
+        </div>
+    </div>
+
+    <button type="submit" mat-raised-button>Login</button>
+</form>
