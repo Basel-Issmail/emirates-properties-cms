@@ -1,0 +1,65 @@
+@import '~@angular/material/theming';
+
+
+$emirates-properties-cms-background: (
+  status-bar: black,
+  app-bar: map_get($mat-grey, 300),
+  background: #303030,
+  hover: rgba(white, 0.04), // TODO(kara): check style with Material Design UX
+  card: white,
+  dialog: map_get($mat-grey, 800),
+  disabled-button: rgba(white, 0.12),
+  raised-button: map-get($mat-grey, 800),
+  focused-button: $light-focused,
+  selected-button: map_get($mat-grey, 900),
+  selected-disabled-button: map_get($mat-grey, 800),
+  disabled-button-toggle: black,
+  unselected-chip: map_get($mat-grey, 700),
+  disabled-list-option: black,
+  tooltip: map_get($mat-grey, 700),
+);
+
+// Foreground palette for light themes.
+$emirates-properties-cms-foreground: (
+  base:              black,
+  divider:           $dark-dividers,
+  dividers:          $dark-dividers,
+  disabled:          $dark-disabled-text,
+  disabled-button:   rgba(black, 0.26),
+  disabled-text:     $dark-disabled-text,
+  elevation:         black,
+  hint-text:         $dark-disabled-text,
+  secondary-text:    $dark-secondary-text,
+  icon:              rgba(black, 0.54),
+  icons:             rgba(black, 0.54),
+  text:              rgba(black, 0.87),
+  slider-min:        rgba(black, 0.87),
+  slider-off:        rgba(black, 0.26),
+  slider-off-active: rgba(black, 0.38),
+);
+
+@function emirates-properties-cms-theme($primary, $accent, $warn: mat-palette($mat-red)) {
+    @return (
+      primary: $primary,
+      accent: $accent,
+      warn: $warn,
+      is-dark: false,
+      foreground: $emirates-properties-cms-foreground,
+      background: $emirates-properties-cms-background,
+    );
+  }
+
+
+$emirates-properties-cms-primary: mat-palette($mat-indigo);
+$emirates-properties-cms-accent: mat-palette($mat-pink, A200, A100, A400);
+
+// The warn palette is optional (defaults to red).
+$emirates-properties-cms-warn: mat-palette($mat-red);
+
+// Create the theme object. A theme consists of configurations for individual
+// theming systems such as "color" or "typography".
+$emirates-properties-cms-theme: emirates-properties-cms-theme(
+     $emirates-properties-cms-primary,
+     $emirates-properties-cms-accent,
+     $emirates-properties-cms-warn,
+);
