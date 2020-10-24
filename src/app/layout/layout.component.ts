@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SpinnerService } from '../core/services/spinner.service';
 
 @Component({
   selector: 'ep-layout',
@@ -7,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LayoutComponent implements OnInit {
 
-  constructor() { }
+  constructor(public spinnerService: SpinnerService) { }
 
   ngOnInit(): void {
   }

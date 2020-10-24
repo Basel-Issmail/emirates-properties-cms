@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ep-login',
@@ -12,7 +14,7 @@ export class LoginComponent implements OnInit {
     password: ['', Validators.required],
     remember: ['']
   })
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
@@ -23,7 +25,10 @@ export class LoginComponent implements OnInit {
 
   onSubmit() {
     if (this.loginForm.valid) {
-      alert('Form Submitted succesfully!!!\n Check the values in browser console.');
+      this.authService.login(this.loginForm.value).subscribe(
+        response => {
+          this.router.navigate(['/'])
+        });
       console.table(this.loginForm.value);
     }
   }

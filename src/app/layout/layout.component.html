@@ -1,3 +1,7 @@
 <ep-header></ep-header>
-
-<p>layout works!</p>
+<router-outlet>
+    <div style="height: 4px !important;">
+        <mat-progress-bar *ngIf="spinnerService.isLoading" style="height: 100% !important;" mode="indeterminate">
+        </mat-progress-bar>
+    </div>
+</router-outlet>
