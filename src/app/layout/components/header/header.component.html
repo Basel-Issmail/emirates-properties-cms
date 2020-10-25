@@ -18,7 +18,7 @@
             <mat-icon>vpn_key</mat-icon>
             <span>Change password</span>
         </button>
-        <button mat-menu-item>
+        <button mat-menu-item (click)="logout.emit()">
             <mat-icon>exit_to_app</mat-icon>
             <span>Logout</span>
         </button>

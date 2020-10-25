@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { AuthApis } from '../auth.constants';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
 import { UserTokenService } from './user-token.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
@@ -22,7 +22,7 @@ export class AuthService {
       UserTokenService.storeToken(response['access_token']);
       this.user = response['user'];
       return response;
-    }),catchError(error => {
+    }), catchError(error => {
       this._snackBar.open('Invalid email or password', '', {
         duration: 2000,
       });
@@ -30,5 +30,12 @@ export class AuthService {
     }))
   }
 
- 
+  logout() {
+    this.user = null;
+    return this.httpClient.post(AuthApis.logout, {}).pipe(tap(response => {
+      UserTokenService.logOut();
+    }));
+  }
+
+
 }

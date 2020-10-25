@@ -7,6 +7,7 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
   @Output() toggleSidenav = new EventEmitter();
+  @Output() logout = new EventEmitter();
   constructor() { }
 
   ngOnInit(): void {
