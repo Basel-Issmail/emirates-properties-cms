@@ -4,10 +4,10 @@
 $emirates-properties-cms-background: (
   status-bar: black,
   app-bar: map_get($mat-grey, 300),
-  background: #303030,
+  background: white,
   hover: rgba(white, 0.04), // TODO(kara): check style with Material Design UX
   card: white,
-  dialog: map_get($mat-grey, 800),
+  dialog: white,
   disabled-button: rgba(white, 0.12),
   raised-button: #d3371e,
   focused-button: $light-focused,

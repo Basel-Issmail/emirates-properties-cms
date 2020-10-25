@@ -1,7 +1,16 @@
-<ep-header></ep-header>
-<router-outlet>
-    <div style="height: 4px !important;">
-        <mat-progress-bar *ngIf="spinnerService.isLoading" style="height: 100% !important;" mode="indeterminate">
-        </mat-progress-bar>
-    </div>
-</router-outlet>
+<ep-header (toggleSidenav)="sidenav.toggle()"></ep-header>
+<mat-sidenav-container class="example-container">
+    <mat-sidenav #sidenav mode="side" class="example-sidenav">
+        <ep-sidenav></ep-sidenav>
+    </mat-sidenav>
+
+    <mat-sidenav-content>
+        <router-outlet>
+            <div style="height: 4px !important;">
+                <mat-progress-bar *ngIf="spinnerService.isLoading" style="height: 100% !important;"
+                    mode="indeterminate">
+                </mat-progress-bar>
+            </div>
+        </router-outlet>
+    </mat-sidenav-content>
+</mat-sidenav-container>    

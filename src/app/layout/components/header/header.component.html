@@ -2,7 +2,11 @@
     <div>
         <img src="assets/images/logo.svg" alt="Emirates Centeral Properties Logo">
     </div>
-    <button class="header-burger" mat-icon-button>
+    <button class="header-burger" mat-icon-button (click)="toggleSidenav.emit()">
         <mat-icon>menu</mat-icon>
+    </button>
+    <span class="l-spacer"></span>
+    <button mat-icon-button>
+        <img class="header-profile_image" src="assets/images/default-profile.svg" alt="Profile Picture">
     </button>
 </mat-toolbar>
