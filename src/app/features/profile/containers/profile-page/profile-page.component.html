@@ -1,0 +1,94 @@
+<div class="profile">
+    <div class="profile-image">
+        <div class="img-wrapper">
+            <img src="assets/images/default-profile.svg" alt="Profile Picture">
+        </div>
+        <div class="profile-image-edit">
+            <div class="profile-image-edit-effect"></div>
+        </div>
+    </div>
+    <h1 class="profile-title">Personal info</h1>
+    <div class="profile-caption">Basic info, like your name and photo, that you use on Emitates Properties CMS</div>
+    <div class="profile-wrapper">
+        <div class="profile-card">
+            <mat-list>
+                <div mat-subheader>
+                    <div>Basic Info</div>
+                    <button mat-icon-button [matMenuTriggerFor]="profileEdit">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                </div>
+                <mat-menu #profileEdit="matMenu" xPosition="before">
+                    <button mat-menu-item [routerLink]="['/profile/edit']">
+                        <mat-icon>edit</mat-icon>
+                        <span>Edit basic info</span>
+                    </button>
+                </mat-menu>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">First name</div>
+                        <div class="profile-info-value"> {{user.first_name}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Last name</div>
+                        <div class="profile-info-value"> {{user.last_name}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Email</div>
+                        <div class="profile-info-value"> {{user.email}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Mobile number</div>
+                        <div class="profile-info-value"> {{user.mobile}}</div>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+
+        <div class="profile-card">
+            <mat-list>
+                <h2 mat-subheader>
+                    <div>Privacy</div>
+                    <button mat-icon-button [matMenuTriggerFor]="passwordEdit">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                </h2>
+                <mat-menu #passwordEdit="matMenu" xPosition="before">
+                    <button mat-menu-item [routerLink]="['/profile/change-password']">
+                        <mat-icon>vpn_key</mat-icon>
+                        <span>Change password</span>
+                    </button>
+                </mat-menu>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Status</div>
+                        <div class="profile-info-value"> Active</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Role</div>
+                        <div class="profile-info-value"> Admin</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Password</div>
+                        <div class="profile-info-value"> ••••••••</div>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+</div>

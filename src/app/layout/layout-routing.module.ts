@@ -6,7 +6,9 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    children: []
+    children: [
+      { path: 'profile', loadChildren: () => import('../features/profile/profile.module').then(m => m.ProfileModule) }
+    ]
   }
 ];
 

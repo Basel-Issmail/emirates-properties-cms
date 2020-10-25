@@ -1,0 +1,63 @@
+<div class="profileform">
+    <div class="profileform-wrapper">
+        <div class="profileform-breadcrumb">
+            <button mat-icon-button [routerLink]="['/profile']">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+            <h1 class="profileform-title">Personal info</h1>
+        </div>
+        <div class="profileform-card">
+            <div mat-subheader>
+                <div>Basic Info</div>
+            </div>
+            <form class="form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+                <table class="form-field" cellspacing="0">
+                    <tr>
+                        <td>
+                            <mat-form-field class="form-field">
+                                <mat-label>First name*</mat-label>
+                                <input matInput formControlName="first_name">
+                                <mat-error *ngIf="userFormControl.first_name.hasError('required')">
+                                    First name is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </td>
+                        <td>
+                            <mat-form-field class="form-field">
+                                <mat-label>Last name*</mat-label>
+                                <input matInput formControlName="last_name">
+                                <mat-error *ngIf="userFormControl.last_name.hasError('required')">
+                                    Last name is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                        </td>
+                    </tr>
+                </table>
+
+                <mat-form-field class="form-field">
+                    <mat-label>Email*</mat-label>
+                    <input type="email" matInput formControlName="email">
+                    <mat-error
+                        *ngIf="userFormControl.email.hasError('email') && !userFormControl.email.hasError('required')">
+                        Please enter a valid email address
+                    </mat-error>
+                    <mat-error *ngIf="userFormControl.email.hasError('required')">
+                        Email is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-field">
+                    <mat-label>Mobile number*</mat-label>
+                    <input matInput formControlName="mobile">
+                    <mat-error *ngIf="userFormControl.mobile.hasError('required')">
+                        Mobile number is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <div class="form-submit">
+                    <button type="submit" color="primary" mat-raised-button>Save</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
