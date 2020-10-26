@@ -14,7 +14,10 @@ import {MatMenuModule} from '@angular/material/menu';
 import {MatDividerModule} from '@angular/material/divider';
 import {MatListModule} from '@angular/material/list';
 import {MatExpansionModule} from '@angular/material/expansion';
-
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [],
@@ -33,7 +36,11 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatMenuModule,
     MatDividerModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSortModule
   ],
   exports: [
     MatToolbarModule,
@@ -49,7 +56,11 @@ import {MatExpansionModule} from '@angular/material/expansion';
     MatMenuModule,
     MatDividerModule,
     MatListModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatTableModule,
+    MatPaginatorModule,
+    MatProgressSpinnerModule,
+    MatSortModule
   ]
 })
 export class MaterialModule { }

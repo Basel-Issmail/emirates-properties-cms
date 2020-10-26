@@ -9,7 +9,8 @@ const routes: Routes = [
     component: LayoutComponent,
     children: [
       { path: '', component: DashboardComponent },
-      { path: 'profile', loadChildren: () => import('../features/profile/profile.module').then(m => m.ProfileModule) }
+      { path: 'profile', loadChildren: () => import('../features/profile/profile.module').then(m => m.ProfileModule) },
+      { path: 'completion-status', loadChildren: () => import('../features/completion-status/completion-status.module').then(m => m.CompletionStatusModule) }
     ]
   }
 ];
