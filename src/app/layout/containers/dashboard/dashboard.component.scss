@@ -1,0 +1,152 @@
+.dashboard {
+  padding: 1rem;
+
+  .mat-divider {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .dashboard-title {
+    text-align: center;
+    font-size: 1.75rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 2.25rem;
+    hyphens: auto;
+    word-break: break-word;
+    word-wrap: break-word;
+    margin: 16px 0 8px 0;
+    padding: 0;
+  }
+
+  .dashboard-caption {
+    letter-spacing: .00625em;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    hyphens: auto;
+    word-break: break-word;
+    word-wrap: break-word;
+    color: #5f6368;
+    text-align: center;
+  }
+
+  .dashboard-wrapper {
+    margin-top: 1rem;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1000px;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .dashboard-access {
+    box-align: stretch;
+    align-items: stretch;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+
+}
+
+.dashboard-image {
+  width: 150px;
+  height: 150px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+
+  .img-wrapper {
+    box-align: center;
+    align-items: center;
+    display: flex;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+    }
+  }
+
+  .dashboard-image-edit {
+    transition: opacity .2s ease-in-out;
+    background-color: rgba(32, 33, 36, 0.6);
+    bottom: 0;
+    height: 33%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    opacity: 0;
+
+    .dashboard-image-edit-effect {
+      background-image: url(/assets/images/camera.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 24px 24px;
+      height: 100%;
+      opacity: .8;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    .dashboard-image-edit {
+      opacity: 1;
+    }
+  }
+}
+
+.access_card {
+  width: 98%;
+  margin: 1%;
+
+  .access_card-content {
+    background-color: #fff;
+    border-radius: 8px;
+    border: 1px solid #dadce0;
+  }
+
+  .access_card-header {
+    display: flex;
+    padding-top: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+
+    >.access_card-header-text {
+      flex: 1;
+    }
+
+    >.access_card-header-image {
+      width: 35%;
+      text-align: right;
+
+      img {
+        width: 100%;
+        height: auto;
+        max-width: 150px;
+      }
+    }
+  }
+
+  .access_card-footer {
+    .mat-expansion-panel-header {
+      box-shadow: none;
+      border: none;
+    }
+  }
+}
+
+
+@media(min-width:768px) {
+  .access_card {
+    width: 48%;
+    margin: 1%;
+  }
+}

@@ -1,0 +1,17 @@
+.sidenav-content {
+
+  .mat-expansion-panel-header,
+  .mat-expansion-panel {
+    box-shadow: none;
+    border: none;
+  }
+
+  .mat-expansion-panel-header{
+    height: 32px;
+  }
+
+  .mat-list-base .mat-list-item.mat-list-item-with-avatar,
+  .mat-list-base .mat-list-option.mat-list-item-with-avatar {
+    height: 32px;
+  }
+}

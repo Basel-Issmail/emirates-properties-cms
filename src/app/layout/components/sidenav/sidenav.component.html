@@ -1,1 +1,150 @@
-<p>sidenav works!</p>
+<div class="sidenav-content">
+    <mat-accordion multi>
+        <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Theme
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-selection-list [multiple]="false">
+                <mat-list-option [routerLink]="['/profile']">
+                    <mat-icon mat-list-icon>file_copy</mat-icon>
+                    <div mat-line>Pages</div>
+                </mat-list-option>
+
+                <mat-list-option [routerLink]="['/profile']">
+                    <mat-icon mat-list-icon>domain</mat-icon>
+                    <div mat-line>Companies</div>
+                </mat-list-option>
+
+                <mat-list-option [routerLink]="['/profile']">
+                    <mat-icon mat-list-icon>support_agent</mat-icon>
+                    <div mat-line>Agents</div>
+                </mat-list-option>
+
+                <mat-list-option [routerLink]="['/profile']">
+                    <mat-icon mat-list-icon>request_page</mat-icon>
+                    <div mat-line>Requests</div>
+                </mat-list-option>
+
+            </mat-selection-list>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Properties
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-selection-list [multiple]="false">
+                <mat-list-option [routerLink]="['/profile']">
+                    <mat-icon mat-list-icon>domain</mat-icon>
+                    <div mat-line>Property</div>
+                </mat-list-option>
+
+                <mat-list-option [routerLink]="['/profile']">
+                    <mat-icon mat-list-icon>golf_course</mat-icon>
+                    <div mat-line>Amenity</div>
+                </mat-list-option>
+
+
+                <mat-list-option [routerLink]="['/profile']">
+                    <mat-icon mat-list-icon>tapas</mat-icon>
+                    <div mat-line>Amenity categories</div>
+                </mat-list-option>
+
+                <mat-list-option [routerLink]="['/profile']">
+                    <mat-icon mat-list-icon>home_work</mat-icon>
+                    <div mat-line>Property types</div>
+                </mat-list-option>
+
+                <mat-list-option [routerLink]="['/profile']">
+                    <mat-icon mat-list-icon>construction</mat-icon>
+                    <div mat-line>Property types categories</div>
+                </mat-list-option>
+
+                <mat-list-option [routerLink]="['/profile']">
+                    <mat-icon mat-list-icon>group</mat-icon>
+                    <div mat-line>Members</div>
+                </mat-list-option>
+
+
+                <mat-list-option [routerLink]="['/profile']">
+                    <mat-icon mat-list-icon>fact_check</mat-icon>
+                    <div mat-line>Completion status</div>
+                </mat-list-option>
+
+            </mat-selection-list>
+        </mat-expansion-panel>
+
+        <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Administrator
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-selection-list [multiple]="false">
+
+                
+                <mat-list-option [routerLink]="['/profile']">
+                    <mat-icon mat-list-icon>supervised_user_circle</mat-icon>
+                    <div mat-line>Users</div>
+                </mat-list-option>
+
+                <mat-list-option [routerLink]="['/profile']">
+                    <mat-icon mat-list-icon>verified_user</mat-icon>
+                    <div mat-line>Roles</div>
+                </mat-list-option>
+
+
+                <mat-list-option [routerLink]="['/profile']">
+                    <mat-icon mat-list-icon>admin_panel_settings</mat-icon>
+                    <div mat-line>Persmissions</div>
+                </mat-list-option>
+
+                <mat-list-option [routerLink]="['/profile']">
+                    <mat-icon mat-list-icon>settings_input_composite</mat-icon>
+                    <div mat-line>Settings</div>
+                </mat-list-option>
+
+                <mat-list-option [routerLink]="['/profile']">
+                    <mat-icon mat-list-icon>work_outline</mat-icon>
+                    <div mat-line>Careers</div>
+                </mat-list-option>
+
+                <mat-list-option [routerLink]="['/profile']">
+                    <mat-icon mat-list-icon>cast</mat-icon>
+                    <div mat-line>News</div>
+                </mat-list-option>
+
+            </mat-selection-list>
+        </mat-expansion-panel>
+
+
+
+        <mat-expansion-panel expanded="true">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Regions
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-selection-list [multiple]="false">
+
+                
+                <mat-list-option [routerLink]="['/profile']">
+                    <mat-icon mat-list-icon>public</mat-icon>
+                    <div mat-line>Countries</div>
+                </mat-list-option>
+
+                <mat-list-option [routerLink]="['/profile']">
+                    <mat-icon mat-list-icon>location_on</mat-icon>
+                    <div mat-line>Cities</div>
+                </mat-list-option>
+
+
+
+            </mat-selection-list>
+        </mat-expansion-panel>
+
+    </mat-accordion>
+</div>

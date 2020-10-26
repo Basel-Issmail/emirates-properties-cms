@@ -1,4 +1,4 @@
-.example-container {
+.layout_sidenav-container {
   position: absolute;
   top: 64px;
   bottom: 0;
@@ -6,9 +6,9 @@
   right: 0;
 }
 
-.example-sidenav {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 240px;
-  }
+.layout_sidenav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+}

@@ -1,0 +1,88 @@
+<div class="dashboard">
+    <div class="dashboard-image">
+        <div class="img-wrapper">
+            <img src="assets/images/default-profile.svg" alt="Profile Picture">
+        </div>
+        <div class="dashboard-image-edit">
+            <div class="dashboard-image-edit-effect"></div>
+        </div>
+    </div>
+    <h1 class="dashboard-title">Welcome, {{user.first_name}} {{user.last_name}}</h1>
+    <div class="dashboard-caption">Manage your info, privacy, and security to make CMS work better for you. </div>
+    <div class="dashboard-wrapper">
+        <div class="access_card">
+            <div class="access_card-content">
+                <header class="access_card-header">
+                    <div class="access_card-header-text">
+                        <h2>Privacy & personalization</h2>
+                        <p>See the data in your Google Account and choose what activity is saved to
+                            personalize your Google experience</p>
+                    </div>
+                    <div class="access_card-header-image">
+                        <img src="assets/images/privacy_tip.svg" alt="">
+                    </div>
+                </header>
+                <footer class="access_card-footer">
+                    <mat-accordion multi>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    View Profile and Privacy Pages
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-selection-list [multiple]="false">
+                                <mat-list-option [routerLink]="['/profile']">
+                                    <mat-icon mat-list-icon>account</mat-icon>
+                                    <div mat-line>Profile</div>
+                                </mat-list-option>
+                                <mat-divider></mat-divider>
+                                <mat-list-option [routerLink]="['/profile']">
+                                    <mat-icon mat-list-icon>lock_open</mat-icon>
+                                    <div mat-line>Users</div>
+                                </mat-list-option>
+                            </mat-selection-list>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </footer>
+            </div>
+        </div>
+
+
+        <div class="access_card">
+            <div class="access_card-content">
+                <header class="access_card-header">
+                    <div class="access_card-header-text">
+                        <h2>Manage properties</h2>
+                        <p>Add edit or delete data related to properties.</p>
+                    </div>
+                    <div class="access_card-header-image">
+                        <img src="assets/images/apartment.svg" alt="">
+                    </div>
+                </header>
+                <footer class="access_card-footer">
+                    <mat-accordion multi>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    View Properties Pages
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-selection-list [multiple]="false">
+                                <mat-list-option [routerLink]="['/profile']">
+                                    <mat-icon mat-list-icon>home</mat-icon>
+                                    <div mat-line>Property</div>
+                                </mat-list-option>
+                                <mat-divider></mat-divider>
+                                <mat-list-option [routerLink]="['/profile']">
+                                    <mat-icon mat-list-icon>weekend</mat-icon>
+                                    <div mat-line>Amenity</div>
+                                </mat-list-option>
+                            </mat-selection-list>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </footer>
+            </div>
+        </div>
+
+    </div>
+</div>
