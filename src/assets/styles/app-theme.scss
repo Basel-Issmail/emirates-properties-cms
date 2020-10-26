@@ -44,6 +44,26 @@ $emirates-properties-cms-foreground: (
   slider-off-active: rgba(black, 0.38),
 );
 
+@mixin mat-progress-spinner-color($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $accent: map-get($config, accent);
+  $warn: map-get($config, warn);
+
+  .mat-progress-spinner, .mat-spinner {
+    circle {
+      stroke: #d3371e;
+    }
+
+    &.mat-accent circle {
+      stroke: mat-color($accent);
+    }
+
+    &.mat-warn circle {
+      stroke: mat-color($warn);
+    }
+  }
+}
+
 @function emirates-properties-cms-theme($primary, $accent, $warn: mat-palette($mat-red)) {
     @return (
       primary: $primary,
