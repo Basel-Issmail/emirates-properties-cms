@@ -6,28 +6,28 @@ import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import { merge, of as observableOf, Subject } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { SharedCrudService } from 'src/app/shared/services/shared-crud.service';
-import { CompletionStatusApis } from '../../completion-status.constants';
-
+import { PropertyApis } from '../../property.constants';
 @Component({
-  selector: 'ep-completion-status-table',
-  templateUrl: './completion-status-table.component.html',
-  styleUrls: ['./completion-status-table.component.scss']
+  selector: 'ep-property-table',
+  templateUrl: './property-table.component.html',
+  styleUrls: ['./property-table.component.scss']
 })
-export class CompletionStatusTableComponent implements AfterViewInit {
-  displayedColumns: string[] = ['select', 'status', 'title', 'updated_at', 'actions'];
+export class PropertyTableComponent implements AfterViewInit {
+  displayedColumns: string[] = ['select', 'status', 'title', 'agent_name', 'created_at', 'actions'];
   columns = {
-    cols: ['select', 'status', 'title', 'updated_at', 'actions'],
+    cols: ['select', 'status', 'title', 'agent_name', 'created_at', 'actions'],
     select: { isShown: true, label: '', canHide: false },
     status: { isShown: true, label: '', canHide: false },
     title: { isShown: true, label: 'Title', canHide: true },
-    updated_at: { isShown: true, label: 'updated at', canHide: true },
+    agent_name: { isShown: true, label: 'Agent name', canHide: true },
+    created_at: { isShown: true, label: 'Created at', canHide: true },
     actions: { isShown: true, label: '', canHide: false },
   }
   data: any[] = [];
-  tab: any = 'all';
+  tab: any = 'approved';
   tabs = [
-    { value: 'all', label: 'All', icon: 'done_all' },
-    { value: 'remind', label: 'Reminders', icon: 'alarm' },
+    { value: 'approved', label: 'Approved', icon: 'done_all' },
+    { value: 'pending_approval', label: 'Pedngin Approval', icon: 'alarm' },
     { value: 'draft', label: 'Drafts', icon: 'drafts' },
     { value: 'delete', label: 'Deleted', icon: 'delete_outline' }]
   selectedTab = new Subject<string>();
@@ -50,7 +50,7 @@ export class CompletionStatusTableComponent implements AfterViewInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.sharedCrudService.getData(CompletionStatusApis.getData, { tab: this.tab, sortCol: this.sort.active, sortDir: this.sort.direction, page: (this.paginator.pageIndex + 1), pageSize: this.pageSize });
+          return this.sharedCrudService.getData(PropertyApis.getData, { tab: this.tab, sortCol: this.sort.active, sortDir: this.sort.direction, page: (this.paginator.pageIndex + 1), pageSize: this.pageSize });
         }),
         map(data => {
           this.isLoadingResults = false;
@@ -91,32 +91,45 @@ export class CompletionStatusTableComponent implements AfterViewInit {
   }
 
   delete(selected) {
-    this.sharedCrudService.delete(CompletionStatusApis.delete, selected).subscribe(response => {
+    this.sharedCrudService.delete(PropertyApis.delete, selected).subscribe(response => {
       this.changedData.next();
     })
   }
 
   deleteDraft(selected) {
-    this.sharedCrudService.delete(CompletionStatusApis.deleteDraft, selected).subscribe(response => {
+    this.sharedCrudService.delete(PropertyApis.deleteDraft, selected).subscribe(response => {
       this.changedData.next();
     })
   }
 
   deleteForever(selected) {
-    this.sharedCrudService.delete(CompletionStatusApis.deleteForever, selected).subscribe(response => {
+    this.sharedCrudService.delete(PropertyApis.deleteForever, selected).subscribe(response => {
       this.changedData.next();
     })
   }
 
   changeStatus(selected, attribute, value) {
-    this.sharedCrudService.changeAttribute(CompletionStatusApis.changeAttribute, selected, attribute, value).subscribe(response => {
+    this.sharedCrudService.changeAttribute(PropertyApis.changeAttribute, selected, attribute, value).subscribe(response => {
       this.changedData.next();
     })
   }
 
   restore(selected) {
-    this.sharedCrudService.restore(CompletionStatusApis.restore, selected).subscribe(response => {
+    this.sharedCrudService.restore(PropertyApis.restore, selected).subscribe(response => {
       this.changedData.next();
     })
+  }
+
+  approve(selected) {
+    this.sharedCrudService.postRequest(PropertyApis.approve, selected).subscribe(response => {
+      this.changedData.next();
+    })
+  }
+
+  disapprove(selected) {
+    alert('No API Yet');
+    // this.sharedCrudService.postRequest(PropertyApis.approve, selected).subscribe(response => {
+    //   this.changedData.next();
+    // })
   }
 }

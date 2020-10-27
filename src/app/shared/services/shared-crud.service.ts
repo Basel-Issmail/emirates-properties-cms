@@ -28,6 +28,10 @@ export class SharedCrudService {
     return this.http.post(url, { ids: this.getItemsIdsFromSelection(items) });
   }
 
+  postRequest(url, items) {
+    return this.http.post(url, { ids: this.getItemsIdsFromSelection(items) });
+  }
+
   restore(url, items) {
     return this.http.post(url, { ids: this.getItemsIdsFromSelection(items) });
   }

@@ -15,6 +15,7 @@ const routes: Routes = [
       { path: 'companies', loadChildren: () => import('../features/companies/companies.module').then(m => m.CompaniesModule) },
       { path: 'agents', loadChildren: () => import('../features/agents/agents.module').then(m => m.AgentsModule) },
       { path: 'requests', loadChildren: () => import('../features/requests/requests.module').then(m => m.RequestsModule) },
+      { path: 'property', loadChildren: () => import('../features/property/property.module').then(m => m.PropertyModule) },
     ]
   }
 ];
