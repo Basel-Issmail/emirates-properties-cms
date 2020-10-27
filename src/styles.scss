@@ -36,13 +36,42 @@ body {
 .datatable {
   padding: 1rem;
 
+  tr.mat-row {
+    &:hover{
+      background-color: #fafafa;
+      th.cdk-column-actions.mat-header-cell,
+      td.cdk-column-actions.mat-cell,
+      td.cdk-column-actions.mat-footer-cell {
+        display: inherit;
+      }
+    }
+  }
+
+  th.cdk-column-actions.mat-header-cell,
+  td.cdk-column-actions.mat-cell,
+  td.cdk-column-actions.mat-footer-cell {
+    padding-right: 24px;
+    position: absolute;
+    right: 0;
+    border: none;
+    background: #fafafa;
+    display: none;
+    button{
+      color: black;
+      &:hover{
+        color: #d3371e;
+      }
+    }
+  }
+
   .datatable-paginator {
     border-bottom: 1px solid rgba(0, 0, 0, 0.12);
     display: flex;
     align-items: center;
     padding-left: 1rem;
-    >a{
-      &:hover{
+
+    >a {
+      &:hover {
         cursor: pointer;
       }
     }

@@ -21,6 +21,7 @@ import {MatSortModule} from '@angular/material/sort';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatChipsModule} from '@angular/material/chips';
 
 
 @NgModule({
@@ -47,7 +48,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatSortModule,
     MatButtonToggleModule,
     MatTabsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatChipsModule
   ],
   exports: [
     MatToolbarModule,
@@ -70,7 +72,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     MatSortModule,
     MatButtonToggleModule,
     MatTabsModule,
-    MatTooltipModule
+    MatTooltipModule,
+    MatChipsModule
   ]
 })
 export class MaterialModule { }

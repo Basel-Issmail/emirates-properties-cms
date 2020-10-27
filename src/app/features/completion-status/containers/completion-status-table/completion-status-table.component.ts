@@ -6,6 +6,8 @@ import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import { merge, of as observableOf, Subject } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { CompletionStatusService } from '../../services/completion-status.service';
+import { SharedCrudService } from 'src/app/shared/services/shared-crud.service';
+import { CompletionStatusApis } from '../../completion-status.constants';
 
 @Component({
   selector: 'ep-completion-status-table',
@@ -13,9 +15,11 @@ import { CompletionStatusService } from '../../services/completion-status.servic
   styleUrls: ['./completion-status-table.component.scss']
 })
 export class CompletionStatusTableComponent implements AfterViewInit {
-  displayedColumns: string[] = ['select', 'title', 'updated_at'];
+  displayedColumns: string[] = ['select', 'status', 'title', 'updated_at', 'actions'];
   columns = {
-    cols: ['select', 'title', 'updated_at'],
+    cols: ['select', 'status', 'title', 'updated_at', 'actions'],
+    actions: { isShown: true, label: '', canHide: false },
+    status: { isShown: true, label: '', canHide: false },
     select: { isShown: true, label: '', canHide: false },
     title: { isShown: true, label: 'Title', canHide: true },
     updated_at: { isShown: true, label: 'updated at', canHide: true },
@@ -25,9 +29,10 @@ export class CompletionStatusTableComponent implements AfterViewInit {
   tabs = [
     { value: 'all', label: 'All', icon: 'done_all' },
     { value: 'remind', label: 'Reminders', icon: 'alarm' },
-    { value: 'draft', label: 'Drafts', icon: 'draft' },
+    { value: 'draft', label: 'Drafts', icon: 'drafts' },
     { value: 'delete', label: 'Deleted', icon: 'delete_outline' }]
   selectedTab = new Subject<string>();
+  changedData = new Subject<any>();
   resultsLength = 0;
   isLoadingResults: boolean = true;
   pageSize = 30;
@@ -36,24 +41,22 @@ export class CompletionStatusTableComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   selection = new SelectionModel<any>(true, []);
 
-  constructor(private completionStatusService: CompletionStatusService) { }
+  constructor(private completionStatusService: CompletionStatusService, private sharedCrudService: SharedCrudService) { }
 
   ngAfterViewInit() {
-    // If the user changes the sort order, reset back to the first page.
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-    merge(this.sort.sortChange, this.paginator.page, this.selectedTab)
+    merge(this.sort.sortChange, this.paginator.page, this.selectedTab, this.changedData)
       .pipe(
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.completionStatusService.getData(
-            { tab: this.tab, sortCol: this.sort.active, sortDir: this.sort.direction, page: (this.paginator.pageIndex + 1), pageSize: this.pageSize });
+          return this.completionStatusService.getData({ tab: this.tab, sortCol: this.sort.active, sortDir: this.sort.direction, page: (this.paginator.pageIndex + 1), pageSize: this.pageSize });
         }),
         map(data => {
           this.isLoadingResults = false;
+          this.selection.clear();
           this.resultsLength = data.total;
-
           return data.data;
         }),
         catchError(() => {
@@ -86,5 +89,35 @@ export class CompletionStatusTableComponent implements AfterViewInit {
   toggleColumn(checkbox) {
     this.columns[checkbox.item].isShown = checkbox.event.checked;
     this.displayedColumns = this.columns.cols.filter(val => this.columns[val].isShown);
+  }
+
+  delete(selected) {
+    this.sharedCrudService.delete(CompletionStatusApis.delete, selected).subscribe(response => {
+      this.changedData.next();
+    })
+  }
+
+  deleteDraft(selected) {
+    this.sharedCrudService.delete(CompletionStatusApis.deleteDraft, selected).subscribe(response => {
+      this.changedData.next();
+    })
+  }
+
+  deleteForever(selected) {
+    this.sharedCrudService.delete(CompletionStatusApis.deleteForever, selected).subscribe(response => {
+      this.changedData.next();
+    })
+  }
+
+  changeStatus(selected, attribute, value) {
+    this.sharedCrudService.changeAttribute(CompletionStatusApis.changeAttribute, selected, attribute, value).subscribe(response => {
+      this.changedData.next();
+    })
+  }
+
+  restore(selected) {
+    this.sharedCrudService.restore(CompletionStatusApis.restore, selected).subscribe(response => {
+      this.changedData.next();
+    })
   }
 }

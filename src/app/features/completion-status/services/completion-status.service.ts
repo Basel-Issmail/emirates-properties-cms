@@ -13,7 +13,6 @@ export class CompletionStatusService {
   getData(params) {
     return this.http.get<any[]>(CompletionStatusApis.getData, { params }).pipe(map(response => {
       console.log(response[params.tab]);
-      
       return response[params.tab];
     }));
   }
