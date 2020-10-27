@@ -14,6 +14,7 @@ const routes: Routes = [
       { path: 'pages', loadChildren: () => import('../features/pages/pages.module').then(m => m.PagesModule) },
       { path: 'companies', loadChildren: () => import('../features/companies/companies.module').then(m => m.CompaniesModule) },
       { path: 'agents', loadChildren: () => import('../features/agents/agents.module').then(m => m.AgentsModule) },
+      { path: 'requests', loadChildren: () => import('../features/requests/requests.module').then(m => m.RequestsModule) },
     ]
   }
 ];
