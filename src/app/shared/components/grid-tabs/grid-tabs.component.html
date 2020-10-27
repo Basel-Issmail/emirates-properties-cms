@@ -1,0 +1,6 @@
+<nav mat-tab-nav-bar mat-stretch-tabs>
+    <a mat-tab-link *ngFor="let tabItem of tabs" (click)="changeActiveTab(tabItem.value)"
+        [class.active]="activeTab === tabItem.value">
+        <mat-icon>{{tabItem.icon}}</mat-icon> {{tabItem.label}}
+    </a>
+</nav>

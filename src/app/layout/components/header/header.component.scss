@@ -1,8 +1,14 @@
-.header-burger{
-    margin-left: 1rem;
+.header-burger {
+  margin-left: 1rem;
 }
 
-.header-profile_image{
-    width: 100%;
-    border-radius: 50%;
+.header-profile_image {
+  width: 100%;
+  border-radius: 50%;
+}
+
+.mat-toolbar {
+  position: relative;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, .2);
+  z-index: 2;
 }

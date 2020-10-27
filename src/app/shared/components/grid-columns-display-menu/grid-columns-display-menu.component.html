@@ -1,0 +1,14 @@
+<a class="show-columns-menu" matTooltip="Displayed Columns" [matMenuTriggerFor]="menu">
+    <mat-icon class="action-icon">more_vert</mat-icon>
+</a>
+
+
+<mat-menu #menu="matMenu">
+    <span *ngFor="let item of canHide(columns.cols)" (click)="$event.stopPropagation()" mat-menu-item
+        [disableRipple]="true">
+        <mat-checkbox (change)="toggleColumn.emit({item: item, event: $event})" [disableRipple]="true"
+            [(ngModel)]="columns[item].isShown">
+            {{columns[item].label}}
+        </mat-checkbox>
+    </span>
+</mat-menu>
