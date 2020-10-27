@@ -21,6 +21,7 @@ const routes: Routes = [
       { path: 'property-type', loadChildren: () => import('../features/property-type/property-type.module').then(m => m.PropertyTypeModule) },
       { path: 'property-type-category', loadChildren: () => import('../features/property-type-category/property-type-category.module').then(m => m.PropertyTypeCategoryModule) },
       { path: 'members', loadChildren: () => import('../features/member/member.module').then(m => m.MemberModule) },
+      { path: 'users', loadChildren: () => import('../features/user/user.module').then(m => m.UserModule) },
     ]
   }
 ];
