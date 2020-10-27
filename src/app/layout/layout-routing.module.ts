@@ -13,6 +13,7 @@ const routes: Routes = [
       { path: 'completion-status', loadChildren: () => import('../features/completion-status/completion-status.module').then(m => m.CompletionStatusModule) },
       { path: 'pages', loadChildren: () => import('../features/pages/pages.module').then(m => m.PagesModule) },
       { path: 'companies', loadChildren: () => import('../features/companies/companies.module').then(m => m.CompaniesModule) },
+      { path: 'agents', loadChildren: () => import('../features/agents/agents.module').then(m => m.AgentsModule) },
     ]
   }
 ];
