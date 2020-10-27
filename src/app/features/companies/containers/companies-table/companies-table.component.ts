@@ -6,22 +6,24 @@ import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import { merge, of as observableOf, Subject } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { SharedCrudService } from 'src/app/shared/services/shared-crud.service';
-import { CompletionStatusApis } from '../../completion-status.constants';
+import { CompaniesApis } from '../../companies.constants';
 
 @Component({
-  selector: 'ep-completion-status-table',
-  templateUrl: './completion-status-table.component.html',
-  styleUrls: ['./completion-status-table.component.scss']
+  selector: 'ep-companies-table',
+  templateUrl: './companies-table.component.html',
+  styleUrls: ['./companies-table.component.scss']
 })
-export class CompletionStatusTableComponent implements AfterViewInit {
-  displayedColumns: string[] = ['select', 'status', 'title', 'updated_at', 'actions'];
+export class CompaniesTableComponent {
+  displayedColumns: string[] = ['select', 'status', 'name', 'email', 'head_office', 'phone','actions'];
   columns = {
-    cols: ['select', 'status', 'title', 'updated_at', 'actions'],
-    actions: { isShown: true, label: '', canHide: false },
-    status: { isShown: true, label: '', canHide: false },
+    cols: ['select', 'status', 'name', 'email', 'head_office', 'phone','actions'],
     select: { isShown: true, label: '', canHide: false },
-    title: { isShown: true, label: 'Title', canHide: true },
-    updated_at: { isShown: true, label: 'updated at', canHide: true },
+    status: { isShown: true, label: '', canHide: false },
+    name: { isShown: true, label: 'Name', canHide: true },
+    email: { isShown: true, label: 'Email', canHide: true },
+    head_office: { isShown: true, label: 'Head office', canHide: true },
+    phone: { isShown: true, label: 'Phone', canHide: true },
+    actions: { isShown: true, label: '', canHide: false },
   }
   data: any[] = [];
   tab: any = 'all';
@@ -50,7 +52,7 @@ export class CompletionStatusTableComponent implements AfterViewInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.sharedCrudService.getData(CompletionStatusApis.getData, { tab: this.tab, sortCol: this.sort.active, sortDir: this.sort.direction, page: (this.paginator.pageIndex + 1), pageSize: this.pageSize });
+          return this.sharedCrudService.getData(CompaniesApis.getData, { tab: this.tab, sortCol: this.sort.active, sortDir: this.sort.direction, page: (this.paginator.pageIndex + 1), pageSize: this.pageSize });
         }),
         map(data => {
           this.isLoadingResults = false;
@@ -91,31 +93,31 @@ export class CompletionStatusTableComponent implements AfterViewInit {
   }
 
   delete(selected) {
-    this.sharedCrudService.delete(CompletionStatusApis.delete, selected).subscribe(response => {
+    this.sharedCrudService.delete(CompaniesApis.delete, selected).subscribe(response => {
       this.changedData.next();
     })
   }
 
   deleteDraft(selected) {
-    this.sharedCrudService.delete(CompletionStatusApis.deleteDraft, selected).subscribe(response => {
+    this.sharedCrudService.delete(CompaniesApis.deleteDraft, selected).subscribe(response => {
       this.changedData.next();
     })
   }
 
   deleteForever(selected) {
-    this.sharedCrudService.delete(CompletionStatusApis.deleteForever, selected).subscribe(response => {
+    this.sharedCrudService.delete(CompaniesApis.deleteForever, selected).subscribe(response => {
       this.changedData.next();
     })
   }
 
   changeStatus(selected, attribute, value) {
-    this.sharedCrudService.changeAttribute(CompletionStatusApis.changeAttribute, selected, attribute, value).subscribe(response => {
+    this.sharedCrudService.changeAttribute(CompaniesApis.changeAttribute, selected, attribute, value).subscribe(response => {
       this.changedData.next();
     })
   }
 
   restore(selected) {
-    this.sharedCrudService.restore(CompletionStatusApis.restore, selected).subscribe(response => {
+    this.sharedCrudService.restore(CompaniesApis.restore, selected).subscribe(response => {
       this.changedData.next();
     })
   }

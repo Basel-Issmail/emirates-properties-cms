@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,13 @@ import { HttpClient } from '@angular/common/http';
 export class SharedCrudService {
 
   constructor(private http: HttpClient) { }
+
+  getData(url, params) {
+    return this.http.get<any[]>(url, { params }).pipe(map(response => {
+      console.log(response[params.tab]);
+      return response[params.tab];
+    }));
+  }
 
   getItemsIdsFromSelection(items) {
     return items.map(val => val.id)

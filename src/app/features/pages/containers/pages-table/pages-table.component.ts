@@ -6,14 +6,15 @@ import { startWith, switchMap, map, catchError } from 'rxjs/operators';
 import { merge, of as observableOf, Subject } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { SharedCrudService } from 'src/app/shared/services/shared-crud.service';
-import { CompletionStatusApis } from '../../completion-status.constants';
+import { PagesApis } from '../../pages.constants';
+
 
 @Component({
-  selector: 'ep-completion-status-table',
-  templateUrl: './completion-status-table.component.html',
-  styleUrls: ['./completion-status-table.component.scss']
+  selector: 'ep-pages-table',
+  templateUrl: './pages-table.component.html',
+  styleUrls: ['./pages-table.component.scss']
 })
-export class CompletionStatusTableComponent implements AfterViewInit {
+export class PagesTableComponent {
   displayedColumns: string[] = ['select', 'status', 'title', 'updated_at', 'actions'];
   columns = {
     cols: ['select', 'status', 'title', 'updated_at', 'actions'],
@@ -50,7 +51,7 @@ export class CompletionStatusTableComponent implements AfterViewInit {
         startWith({}),
         switchMap(() => {
           this.isLoadingResults = true;
-          return this.sharedCrudService.getData(CompletionStatusApis.getData, { tab: this.tab, sortCol: this.sort.active, sortDir: this.sort.direction, page: (this.paginator.pageIndex + 1), pageSize: this.pageSize });
+          return this.sharedCrudService.getData(PagesApis.getData, { tab: this.tab, sortCol: this.sort.active, sortDir: this.sort.direction, page: (this.paginator.pageIndex + 1), pageSize: this.pageSize });
         }),
         map(data => {
           this.isLoadingResults = false;
@@ -91,32 +92,33 @@ export class CompletionStatusTableComponent implements AfterViewInit {
   }
 
   delete(selected) {
-    this.sharedCrudService.delete(CompletionStatusApis.delete, selected).subscribe(response => {
+    this.sharedCrudService.delete(PagesApis.delete, selected).subscribe(response => {
       this.changedData.next();
     })
   }
 
   deleteDraft(selected) {
-    this.sharedCrudService.delete(CompletionStatusApis.deleteDraft, selected).subscribe(response => {
+    this.sharedCrudService.delete(PagesApis.deleteDraft, selected).subscribe(response => {
       this.changedData.next();
     })
   }
 
   deleteForever(selected) {
-    this.sharedCrudService.delete(CompletionStatusApis.deleteForever, selected).subscribe(response => {
+    this.sharedCrudService.delete(PagesApis.deleteForever, selected).subscribe(response => {
       this.changedData.next();
     })
   }
 
   changeStatus(selected, attribute, value) {
-    this.sharedCrudService.changeAttribute(CompletionStatusApis.changeAttribute, selected, attribute, value).subscribe(response => {
+    this.sharedCrudService.changeAttribute(PagesApis.changeAttribute, selected, attribute, value).subscribe(response => {
       this.changedData.next();
     })
   }
 
   restore(selected) {
-    this.sharedCrudService.restore(CompletionStatusApis.restore, selected).subscribe(response => {
+    this.sharedCrudService.restore(PagesApis.restore, selected).subscribe(response => {
       this.changedData.next();
     })
   }
+
 }
