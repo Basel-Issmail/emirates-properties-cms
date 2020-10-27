@@ -28,6 +28,7 @@ const routes: Routes = [
       { path: 'careers', loadChildren: () => import('../features/career/career.module').then(m => m.CareerModule) },
       { path: 'news', loadChildren: () => import('../features/news/news.module').then(m => m.NewsModule) },
       { path: 'countries', loadChildren: () => import('../features/country/country.module').then(m => m.CountryModule) },
+      { path: 'cities', loadChildren: () => import('../features/city/city.module').then(m => m.CityModule) },
     ]
   }
 ];
