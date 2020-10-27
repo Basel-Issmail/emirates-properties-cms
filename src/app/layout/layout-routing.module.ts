@@ -23,6 +23,8 @@ const routes: Routes = [
       { path: 'members', loadChildren: () => import('../features/member/member.module').then(m => m.MemberModule) },
       { path: 'users', loadChildren: () => import('../features/user/user.module').then(m => m.UserModule) },
       { path: 'roles', loadChildren: () => import('../features/role/role.module').then(m => m.RoleModule) },
+      { path: 'permissions', loadChildren: () => import('../features/permission/permission.module').then(m => m.PermissionModule) },
+      { path: 'settings', loadChildren: () => import('../features/settings/settings.module').then(m => m.SettingsModule) },
     ]
   }
 ];
