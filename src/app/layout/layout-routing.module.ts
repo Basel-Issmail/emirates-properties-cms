@@ -25,6 +25,7 @@ const routes: Routes = [
       { path: 'roles', loadChildren: () => import('../features/role/role.module').then(m => m.RoleModule) },
       { path: 'permissions', loadChildren: () => import('../features/permission/permission.module').then(m => m.PermissionModule) },
       { path: 'settings', loadChildren: () => import('../features/settings/settings.module').then(m => m.SettingsModule) },
+      { path: 'careers', loadChildren: () => import('../features/career/career.module').then(m => m.CareerModule) },
     ]
   }
 ];
