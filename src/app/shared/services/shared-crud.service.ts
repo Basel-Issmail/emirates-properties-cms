@@ -16,6 +16,10 @@ export class SharedCrudService {
     }));
   }
 
+  getItemDetails(url, id) {
+    return this.http.get(`${url}/${id}`);
+  }
+
   getItemsIdsFromSelection(items) {
     return items.map(val => val.id)
   }

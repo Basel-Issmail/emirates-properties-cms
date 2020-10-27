@@ -1,0 +1,64 @@
+<div class="profile" *ngIf="request$ | async as request">
+    <h1 class="profile-title">Request Details</h1>
+    <div class="profile-wrapper">
+        <div class="profileform-breadcrumb">
+            <button mat-icon-button [routerLink]="['/requests']">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+            <h1 class="profileform-title">All requests</h1>
+        </div>
+        <div class="profile-card">
+            <mat-list>
+                <div mat-subheader>
+                    <div>Request Info</div>
+                </div>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Agent name</div>
+                        <div class="profile-info-value"> {{(request)?.agent_name}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <div class="profile-info" style="padding: 16px;display: flex;">
+                    <div class="profile-info-prop">Message</div>
+                    <div class="profile-info-value">{{(request)?.user_msg}}</div>
+                </div>
+            </mat-list>
+        </div>
+
+        <div class="profile-card">
+            <mat-list>
+                <h2 mat-subheader>
+                    <div>Sender Info</div>
+                </h2>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Name</div>
+                        <div class="profile-info-value"> {{(request)?.user_name}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Email</div>
+                        <div class="profile-info-value"> {{(request)?.user_email}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Phone</div>
+                        <div class="profile-info-value"> {{(request)?.user_phone}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Date</div>
+                        <div class="profile-info-value"> {{(request)?.updated_at | date}} </div>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+</div>

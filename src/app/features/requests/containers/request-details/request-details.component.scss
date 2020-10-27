@@ -1,0 +1,101 @@
+.profile {
+  padding: 1rem;
+
+  .mat-list-base .mat-list-item .mat-line {
+    white-space: inherit;
+    text-overflow: inherit;
+  }
+
+  .profileform-breadcrumb {
+    display: flex;
+    align-items: center;
+  }
+
+  .mat-divider {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .profileform-title {
+    text-align: left;
+    font-size: 1.75rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 40px;
+    hyphens: auto;
+    word-break: break-word;
+    word-wrap: break-word;
+    margin: 0;
+    padding: 0;
+  }
+
+  .profile-title {
+    text-align: center;
+    font-size: 1.75rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 2.25rem;
+    hyphens: auto;
+    word-break: break-word;
+    word-wrap: break-word;
+    padding: 0;
+  }
+
+  .profile-wrapper {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 800px;
+  }
+
+  .profile-card {
+    border-radius: 8px;
+    border: 1px solid #dadce0;
+    background-color: #fff;
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 100%;
+    box-shadow: none;
+    margin-top: 2rem;
+
+    .mat-subheader {
+      font-size: 1.375rem;
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.75rem;
+      hyphens: auto;
+      word-break: break-word;
+      word-wrap: break-word;
+      color: #202124;
+      display: flex;
+      padding-right: 0;
+      justify-content: space-between;
+    }
+  }
+}
+
+
+.profile-info {
+  .profile-info-prop {
+    display: inline-block;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.54);
+    margin-right: 20px;
+    min-width: 100px;
+  }
+
+  .profile-info-value {
+    display: inline-block;
+
+  }
+}
+
+.profile-info.profile-info--photo {
+  height: 90px;
+
+  .mat-line {
+    display: flex;
+    align-items: center;
+  }
+}

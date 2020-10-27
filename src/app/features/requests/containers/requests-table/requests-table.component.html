@@ -1,9 +1,6 @@
 <div class="datatable">
 
     <div class="actions-container">
-        <button matTooltip="Add new Item" mat-fab class="action-main">
-            <i class="material-icons">add</i>
-        </button>
         <div *ngIf="selection.hasValue()">
 
             <span *ngIf="tab === 'delete'">
@@ -18,10 +15,14 @@
                 </button>
             </span>
 
-            <span *ngIf="tab !== 'delete' && tab !== 'draft'">
+            <span *ngIf="tab !== 'delete'">
                 <button (click)="delete(selection.selected)" matTooltip="Delete selected" mat-mini-fab
                     class="fab-secondary" color="secondary">
                     <i class="material-icons">delete</i>
+                </button>
+                <button *ngIf="selection.selected.length === 1" [routerLink]="['/requests/' + selection.selected[0].id]"
+                    matTooltip="View details" mat-mini-fab class="fab-secondary" color="secondary">
+                    <i class="material-icons">visibility</i>
                 </button>
             </span>
         </div>
@@ -105,10 +106,14 @@
 
 
 
-                        <span *ngIf="tab !== 'delete' && tab !== 'draft'">
+                        <span *ngIf="tab !== 'delete'">
                             <button (click)="delete([row])" matTooltip="Delete selected" mat-icon-button
                                 class="fab-secondary" color="secondary">
                                 <i class="material-icons">delete</i>
+                            </button>
+                            <button [routerLink]="['/requests/' + row.id]" matTooltip="View details" mat-icon-button
+                                class="fab-secondary" color="secondary">
+                                <i class="material-icons">visibility</i>
                             </button>
                         </span>
                     </td>
