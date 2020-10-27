@@ -19,6 +19,7 @@ const routes: Routes = [
       { path: 'amenity', loadChildren: () => import('../features/amenity/amenity.module').then(m => m.AmenityModule) },
       { path: 'amenity-category', loadChildren: () => import('../features/amenity-category/amenity-category.module').then(m => m.AmenityCategoryModule) },
       { path: 'property-type', loadChildren: () => import('../features/property-type/property-type.module').then(m => m.PropertyTypeModule) },
+      { path: 'property-type-category', loadChildren: () => import('../features/property-type-category/property-type-category.module').then(m => m.PropertyTypeCategoryModule) },
     ]
   }
 ];
