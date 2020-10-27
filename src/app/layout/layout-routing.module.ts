@@ -18,6 +18,7 @@ const routes: Routes = [
       { path: 'property', loadChildren: () => import('../features/property/property.module').then(m => m.PropertyModule) },
       { path: 'amenity', loadChildren: () => import('../features/amenity/amenity.module').then(m => m.AmenityModule) },
       { path: 'amenity-category', loadChildren: () => import('../features/amenity-category/amenity-category.module').then(m => m.AmenityCategoryModule) },
+      { path: 'property-type', loadChildren: () => import('../features/property-type/property-type.module').then(m => m.PropertyTypeModule) },
     ]
   }
 ];
