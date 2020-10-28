@@ -37,8 +37,9 @@ body {
   padding: 1rem;
 
   tr.mat-row {
-    &:hover{
+    &:hover {
       background-color: #fafafa;
+
       th.cdk-column-actions.mat-header-cell,
       td.cdk-column-actions.mat-cell,
       td.cdk-column-actions.mat-footer-cell {
@@ -56,9 +57,11 @@ body {
     border: none;
     background: #fafafa;
     display: none;
-    button{
+
+    button {
       color: black;
-      &:hover{
+
+      &:hover {
         color: #d3371e;
       }
     }
@@ -165,4 +168,81 @@ body {
     background-color: #d3371e;
     color: white;
   }
+}
+
+
+
+.epform {
+  padding: 1rem;
+
+  .epform-breadcrumb {
+    display: flex;
+    align-items: center;
+
+    .return {
+      flex: 1;
+      display: flex;
+    }
+  }
+
+  .mat-divider {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .epform-title {
+    text-align: left;
+    font-size: 1.75rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 40px;
+    hyphens: auto;
+    word-break: break-word;
+    word-wrap: break-word;
+    margin: 0;
+    padding: 0;
+  }
+
+  .epform-card {
+    border-radius: 8px;
+    background-color: #fff;
+    border: 1px solid #dadce0;
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 2rem;
+    padding: 1rem;
+
+    .mat-subheader {
+      font-size: 1.375rem;
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.75rem;
+      hyphens: auto;
+      word-break: break-word;
+      word-wrap: break-word;
+      color: #202124;
+      display: flex;
+      justify-content: space-between;
+      padding-right: 0;
+      padding-left: 0;
+    }
+  }
+
+  .form {
+    width: 100%;
+
+    .form-field {
+      width: 100%;
+    }
+
+    td {
+      padding-right: 8px;
+    }
+
+    .form-submit {
+      text-align: right;
+    }
+  }
+
 }

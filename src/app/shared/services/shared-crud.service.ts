@@ -17,7 +17,11 @@ export class SharedCrudService {
   }
 
   getItemDetails(url, id) {
-    return this.http.get(`${url}/${id}`);
+    return this.http.get(`${url}/${id}`).pipe(map((response: any) => response.data));
+  }
+
+  getDraftItemDetails(url, id) {
+    return this.http.get(`${url}/${id}`).pipe(map((response: any) => response.value));
   }
 
   getItemsIdsFromSelection(items) {
@@ -34,6 +38,14 @@ export class SharedCrudService {
 
   restore(url, items) {
     return this.http.post(url, { ids: this.getItemsIdsFromSelection(items) });
+  }
+
+  addItem(url, item) {
+    return this.http.post(url, item);
+  }
+
+  editItem(url, item, id) {
+    return this.http.put(`${url}/${id}`, item);
   }
 
   changeAttribute(url, items, attribute, value) {

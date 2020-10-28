@@ -18,8 +18,7 @@ export class RequestDetailsComponent implements OnInit {
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe(params => {
-      this.request$ = this.sharedCrudService.getItemDetails(RequestsApis.getDetails, params.get("id"))
-        .pipe(map((response: any) => response.data));
+      this.request$ = this.sharedCrudService.getItemDetails(RequestsApis.getDetails, params.get("id"));
     });
   }
 }

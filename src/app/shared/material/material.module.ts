@@ -23,6 +23,7 @@ import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatChipsModule} from '@angular/material/chips';
 import {LayoutModule} from '@angular/cdk/layout';
+import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -54,7 +55,8 @@ const appearance: MatFormFieldDefaultOptions = {
     MatTabsModule,
     MatTooltipModule,
     MatChipsModule,
-    LayoutModule
+    LayoutModule,
+    MatSlideToggleModule
   ],
   exports: [
     MatToolbarModule,
@@ -79,7 +81,8 @@ const appearance: MatFormFieldDefaultOptions = {
     MatTabsModule,
     MatTooltipModule,
     MatChipsModule,
-    LayoutModule
+    LayoutModule,
+    MatSlideToggleModule
   ],
   providers: [
     {
