@@ -22,6 +22,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatChipsModule} from '@angular/material/chips';
+import {LayoutModule} from '@angular/cdk/layout';
 
 
 @NgModule({
@@ -49,7 +50,8 @@ import {MatChipsModule} from '@angular/material/chips';
     MatButtonToggleModule,
     MatTabsModule,
     MatTooltipModule,
-    MatChipsModule
+    MatChipsModule,
+    LayoutModule
   ],
   exports: [
     MatToolbarModule,
@@ -73,7 +75,8 @@ import {MatChipsModule} from '@angular/material/chips';
     MatButtonToggleModule,
     MatTabsModule,
     MatTooltipModule,
-    MatChipsModule
+    MatChipsModule,
+    LayoutModule
   ]
 })
 export class MaterialModule { }
