@@ -52,7 +52,7 @@ export class CompaniesFormComponent implements OnInit {
     return this.companyForm.controls;
   }
 
-  addNewCompany(formDirective: FormGroupDirective) {
+  addNew(formDirective: FormGroupDirective) {
     if (this.companyForm.valid) {
       this.sharedCrudService.addItem(CompaniesApis.add, this.companyForm.value)
         .subscribe(response => {
@@ -72,7 +72,7 @@ export class CompaniesFormComponent implements OnInit {
     }
   }
 
-  editCompany() {
+  edit() {
     if (this.companyForm.valid) {
       this.sharedCrudService.editItem(CompaniesApis.update, this.companyForm.value, this.formType.id)
         .subscribe(response => {
@@ -80,7 +80,7 @@ export class CompaniesFormComponent implements OnInit {
     }
   }
 
-  editDraftCompany() {
+  editDraft() {
     if (this.companyForm.valid) {
       this.sharedCrudService.editItem(CompaniesApis.updateDraft, this.companyForm.value, this.formType.id)
         .subscribe(response => {

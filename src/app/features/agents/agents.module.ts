@@ -4,16 +4,18 @@ import { CommonModule } from '@angular/common';
 import { AgentsRoutingModule } from './agents-routing.module';
 import { AgentsTableComponent } from './containers/agents-table/agents-table.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { AgentsFormComponent } from './containers/agents-form/agents-form.component';
 
 
 @NgModule({
-  declarations: [AgentsTableComponent],
+  declarations: [AgentsTableComponent, AgentsFormComponent],
   imports: [
     CommonModule,
     AgentsRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class AgentsModule { }

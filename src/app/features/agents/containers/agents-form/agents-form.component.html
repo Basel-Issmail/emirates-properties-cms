@@ -1,0 +1,146 @@
+<form class="epform" [formGroup]="agentForm" #formDirective="ngForm">
+    <div class="epform-breadcrumb">
+        <div class="return">
+            <a mat-icon-button [routerLink]="['/agents']">
+                <mat-icon>arrow_back</mat-icon>
+            </a>
+            <h1 class="epform-title">Agents list</h1>
+        </div>
+        <div *ngIf="formType.type === FormTypes.add">
+            <button type="submit" mat-stroked-button color="primary" (click)="saveAsDraft(formDirective)">Save as
+                draft</button>
+            <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary"
+                (click)="addNew(formDirective)">Add new agent</button>
+        </div>
+        <div *ngIf="formType.type === FormTypes.edit">
+            <button type="submit" mat-flat-button color="primary" (click)="edit()">Edit agent</button>
+        </div>
+        <div *ngIf="formType.type === FormTypes.editDraft">
+            <button type="submit" mat-flat-button color="primary" (click)="editDraft()">Edit draft agent</button>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-left_col">
+            <div class="epform-card">
+                <div mat-subheader>
+                    <div>Agent Info </div>
+                </div>
+                <div class="form">
+                    <table class="form-field" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>Name *</mat-label>
+                                    <input matInput formControlName="name">
+                                    <mat-error *ngIf="agentFormControl.name.hasError('required')">
+                                        Name is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>Position</mat-label>
+                                    <input matInput formControlName="position">
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>BRN</mat-label>
+                                    <input matInput formControlName="brn">
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>Experience since</mat-label>
+                                    <input matInput formControlName="experienced_since">
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                    </table>
+                    <mat-form-field class="form-field">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput formControlName="description"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="epform-card">
+                <div mat-subheader>
+                    <div>Contact Info</div>
+                </div>
+                <div class="form">
+
+                    <table class="form-field" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>Linkedin</mat-label>
+                                    <input matInput formControlName="linkedin">
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>Phone number</mat-label>
+                                    <input matInput formControlName="phone">
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>Whatsapp number</mat-label>
+                                    <input matInput formControlName="whatsapp_number">
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>Email</mat-label>
+                                    <input matInput formControlName="email">
+                                    <mat-error *ngIf="agentFormControl.email.hasError('email')">
+                                        Please enter a valid email address
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="form-right_col">
+            <div class="epform-card">
+                <div mat-subheader>
+                    <div>Status Info</div>
+                </div>
+                <div class="form">
+                    <mat-slide-toggle formControlName="active" color="primary" [labelPosition]="'before'">Active agent
+                    </mat-slide-toggle>
+                </div>
+            </div>
+            <div class="epform-card">
+                <div mat-subheader>
+                    <div>Additional Info</div>
+                </div>
+                <div class="form">
+                    <mat-form-field class="form-field">
+                        <mat-label>Company</mat-label>
+                        <input matInput formControlName="company_id">
+                    </mat-form-field>
+                    <mat-form-field class="form-field">
+                        <mat-label>Nationality</mat-label>
+                        <input matInput formControlName="nationality_id">
+                    </mat-form-field>
+                    <mat-form-field class="form-field">
+                        <mat-label>Languages</mat-label>
+                        <input matInput formControlName="languages">
+                    </mat-form-field>
+                    <mat-form-field class="form-field">
+                        <mat-label>Areas</mat-label>
+                        <input matInput formControlName="areas">
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
