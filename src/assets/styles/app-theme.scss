@@ -64,6 +64,67 @@ $emirates-properties-cms-foreground: (
   }
 }
 
+// 546e7a
+
+
+@mixin mat-form-field-outline-color($config-or-theme) {
+  $config: mat-get-color-config($config-or-theme);
+  $primary: map-get($config, primary);
+  $accent: map-get($config, accent);
+  $warn: map-get($config, warn);
+  $foreground: map-get($config, foreground);
+  $is-dark-theme: map-get($config, is-dark);
+
+  $label-disabled-color: mat-color($foreground, disabled-text);
+  $outline-color: mat-color($foreground, divider, if($is-dark-theme, 0.3, 0.12));
+  $outline-color-hover: #546e7a;
+  $outline-color-primary: mat-color($primary);
+  $outline-color-accent: mat-color($accent);
+  $outline-color-warn: mat-color($warn);
+  $outline-color-disabled: mat-color($foreground, divider, if($is-dark-theme, 0.15, 0.06));
+
+  .mat-form-field-appearance-outline {
+    .mat-form-field-outline {
+      color: $outline-color;
+    }
+
+    .mat-form-field-outline-thick {
+      color: $outline-color-hover;
+    }
+
+    &.mat-focused {
+      .mat-form-field-outline-thick {
+        color: $outline-color-primary;
+      }
+
+      &.mat-accent .mat-form-field-outline-thick {
+        color: $outline-color-accent;
+      }
+
+      &.mat-warn .mat-form-field-outline-thick {
+        color: $outline-color-warn;
+      }
+    }
+
+    // Class repeated so that rule is specific enough to override focused accent color case.
+    &.mat-form-field-invalid.mat-form-field-invalid {
+      .mat-form-field-outline-thick {
+        color: $outline-color-warn;
+      }
+    }
+
+    &.mat-form-field-disabled {
+      .mat-form-field-label {
+        color: $label-disabled-color;
+      }
+
+      .mat-form-field-outline {
+        color: $outline-color-disabled;
+      }
+    }
+  }
+}
+
 @function emirates-properties-cms-theme($primary, $accent, $warn: mat-palette($mat-red)) {
     @return (
       primary: $primary,
