@@ -10,5 +10,6 @@ export enum AgentsApis {
     add = 'agents/add',
     addDraft = 'agents/add-draft',
     update = 'agents/update',
-    updateDraft = 'agents/update-draft'
+    updateDraft = 'agents/update-draft',
+    builder = 'agents/builder'
 }

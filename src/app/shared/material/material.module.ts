@@ -24,6 +24,11 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatChipsModule} from '@angular/material/chips';
 import {LayoutModule} from '@angular/cdk/layout';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+
 
 const appearance: MatFormFieldDefaultOptions = {
   appearance: 'outline'
@@ -56,7 +61,11 @@ const appearance: MatFormFieldDefaultOptions = {
     MatTooltipModule,
     MatChipsModule,
     LayoutModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatAutocompleteModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   exports: [
     MatToolbarModule,
@@ -82,13 +91,18 @@ const appearance: MatFormFieldDefaultOptions = {
     MatTooltipModule,
     MatChipsModule,
     LayoutModule,
-    MatSlideToggleModule
+    MatSlideToggleModule,
+    MatAutocompleteModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [
     {
       provide: MAT_FORM_FIELD_DEFAULT_OPTIONS,
       useValue: appearance
-    }
+    },
+    MatDatepickerModule
   ],
 })
 export class MaterialModule { }

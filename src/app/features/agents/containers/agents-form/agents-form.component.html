@@ -55,7 +55,9 @@
                             <td>
                                 <mat-form-field class="form-field">
                                     <mat-label>Experience since</mat-label>
-                                    <input matInput formControlName="experienced_since">
+                                    <input matInput [matDatepicker]="experiencedSincePicker" formControlName="experienced_since">
+                                    <mat-datepicker-toggle matSuffix [for]="experiencedSincePicker"></mat-datepicker-toggle>
+                                    <mat-datepicker #experiencedSincePicker></mat-datepicker>
                                 </mat-form-field>
                             </td>
                         </tr>
@@ -125,19 +127,50 @@
                 <div class="form">
                     <mat-form-field class="form-field">
                         <mat-label>Company</mat-label>
-                        <input matInput formControlName="company_id">
+                        <mat-select formControlName="company_id">
+                            <mat-form-field class="autocomplete-form-field" style="width: 100%;padding-bottom: 0;">
+                                <input placeholder="Search" matInput [formControl]="companyFormControl" type="text">
+                            </mat-form-field>
+                            <mat-option *ngFor="let company of filteredCompanies$ | async" [value]="company.id">
+                                {{company.name }}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                     <mat-form-field class="form-field">
                         <mat-label>Nationality</mat-label>
-                        <input matInput formControlName="nationality_id">
+                        <mat-select formControlName="nationality_id">
+                            <mat-form-field class="autocomplete-form-field" style="width: 100%;padding-bottom: 0;">
+                                <input placeholder="Search" matInput [formControl]="nationalityFormControl" type="text">
+                            </mat-form-field>
+                            <mat-option *ngFor="let nationality of filteredNationalities$ | async"
+                                [value]="nationality.id">
+                                {{nationality.name }}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
+
                     <mat-form-field class="form-field">
                         <mat-label>Languages</mat-label>
-                        <input matInput formControlName="languages">
+                        <mat-select formControlName="languages">
+                            <mat-form-field class="autocomplete-form-field" style="width: 100%;padding-bottom: 0;">
+                                <input placeholder="Search" matInput [formControl]="languageFormControl" type="text">
+                            </mat-form-field>
+                            <mat-option *ngFor="let language of filteredLanguages$ | async" [value]="language.id">
+                                {{language.name }}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
+
                     <mat-form-field class="form-field">
                         <mat-label>Areas</mat-label>
-                        <input matInput formControlName="areas">
+                        <mat-select formControlName="areas" multiple>
+                            <mat-form-field class="autocomplete-form-field" style="width: 100%;padding-bottom: 0;">
+                                <input placeholder="Search" matInput [formControl]="areaFormControl" type="text">
+                            </mat-form-field>
+                            <mat-option *ngFor="let area of filteredAreas$ | async" [value]="area.id">
+                                {{area.name }}
+                            </mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
             </div>
