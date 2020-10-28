@@ -7,6 +7,7 @@ import { FormTypes } from 'src/app/shared/constants/form-types';
 import { first, map, startWith } from 'rxjs/operators';
 import { AgentsApis } from '../../agents.constants';
 import { Observable } from 'rxjs';
+import * as moment from 'moment';
 
 @Component({
   selector: 'ep-agents-form',
@@ -15,7 +16,10 @@ import { Observable } from 'rxjs';
 })
 export class AgentsFormComponent implements OnInit {
   agentForm: FormGroup;
-  emptyAgentObj = { active: true, description: '', email: '', head_office: '', logo: '', name: '', orn_number: '', phone: '' };
+  emptyAgentObj = {
+    active: true, areas: '', brn: '', company_id: '', description: '', email: '', experienced_since: '', languages: '',
+    linkedin: '', name: '', nationality_id: '', phone: '', position: '', whatsapp_number: ''
+  };
   formType = null;
   FormTypes = FormTypes;
   // data to autocomplete
@@ -38,7 +42,7 @@ export class AgentsFormComponent implements OnInit {
   ngOnInit(): void {
     this.formType = this.formTypeService.getFormTypeWithId(this.route);
     this.agentForm = this.fb.group({
-      active: [false],
+      active: [true],
       areas: [''],
       brn: [''],
       company_id: [''],
@@ -96,9 +100,13 @@ export class AgentsFormComponent implements OnInit {
     return this.agentForm.controls;
   }
 
+  get prcessedData() {
+    return { ...this.agentForm.value, experienced_since: moment(this.agentFormControl.experienced_since.value).format('YYYY-MM-DD') }
+  }
+
   addNew(formDirective: FormGroupDirective) {
     if (this.agentForm.valid) {
-      this.sharedCrudService.addItem(AgentsApis.add, this.agentForm.value)
+      this.sharedCrudService.addItem(AgentsApis.add, this.prcessedData)
         .subscribe(response => {
           formDirective.resetForm();
           this.agentForm.reset(this.emptyAgentObj);
@@ -108,7 +116,7 @@ export class AgentsFormComponent implements OnInit {
 
   saveAsDraft(formDirective: FormGroupDirective) {
     if (this.agentForm.valid) {
-      this.sharedCrudService.addItem(AgentsApis.addDraft, this.agentForm.value)
+      this.sharedCrudService.addItem(AgentsApis.addDraft, this.prcessedData)
         .subscribe(response => {
           formDirective.resetForm();
           this.agentForm.reset(this.emptyAgentObj);
@@ -118,8 +126,7 @@ export class AgentsFormComponent implements OnInit {
 
   edit() {
     if (this.agentForm.valid) {
-      this.agentFormControl.experienced_since.setValue('2019-05-20')
-      this.sharedCrudService.editItem(AgentsApis.update, this.agentForm.value, this.formType.id)
+      this.sharedCrudService.editItem(AgentsApis.update, this.prcessedData, this.formType.id)
         .subscribe(response => {
         });
     }
@@ -127,7 +134,7 @@ export class AgentsFormComponent implements OnInit {
 
   editDraft() {
     if (this.agentForm.valid) {
-      this.sharedCrudService.editItem(AgentsApis.updateDraft, this.agentForm.value, this.formType.id)
+      this.sharedCrudService.editItem(AgentsApis.updateDraft, this.prcessedData, this.formType.id)
         .subscribe(response => {
         });
     }
