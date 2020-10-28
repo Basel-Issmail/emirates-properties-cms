@@ -1,7 +1,7 @@
 <div class="datatable">
 
   <div class="actions-container">
-    <button matTooltip="Add new Item" mat-fab class="action-main">
+    <button [routerLink]="['/companies/add']" matTooltip="Add new Item" mat-fab class="action-main">
       <i class="material-icons">add</i>
     </button>
     <div *ngIf="selection.hasValue()">
