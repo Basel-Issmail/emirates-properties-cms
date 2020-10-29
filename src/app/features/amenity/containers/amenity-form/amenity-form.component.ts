@@ -4,8 +4,8 @@ import { SharedCrudService } from 'src/app/shared/services/shared-crud.service';
 import { AmenityApis } from '../../amenity.constants';
 import { FormTypeService } from 'src/app/shared/services/form-type.service';
 import { FormTypes } from 'src/app/shared/constants/form-types';
-import { first, startWith, map } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { first, startWith, map, switchMap } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 
 @Component({
@@ -24,6 +24,7 @@ export class AmenityFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router,
     private formTypeService: FormTypeService,
     private sharedCrudService: SharedCrudService) { }
 
@@ -91,6 +92,19 @@ export class AmenityFormComponent implements OnInit {
     if (this.amenityForm.valid) {
       this.sharedCrudService.editItem(AmenityApis.updateDraft, this.amenityForm.value, this.formType.id)
         .subscribe(response => {
+        });
+    }
+  }
+
+  publish() {
+    if (this.amenityForm.valid) {
+      this.sharedCrudService.addItem(AmenityApis.add, this.amenityForm.value)
+        .pipe(switchMap(addedItem =>
+          this.sharedCrudService.delete(AmenityApis.deleteDraft, [{ id: this.formType.id }])
+            .pipe(map(res => addedItem))
+        ))
+        .subscribe((response: any) => {
+          this.router.navigate([`/amenity/edit/${response.data.id}`])
         });
     }
   }

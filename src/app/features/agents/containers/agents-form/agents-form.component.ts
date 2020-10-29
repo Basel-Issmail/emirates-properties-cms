@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroupDirective, FormGroup, FormControl } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormTypeService } from 'src/app/shared/services/form-type.service';
 import { SharedCrudService } from 'src/app/shared/services/shared-crud.service';
 import { FormTypes } from 'src/app/shared/constants/form-types';
-import { first, map, startWith } from 'rxjs/operators';
+import { first, map, startWith, switchMap } from 'rxjs/operators';
 import { AgentsApis } from '../../agents.constants';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
@@ -36,6 +36,7 @@ export class AgentsFormComponent implements OnInit {
 
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router,
     private formTypeService: FormTypeService,
     private sharedCrudService: SharedCrudService) { }
 
@@ -136,6 +137,19 @@ export class AgentsFormComponent implements OnInit {
     if (this.agentForm.valid) {
       this.sharedCrudService.editItem(AgentsApis.updateDraft, this.prcessedData, this.formType.id)
         .subscribe(response => {
+        });
+    }
+  }
+
+  publish() {
+    if (this.agentForm.valid) {
+      this.sharedCrudService.addItem(AgentsApis.add, this.agentForm.value)
+        .pipe(switchMap(addedItem =>
+          this.sharedCrudService.delete(AgentsApis.deleteDraft, [{ id: this.formType.id }])
+            .pipe(map(res => addedItem))
+        ))
+        .subscribe((response: any) => {
+          this.router.navigate([`/agents/edit/${response.data.id}`])
         });
     }
   }
