@@ -4,8 +4,8 @@ import { SharedCrudService } from 'src/app/shared/services/shared-crud.service';
 import { CompaniesApis } from '../../companies.constants';
 import { FormTypeService } from 'src/app/shared/services/form-type.service';
 import { FormTypes } from 'src/app/shared/constants/form-types';
-import { first } from 'rxjs/operators';
-import { ActivatedRoute } from '@angular/router';
+import { first, switchMap, map } from 'rxjs/operators';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'ep-companies-form',
@@ -19,6 +19,7 @@ export class CompaniesFormComponent implements OnInit {
   FormTypes = FormTypes;
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
+    private router: Router,
     private formTypeService: FormTypeService,
     private sharedCrudService: SharedCrudService) { }
 
@@ -88,4 +89,16 @@ export class CompaniesFormComponent implements OnInit {
     }
   }
 
+  publish() {
+    if (this.companyForm.valid) {
+      this.sharedCrudService.addItem(CompaniesApis.add, this.companyForm.value)
+        .pipe(switchMap(addedItem =>
+          this.sharedCrudService.delete(CompaniesApis.deleteDraft, [{ id: this.formType.id }])
+            .pipe(map(res => addedItem))
+        ))
+        .subscribe((response: any) => {
+          this.router.navigate([`/companies/edit/${response.data.id}`])
+        });
+    }
+  }
 }
