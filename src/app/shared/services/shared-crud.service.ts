@@ -11,7 +11,6 @@ export class SharedCrudService {
 
   getData(url, params) {
     return this.http.get<any[]>(url, { params }).pipe(map(response => {
-      console.log(response[params.tab]);
       return response[params.tab];
     }));
   }

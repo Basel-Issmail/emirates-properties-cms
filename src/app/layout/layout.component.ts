@@ -1,8 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterContentChecked } from '@angular/core';
 import { SpinnerService } from '../core/services/spinner.service';
 import { AuthService } from '../features/auth/services/auth.service';
 import { Router } from '@angular/router';
 import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'ep-layout',
@@ -11,11 +12,14 @@ import { BreakpointObserver, Breakpoints } from '@angular/cdk/layout';
 })
 export class LayoutComponent implements OnInit {
   isLargeScreen = false;
-  constructor(public spinnerService: SpinnerService, private authService: AuthService, private router: Router, private breakpointObserver: BreakpointObserver) { }
+  isLoading: boolean = false;
+  constructor(private spinnerService: SpinnerService, private authService: AuthService, private router: Router, private breakpointObserver: BreakpointObserver) { }
 
   ngOnInit(): void {
     const layoutChanges = this.breakpointObserver.observe('(min-width: 768px)');
-
+    this.spinnerService.getLoadingStatus().subscribe((response: boolean) => setTimeout(() => {
+      this.isLoading = response;
+    }, 0));
     layoutChanges.subscribe(result => {
       if (result.matches) {
         this.isLargeScreen = true;
