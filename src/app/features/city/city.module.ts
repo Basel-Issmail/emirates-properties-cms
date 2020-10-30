@@ -4,16 +4,22 @@ import { CommonModule } from '@angular/common';
 import { CityRoutingModule } from './city-routing.module';
 import { CityTableComponent } from './containers/city-table/city-table.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CityFormComponent } from './containers/city-form/city-form.component';
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
-  declarations: [CityTableComponent],
+  declarations: [CityTableComponent, CityFormComponent],
   imports: [
     CommonModule,
     CityRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA5PmefmUHSxICSAawq3mDYlI09Lb2sq9Q'
+    }),
   ]
 })
 export class CityModule { }

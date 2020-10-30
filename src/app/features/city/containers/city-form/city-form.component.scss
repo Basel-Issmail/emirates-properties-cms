@@ -1,0 +1,13 @@
+.form-row {
+  display: flex;
+  justify-content: center;
+
+  .form-col {
+    width: 800px;
+    margin-right: 1rem;
+  }
+}
+
+agm-map {
+  height: 300px !important;
+}
