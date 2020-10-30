@@ -4,16 +4,18 @@ import { CommonModule } from '@angular/common';
 import { NewsRoutingModule } from './news-routing.module';
 import { NewsTableComponent } from './containers/news-table/news-table.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NewsFormComponent } from './containers/news-form/news-form.component';
 
 
 @NgModule({
-  declarations: [NewsTableComponent],
+  declarations: [NewsTableComponent, NewsFormComponent],
   imports: [
     CommonModule,
     NewsRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class NewsModule { }
