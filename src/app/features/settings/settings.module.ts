@@ -4,16 +4,18 @@ import { CommonModule } from '@angular/common';
 import { SettingsRoutingModule } from './settings-routing.module';
 import { SettingsTableComponent } from './containers/settings-table/settings-table.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SettingsFormComponent } from './containers/settings-form/settings-form.component';
 
 
 @NgModule({
-  declarations: [SettingsTableComponent],
+  declarations: [SettingsTableComponent, SettingsFormComponent],
   imports: [
     CommonModule,
     SettingsRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class SettingsModule { }
