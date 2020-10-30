@@ -4,16 +4,18 @@ import { CommonModule } from '@angular/common';
 import { CountryRoutingModule } from './country-routing.module';
 import { CountryTableComponent } from './containers/country-table/country-table.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CountryFormComponent } from './containers/country-form/country-form.component';
 
 
 @NgModule({
-  declarations: [CountryTableComponent],
+  declarations: [CountryTableComponent, CountryFormComponent],
   imports: [
     CommonModule,
     CountryRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class CountryModule { }
