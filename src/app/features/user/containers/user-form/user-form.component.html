@@ -1,1 +1,115 @@
-<p>user-form works!</p>
+<form class="epform" [formGroup]="userForm" #formDirective="ngForm">
+    <div class="epform-breadcrumb">
+        <div class="return">
+            <a mat-icon-button [routerLink]="['/users']">
+                <mat-icon>arrow_back</mat-icon>
+            </a>
+            <h1 class="epform-title">Users list</h1>
+        </div>
+        <div *ngIf="formType.type === FormTypes.add">
+            <button type="submit" mat-stroked-button color="primary" (click)="saveAsDraft(formDirective)">Save as
+                draft</button>
+            <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary"
+                (click)="addNew(formDirective)">Add new user</button>
+        </div>
+        <div *ngIf="formType.type === FormTypes.edit">
+            <button type="submit" mat-flat-button color="primary" (click)="edit()">Edit user</button>
+        </div>
+        <div *ngIf="formType.type === FormTypes.editDraft">
+            <button type="submit" mat-stroked-button color="primary" (click)="editDraft()">Edit draft user</button>
+            <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary" (click)="publish()">Publish
+                user</button>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-left_col">
+            <div class="epform-card">
+                <div mat-subheader>
+                    <div>User Info </div>
+                </div>
+                <div class="form">
+                    <table class="form-field" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>First name *</mat-label>
+                                    <input matInput formControlName="first_name">
+                                    <mat-error *ngIf="userFormControl.first_name.hasError('required')">
+                                        First name is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>Last name *</mat-label>
+                                    <input matInput formControlName="last_name">
+                                    <mat-error *ngIf="userFormControl.last_name.hasError('required')">
+                                        Last name is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr *ngIf="formType.type === FormTypes.add">
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>Email *</mat-label>
+                                    <input type="email" matInput formControlName="email">
+                                    <mat-error *ngIf="userFormControl.email.hasError('required')">
+                                        Email is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>Password *</mat-label>
+                                    <input matInput formControlName="password">
+                                    <mat-error *ngIf="userFormControl.password.hasError('required')">
+                                        Password is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>Role *</mat-label>
+                                    <mat-select formControlName="role" multiple>
+                                        <mat-form-field class="autocomplete-form-field"
+                                            style="width: 100%;padding-bottom: 0;">
+                                            <input placeholder="Search" matInput [formControl]="roleFormControl"
+                                                type="text">
+                                        </mat-form-field>
+                                        <mat-option *ngFor="let role of filteredRoles$ | async" [value]="role.id">
+                                            {{role.name }}
+                                        </mat-option>
+                                    </mat-select>
+                                    <mat-error *ngIf="userFormControl.role.hasError('required')">
+                                        Role is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>Mobile number</mat-label>
+                                    <input matInput formControlName="mobile">
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="form-right_col">
+            <div class="epform-card">
+                <div mat-subheader>
+                    <div>Status Info</div>
+                </div>
+                <div class="form">
+                    <mat-slide-toggle formControlName="active" color="primary" [labelPosition]="'before'">Active user
+                    </mat-slide-toggle>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -15,6 +15,10 @@ export class SharedCrudService {
     }));
   }
 
+  get(url, params) {
+    return this.http.get<any[]>(url, { params });
+  }
+
   getItemDetails(url, id) {
     return this.http.get(`${url}/${id}`).pipe(map((response: any) => response.data));
   }
