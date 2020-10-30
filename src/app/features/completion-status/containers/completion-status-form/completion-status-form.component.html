@@ -1,0 +1,50 @@
+<form class="epform" [formGroup]="completionStatusForm" #formDirective="ngForm">
+    <div class="epform-breadcrumb">
+        <div class="return">
+            <a mat-icon-button [routerLink]="['/completion-status']">
+                <mat-icon>arrow_back</mat-icon>
+            </a>
+            <h1 class="epform-title">Compleyion status list</h1>
+        </div>
+        <div *ngIf="formType.type === FormTypes.add">
+            <button type="submit" mat-stroked-button color="primary" (click)="saveAsDraft(formDirective)">Save as
+                draft</button>
+            <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary"
+                (click)="addNew(formDirective)">Add new completion status</button>
+        </div>
+        <div *ngIf="formType.type === FormTypes.edit">
+            <button type="submit" mat-flat-button color="primary" (click)="edit()">Edit completion status</button>
+        </div>
+        <div *ngIf="formType.type === FormTypes.editDraft">
+            <button type="submit" mat-stroked-button color="primary" (click)="editDraft()">Edit draft completion
+                status</button>
+            <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary" (click)="publish()">Publish
+                completion status</button>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-col">
+            <div class="epform-card">
+                <div mat-subheader>
+                    <div>Completion status Info </div>
+                </div>
+                <div class="form">
+                    <table class="form-field" cellspacing="0">
+                        <mat-form-field class="form-field">
+                            <mat-label>Title *</mat-label>
+                            <input matInput formControlName="title">
+                            <mat-error *ngIf="completionStatusFormControl.title.hasError('required')">
+                                Title is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </table>
+                    <mat-form-field class="form-field">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput formControlName="description"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
