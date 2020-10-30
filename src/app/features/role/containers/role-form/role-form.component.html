@@ -1,0 +1,60 @@
+<form class="epform" [formGroup]="roleForm" #formDirective="ngForm">
+    <div class="epform-breadcrumb">
+        <div class="return">
+            <a mat-icon-button [routerLink]="['/roles']">
+                <mat-icon>arrow_back</mat-icon>
+            </a>
+            <h1 class="epform-title">Roles list</h1>
+        </div>
+        <div *ngIf="formType.type === FormTypes.add">
+            <button type="submit" mat-stroked-button color="primary" (click)="saveAsDraft(formDirective)">Save as
+                draft</button>
+            <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary"
+                (click)="addNew(formDirective)">Add new role</button>
+        </div>
+        <div *ngIf="formType.type === FormTypes.edit">
+            <button type="submit" mat-flat-button color="primary" (click)="edit()">Edit role</button>
+        </div>
+        <div *ngIf="formType.type === FormTypes.editDraft">
+            <button type="submit" mat-stroked-button color="primary" (click)="editDraft()">Edit draft role</button>
+            <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary" (click)="publish()">Publish
+                role</button>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-left_col">
+            <div class="epform-card">
+                <div mat-subheader>
+                    <div>Role Info </div>
+                </div>
+                <div class="form">
+                    <table class="form-field" cellspacing="0">
+                        <mat-form-field class="form-field">
+                            <mat-label>Name *</mat-label>
+                            <input matInput formControlName="name">
+                            <mat-error *ngIf="roleFormControl.name.hasError('required')">
+                                Name is <strong>required</strong>
+                            </mat-error>
+                        </mat-form-field>
+                    </table>
+                    <mat-form-field class="form-field">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput formControlName="description"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+        <div class="form-right_col">
+            <div class="epform-card">
+                <div mat-subheader>
+                    <div>Status Info</div>
+                </div>
+                <div class="form">
+                    <mat-slide-toggle formControlName="active" color="primary" [labelPosition]="'before'">Active Role
+                    </mat-slide-toggle>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

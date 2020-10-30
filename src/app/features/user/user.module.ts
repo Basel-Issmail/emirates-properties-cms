@@ -5,10 +5,11 @@ import { UserRoutingModule } from './user-routing.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule } from '@angular/forms';
 import { UserTableComponent } from './containers/user-table/user-table.component';
+import { UserFormComponent } from './containers/user-form/user-form.component';
 
 
 @NgModule({
-  declarations: [UserTableComponent],
+  declarations: [UserTableComponent, UserFormComponent],
   imports: [
     CommonModule,
     UserRoutingModule,
