@@ -4,16 +4,18 @@ import { CommonModule } from '@angular/common';
 import { CareerRoutingModule } from './career-routing.module';
 import { CareerTableComponent } from './containers/career-table/career-table.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CareerFormComponent } from './containers/career-form/career-form.component';
 
 
 @NgModule({
-  declarations: [CareerTableComponent],
+  declarations: [CareerTableComponent, CareerFormComponent],
   imports: [
     CommonModule,
     CareerRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class CareerModule { }
