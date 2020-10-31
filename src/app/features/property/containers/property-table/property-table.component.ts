@@ -121,7 +121,7 @@ export class PropertyTableComponent implements AfterViewInit {
   }
 
   approve(selected) {
-    this.sharedCrudService.postRequest(PropertyApis.approve, selected).subscribe(response => {
+    this.sharedCrudService.postRequest(PropertyApis.approve, selected, 'Approved successfully').subscribe(response => {
       this.changedData.next();
     })
   }

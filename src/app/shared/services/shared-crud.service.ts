@@ -34,19 +34,43 @@ export class SharedCrudService {
   }
 
   delete(url, items) {
-    return this.http.post(url, { ids: this.getItemsIdsFromSelection(items) });
+    return this.http.post(url, { ids: this.getItemsIdsFromSelection(items) }).pipe(map(response => {
+      this.handleSuccess('Deleted successfully');
+      return response;
+    }), catchError(error => {
+      this.handleError(error);
+      return error
+    }));
   }
 
-  postRequest(url, items) {
-    return this.http.post(url, { ids: this.getItemsIdsFromSelection(items) });
+  postRequest(url, items, message) {
+    return this.http.post(url, { ids: this.getItemsIdsFromSelection(items) }).pipe(map(response => {
+      this.handleSuccess(message);
+      return response;
+    }), catchError(error => {
+      this.handleError(error);
+      return error
+    }));
   }
 
   restore(url, items) {
-    return this.http.post(url, { ids: this.getItemsIdsFromSelection(items) });
+    return this.http.post(url, { ids: this.getItemsIdsFromSelection(items) }).pipe(map(response => {
+      this.handleSuccess('Restored successfully');
+      return response;
+    }), catchError(error => {
+      this.handleError(error);
+      return error
+    }));
   }
 
   addItem(url, item) {
-    return this.http.post(url, item);
+    return this.http.post(url, item).pipe(map(response => {
+      this.handleSuccess('Added successfully');
+      return response;
+    }), catchError(error => {
+      this.handleError(error);
+      return error
+    }));
   }
 
   editItem(url, item, id) {
@@ -64,7 +88,13 @@ export class SharedCrudService {
       ids: this.getItemsIdsFromSelection(items),
       attribute: attribute,
       value: value
-    });
+    }).pipe(map(response => {
+      this.handleSuccess('Attribute changed successfully');
+      return response;
+    }), catchError(error => {
+      this.handleError(error);
+      return error
+    }));
   }
 
   handleSuccess(message) {
@@ -79,7 +109,7 @@ export class SharedCrudService {
 
   handleError(error) {
     console.log(error);
-    
+
     let message = 'Something went wrong, try again later.';
     if (error.message) message = error.message;
     if (error.error && error.error.message) message = error.error.message;

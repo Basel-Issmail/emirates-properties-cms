@@ -166,11 +166,11 @@
                                 matTooltip="edit selected" mat-icon-button class="fab-secondary" color="secondary">
                                 <i class="material-icons">edit</i>
                             </button>
-                            <button *ngIf="tab !== 'approved'" (click)="approve(selection.selected)"
+                            <button *ngIf="tab !== 'approved'" (click)="approve([row])"
                                 matTooltip="Approve selected" mat-icon-button class="fab-secondary" color="secondary">
                                 <i class="material-icons">thumb_up_alt</i>
                             </button>
-                            <button *ngIf="tab !== 'pending_approval'" (click)="disapprove(selection.selected)"
+                            <button *ngIf="tab !== 'pending_approval'" (click)="disapprove([row])"
                                 matTooltip="Disapprove selected" mat-icon-button class="fab-secondary"
                                 color="secondary">
                                 <i class="material-icons">thumb_down_alt</i>
