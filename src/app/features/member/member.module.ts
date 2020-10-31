@@ -7,10 +7,11 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MemberFormComponent } from './containers/member-form/member-form.component';
 import { AgmCoreModule } from '@agm/core';
+import { MemberPasswordFormComponent } from './containers/member-password-form/member-password-form.component';
 
 
 @NgModule({
-  declarations: [MemberTableComponent, MemberFormComponent],
+  declarations: [MemberTableComponent, MemberFormComponent, MemberPasswordFormComponent],
   imports: [
     CommonModule,
     MemberRoutingModule,

@@ -39,7 +39,7 @@
                     <i class="material-icons">edit</i>
                 </button>
                 <button (click)="openPasswordDialog(selection.selected[0].id)" *ngIf="selection.selected.length === 1"
-                    matTooltip="edit selected" mat-mini-fab class="fab-secondary" color="secondary">
+                    matTooltip="Change password" mat-mini-fab class="fab-secondary" color="secondary">
                     <i class="material-icons">vpn_key</i>
                 </button>
                 <button (click)="delete(selection.selected)" matTooltip="Delete selected" mat-mini-fab
@@ -171,7 +171,7 @@
                                 matTooltip="edit selected" mat-icon-button class="fab-secondary" color="secondary">
                                 <i class="material-icons">edit</i>
                             </button>
-                            <button (click)="openPasswordDialog(row.id)" matTooltip="edit selected" mat-icon-button
+                            <button (click)="openPasswordDialog(row.id)" matTooltip="Change password" mat-icon-button
                                 class="fab-secondary" color="secondary">
                                 <i class="material-icons">vpn_key</i>
                             </button>

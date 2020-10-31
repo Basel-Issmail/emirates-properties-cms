@@ -11,5 +11,6 @@ export enum MemberApis {
     addDraft = 'members/add-draft',
     update = 'members/update',
     updateDraft = 'members/update-draft',
-    builder = 'members/builder'
+    builder = 'members/builder',
+    changePassword = 'members/change-password'
 }
