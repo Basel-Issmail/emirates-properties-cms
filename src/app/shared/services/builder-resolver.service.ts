@@ -15,7 +15,7 @@ export class BuilderResolverService implements Resolve<any> {
     return this.httpClient.get(route.data['builderAPI']).pipe(map(response => {
       // make all ids of lists as numbers
       for (const [key, value] of Object.entries(response)) {
-        if (key.includes('list')) {
+        if (key.includes('list') && key !== 'language_list') {
           response[key].forEach(item => {
             item.id = Number(item.id);
           });

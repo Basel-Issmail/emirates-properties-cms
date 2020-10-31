@@ -15,13 +15,13 @@ import { PagesApis } from '../../pages.constants';
   styleUrls: ['./pages-table.component.scss']
 })
 export class PagesTableComponent {
-  displayedColumns: string[] = ['select', 'status', 'title', 'updated_at', 'actions'];
+  displayedColumns: string[] = ['select', 'status', 'name', 'updated_at', 'actions'];
   columns = {
-    cols: ['select', 'status', 'title', 'updated_at', 'actions'],
+    cols: ['select', 'status', 'name', 'updated_at', 'actions'],
     actions: { isShown: true, label: '', canHide: false },
     status: { isShown: true, label: '', canHide: false },
     select: { isShown: true, label: '', canHide: false },
-    title: { isShown: true, label: 'Title', canHide: true },
+    name: { isShown: true, label: 'Name', canHide: true },
     updated_at: { isShown: true, label: 'updated at', canHide: true },
   }
   data: any[] = [];

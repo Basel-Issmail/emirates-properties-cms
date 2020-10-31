@@ -4,16 +4,18 @@ import { CommonModule } from '@angular/common';
 import { PagesRoutingModule } from './pages-routing.module';
 import { PagesTableComponent } from './containers/pages-table/pages-table.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { PagesFormComponent } from './containers/pages-form/pages-form.component';
 
 
 @NgModule({
-  declarations: [PagesTableComponent],
+  declarations: [PagesTableComponent, PagesFormComponent],
   imports: [
     CommonModule,
     PagesRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ]
 })
 export class PagesModule { }
