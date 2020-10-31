@@ -29,6 +29,8 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, DateAdapter, MAT_DATE_FORMATS, MAT_DATE_LOCALE } from '@angular/material/core';
 import { MomentDateAdapter, MAT_MOMENT_DATE_ADAPTER_OPTIONS } from '@angular/material-moment-adapter';
+import {MatDialogModule} from '@angular/material/dialog';
+
 import * as _moment from 'moment';
 
 const appearance: MatFormFieldDefaultOptions = {
@@ -78,7 +80,8 @@ const MY_FORMATS = {
     MatAutocompleteModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatDialogModule
   ],
   exports: [
     MatToolbarModule,
@@ -108,7 +111,8 @@ const MY_FORMATS = {
     MatAutocompleteModule,
     MatSelectModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatDialogModule
   ],
   providers: [
     {

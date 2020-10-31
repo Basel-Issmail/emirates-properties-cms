@@ -7,6 +7,8 @@ import { merge, of as observableOf, Subject } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { SharedCrudService } from 'src/app/shared/services/shared-crud.service';
 import { UserApis } from '../../user.constants';
+import { MatDialog } from '@angular/material/dialog';
+import { UserPasswordFormComponent } from '../user-password-form/user-password-form.component';
 
 @Component({
   selector: 'ep-user-table',
@@ -42,7 +44,7 @@ export class UserTableComponent implements AfterViewInit {
   @ViewChild(MatSort) sort: MatSort;
   selection = new SelectionModel<any>(true, []);
 
-  constructor(private sharedCrudService: SharedCrudService) { }
+  constructor(private sharedCrudService: SharedCrudService, public dialog: MatDialog) { }
 
   ngAfterViewInit() {
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
@@ -120,5 +122,16 @@ export class UserTableComponent implements AfterViewInit {
     this.sharedCrudService.restore(UserApis.restore, selected).subscribe(response => {
       this.changedData.next();
     })
+  }
+
+  openPasswordDialog(id) {
+    const dialogRef = this.dialog.open(UserPasswordFormComponent, {
+      width: '400px',
+      data: { id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }
