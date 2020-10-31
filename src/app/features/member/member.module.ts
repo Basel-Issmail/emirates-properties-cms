@@ -4,16 +4,22 @@ import { CommonModule } from '@angular/common';
 import { MemberRoutingModule } from './member-routing.module';
 import { MemberTableComponent } from './containers/member-table/member-table.component';
 import { SharedModule } from 'src/app/shared/shared.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MemberFormComponent } from './containers/member-form/member-form.component';
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
-  declarations: [MemberTableComponent],
+  declarations: [MemberTableComponent, MemberFormComponent],
   imports: [
     CommonModule,
     MemberRoutingModule,
     SharedModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA5PmefmUHSxICSAawq3mDYlI09Lb2sq9Q'
+    }),
   ]
 })
 export class MemberModule { }

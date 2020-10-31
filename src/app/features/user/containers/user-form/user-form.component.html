@@ -50,8 +50,8 @@
                                 </mat-form-field>
                             </td>
                         </tr>
-                        <tr *ngIf="formType.type === FormTypes.add">
-                            <td>
+                        <tr>
+                            <td [attr.colspan]="(formType.type === FormTypes.add)? 1: 2">
                                 <mat-form-field class="form-field">
                                     <mat-label>Email *</mat-label>
                                     <input type="email" matInput formControlName="email">
@@ -60,7 +60,7 @@
                                     </mat-error>
                                 </mat-form-field>
                             </td>
-                            <td>
+                            <td *ngIf="formType.type === FormTypes.add">
                                 <mat-form-field class="form-field">
                                     <mat-label>Password *</mat-label>
                                     <input matInput formControlName="password">
@@ -70,6 +70,7 @@
                                 </mat-form-field>
                             </td>
                         </tr>
+
                         <tr>
                             <td>
                                 <mat-form-field class="form-field">

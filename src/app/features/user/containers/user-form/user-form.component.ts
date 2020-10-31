@@ -32,17 +32,15 @@ export class UserFormComponent implements OnInit {
     this.formType = this.formTypeService.getFormTypeWithId(this.route);
 
     const passwordValidators = [];
-    const emailValidators = [Validators.email];
-    if(this.formType.type === FormTypes.add){
+    if (this.formType.type === FormTypes.add) {
       passwordValidators.push(Validators.required);
-      emailValidators.push(Validators.required);
     }
 
     this.userForm = this.fb.group({
       active: [true],
       first_name: ['', Validators.required],
       last_name: ['', Validators.required],
-      email: ['', emailValidators],
+      email: ['', Validators.required],
       password: ['', passwordValidators],
       role: ['', Validators.required],
       mobile: [''],
@@ -80,6 +78,17 @@ export class UserFormComponent implements OnInit {
     return this.userForm.controls;
   }
 
+  get userEditValues() {
+    return {
+      active: this.userFormControl.active.value,
+      first_name: this.userFormControl.first_name.value,
+      last_name: this.userFormControl.last_name.value,
+      email: this.userFormControl.email.value,
+      role: this.userFormControl.role.value,
+      mobile: this.userFormControl.mobile.value
+    };
+  }
+
   addNew(formDirective: FormGroupDirective) {
     if (this.userForm.valid) {
       this.sharedCrudService.addItem(UserApis.add, this.userForm.value)
@@ -102,7 +111,7 @@ export class UserFormComponent implements OnInit {
 
   edit() {
     if (this.userForm.valid) {
-      this.sharedCrudService.editItem(UserApis.update, this.userForm.value, this.formType.id)
+      this.sharedCrudService.editItem(UserApis.update, this.userEditValues, this.formType.id)
         .subscribe(response => {
         });
     }
@@ -110,7 +119,7 @@ export class UserFormComponent implements OnInit {
 
   editDraft() {
     if (this.userForm.valid) {
-      this.sharedCrudService.editItem(UserApis.updateDraft, this.userForm.value, this.formType.id)
+      this.sharedCrudService.editItem(UserApis.updateDraft, this.userEditValues, this.formType.id)
         .subscribe(response => {
         });
     }

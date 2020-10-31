@@ -1,7 +1,7 @@
 <div class="datatable">
 
     <div class="actions-container">
-        <button matTooltip="Add new Item" mat-fab class="action-main">
+        <button [routerLink]="['/members/add']" matTooltip="Add new Item" mat-fab class="action-main">
             <i class="material-icons">add</i>
         </button>
         <div *ngIf="selection.hasValue()">
@@ -28,6 +28,11 @@
 
 
             <span *ngIf="tab !== 'delete' && tab !== 'draft'">
+                <button [routerLink]="['/members/edit/' + selection.selected[0].id]"
+                    *ngIf="selection.selected.length === 1" matTooltip="edit selected" mat-mini-fab
+                    class="fab-secondary" color="secondary">
+                    <i class="material-icons">edit</i>
+                </button>
                 <button (click)="delete(selection.selected)" matTooltip="Delete selected" mat-mini-fab
                     class="fab-secondary" color="secondary">
                     <i class="material-icons">delete</i>
@@ -140,15 +145,11 @@
                         </span>
 
 
-                        <span *ngIf="tab === 'draft'">
-                            <button (click)="deleteDraft([row])" matTooltip="Delete selected" mat-icon-button
-                                class="fab-secondary" color="secondary">
-                                <i class="material-icons">delete</i>
-                            </button>
-                        </span>
-
-
                         <span *ngIf="tab !== 'delete' && tab !== 'draft'">
+                            <button [routerLink]="['/members/edit/' + row.id]" matTooltip="edit selected"
+                                mat-icon-button class="fab-secondary" color="secondary">
+                                <i class="material-icons">edit</i>
+                            </button>
                             <button (click)="delete([row])" matTooltip="Delete selected" mat-icon-button
                                 class="fab-secondary" color="secondary">
                                 <i class="material-icons">delete</i>

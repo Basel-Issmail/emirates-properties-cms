@@ -86,7 +86,6 @@ export class AgentsFormComponent implements OnInit {
         .pipe(first(), map(response => { if (response.areas) response.areas = response.areas.map(value => Number(value.id)); return response }))
         .subscribe(x => {
           this.agentForm.patchValue(x);
-          this.agentFormControl.company_id.setValue(35);
         });
     }
 
