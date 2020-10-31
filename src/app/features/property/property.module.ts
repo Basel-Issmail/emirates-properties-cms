@@ -6,6 +6,7 @@ import { PropertyTableComponent } from './containers/property-table/property-tab
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PropertyFormComponent } from './containers/property-form/property-form.component';
+import { AgmCoreModule } from '@agm/core';
 
 
 @NgModule({
@@ -15,7 +16,10 @@ import { PropertyFormComponent } from './containers/property-form/property-form.
     PropertyRoutingModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyA5PmefmUHSxICSAawq3mDYlI09Lb2sq9Q'
+    }),
   ]
 })
 export class PropertyModule { }

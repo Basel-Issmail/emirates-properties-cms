@@ -11,5 +11,6 @@ export enum PropertyApis {
     addDraft = 'properties/add-draft',
     update = 'properties/update',
     updateDraft = 'properties/update-draft',
-    builder = 'properties/builder'
+    builder = 'properties/builder',
+    approve = 'properties/approveProperties'
 }

@@ -34,7 +34,7 @@
 
             <span *ngIf="tab !== 'delete' && tab !== 'draft'">
                 <button [routerLink]="['/property/edit/' + selection.selected[0].id]"
-                    *ngIf="tab === 'all' && selection.selected.length === 1" matTooltip="edit selected" mat-mini-fab
+                    *ngIf="tab === 'approved' && selection.selected.length === 1" matTooltip="edit selected" mat-mini-fab
                     class="fab-secondary" color="secondary">
                     <i class="material-icons">edit</i>
                 </button>
@@ -162,7 +162,7 @@
 
 
                         <span *ngIf="tab !== 'delete' && tab !== 'draft'">
-                            <button [routerLink]="['/property/edit/' + row.id]" *ngIf="tab === 'all'"
+                            <button [routerLink]="['/property/edit/' + row.id]" *ngIf="tab === 'approved'"
                                 matTooltip="edit selected" mat-icon-button class="fab-secondary" color="secondary">
                                 <i class="material-icons">edit</i>
                             </button>

@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseURL: 'https://epapi.clicemails.com/api/'
+  baseURL: 'https://epapi.clicemails.com/api/',
+  imageBaseUrl: 'https://epapi.clicemails.com/'
 };
 
 /*

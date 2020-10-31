@@ -1,1 +1,336 @@
-<p>property-form works!</p>
+<form class="epform" [formGroup]="propertiesForm" #formDirective="ngForm">
+    <div class="epform-breadcrumb">
+        <div class="return">
+            <a mat-icon-button [routerLink]="['/property']">
+                <mat-icon>arrow_back</mat-icon>
+            </a>
+            <h1 class="epform-title">Property list</h1>
+        </div>
+        <div *ngIf="formType.type === FormTypes.add">
+            <button type="submit" mat-stroked-button color="primary" (click)="saveAsDraft(formDirective)">Save
+                as
+                draft</button>
+            <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary"
+                (click)="addNew(formDirective)">Add new Property</button>
+        </div>
+        <div *ngIf="formType.type === FormTypes.edit">
+            <button type="submit" mat-flat-button color="primary" (click)="edit()">Edit Property</button>
+        </div>
+        <div *ngIf="formType.type === FormTypes.editDraft">
+            <button type="submit" mat-stroked-button color="primary" (click)="editDraft()">Edit draft
+                Property</button>
+            <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary" (click)="publish()">Publish
+                Property</button>
+        </div>
+    </div>
+    <mat-tab-group mat-stretch-tabs color="primary" style="margin-top: 2rem">
+        <mat-tab label="Property details">
+            <div class="form-row">
+                <div class="form-left_col">
+                    <div class="epform-card">
+                        <div mat-subheader>
+                            <div>Property Info </div>
+                        </div>
+                        <div class="form">
+
+                            <mat-form-field *ngIf="!member" class="form-field">
+                                <mat-label>Agent</mat-label>
+                                <mat-select formControlName="agent_id">
+                                    <mat-form-field class="autocomplete-form-field"
+                                        style="width: 100%;padding-bottom: 0;">
+                                        <input placeholder="Search company" matInput [formControl]="agentFormControl"
+                                            type="text">
+                                    </mat-form-field>
+                                    <mat-optgroup *ngFor="let group of filteredAgents$ | async" [label]="group.name">
+                                        <mat-option *ngFor="let agent of group.agents" [value]="agent.id">
+                                            {{agent.name}}
+                                        </mat-option>
+                                    </mat-optgroup>
+                                </mat-select>
+                            </mat-form-field>
+                            <mat-form-field *ngIf="member"  class="form-field">
+                                <mat-label>Member</mat-label>
+                                <input matInput [value]="member.full_name" disabled>
+                            </mat-form-field>
+                            <table class="form-field" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="form-field">
+                                            <mat-label>Title *</mat-label>
+                                            <input matInput formControlName="title">
+                                            <mat-error *ngIf="propertiesFormControl.title.hasError('required')">
+                                                Title is <strong>required</strong>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="form-field">
+                                            <mat-label>Reference</mat-label>
+                                            <input matInput formControlName="reference">
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="form-field">
+                                            <mat-label>Trakheesi permit</mat-label>
+                                            <input matInput formControlName="trakheesi_permit">
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="form-field">
+                                            <mat-label>Type *</mat-label>
+                                            <mat-select formControlName="type_id">
+                                                <mat-form-field class="autocomplete-form-field"
+                                                    style="width: 100%;padding-bottom: 0;">
+                                                    <input placeholder="Search type group" matInput
+                                                        [formControl]="typeFormControl" type="text">
+                                                </mat-form-field>
+                                                <mat-optgroup *ngFor="let group of filteredTypes$ | async"
+                                                    [label]="group.name">
+                                                    <mat-option *ngFor="let type of group.types" [value]="type.id">
+                                                        {{type.name}}
+                                                    </mat-option>
+                                                </mat-optgroup>
+                                            </mat-select>
+                                            <mat-error *ngIf="propertiesFormControl.type_id.hasError('required')">
+                                                Type is <strong>required</strong>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                            </table>
+                            <mat-form-field class="form-field">
+                                <mat-label>Description</mat-label>
+                                <textarea matInput formControlName="description"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="epform-card">
+                        <div mat-subheader>
+                            <div>Property specification details</div>
+                        </div>
+                        <div class="form">
+                            <table class="form-field" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="form-field">
+                                            <mat-label>Bedrooms</mat-label>
+                                            <input matInput formControlName="bedrooms">
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="form-field">
+                                            <mat-label>Bathrooms</mat-label>
+                                            <input matInput formControlName="bathrooms">
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="form-field">
+                                            <mat-label>Maidrooms</mat-label>
+                                            <input matInput formControlName="maidroom">
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="form-field">
+                                            <mat-label>Area SQM *</mat-label>
+                                            <input matInput formControlName="area">
+                                            <mat-error *ngIf="propertiesFormControl.area.hasError('required')">
+                                                Area is <strong>required</strong>
+                                            </mat-error>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="epform-card">
+                        <div mat-subheader>
+                            <div>Property media</div>
+                        </div>
+                        <div class="form">
+                            <mat-form-field class="form-field">
+                                <mat-label>Images</mat-label>
+                                <textarea matInput formControlName="images"></textarea>
+                            </mat-form-field>
+                            <mat-form-field class="form-field">
+                                <mat-label>Floor plans</mat-label>
+                                <textarea matInput formControlName="floor_plans"></textarea>
+                            </mat-form-field>
+                            <mat-form-field class="form-field">
+                                <mat-label>Videos</mat-label>
+                                <textarea matInput formControlName="videos"></textarea>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+
+
+                </div>
+                <div class="form-right_col">
+                    <div class="epform-card">
+                        <div mat-subheader>
+                            <div>Property Status</div>
+                        </div>
+                        <div class="form">
+                            <mat-slide-toggle style="margin-bottom: .5rem" formControlName="active" color="primary"
+                                [labelPosition]="'before'">Active
+                                Property
+                            </mat-slide-toggle>
+
+                            <mat-slide-toggle style="margin-bottom: .5rem" formControlName="approve" color="primary"
+                                [labelPosition]="'before'">Approved
+                                Property
+                            </mat-slide-toggle>
+
+                            <mat-slide-toggle style="margin-bottom: 1rem" formControlName="verified" color="primary"
+                                [labelPosition]="'before'">Verified
+                                Property </mat-slide-toggle>
+
+                            <table class="form-field" cellspacing="0">
+                                <tr>
+                                    <td>
+                                        <mat-form-field class="form-field">
+                                            <mat-label>Publishing date</mat-label>
+                                            <input matInput [matDatepicker]="publishDatePicker"
+                                                formControlName="publish_date">
+                                            <mat-datepicker-toggle matSuffix [for]="publishDatePicker">
+                                            </mat-datepicker-toggle>
+                                            <mat-datepicker #publishDatePicker></mat-datepicker>
+                                        </mat-form-field>
+                                    </td>
+                                    <td>
+                                        <mat-form-field class="form-field">
+                                            <mat-label>Expiry date</mat-label>
+                                            <input matInput [matDatepicker]="expiryDatePicker"
+                                                formControlName="expiry_date">
+                                            <mat-datepicker-toggle matSuffix [for]="expiryDatePicker">
+                                            </mat-datepicker-toggle>
+                                            <mat-datepicker #expiryDatePicker></mat-datepicker>
+                                        </mat-form-field>
+                                    </td>
+                                </tr>
+                            </table>
+
+                        </div>
+                    </div>
+                    <div class="epform-card">
+                        <div mat-subheader>
+                            <div>Property Purpose</div>
+                        </div>
+                        <div class="form">
+                            <mat-form-field class="form-field">
+                                <mat-label>Purpose *</mat-label>
+                                <mat-select formControlName="purpose">
+                                    <mat-form-field class="autocomplete-form-field"
+                                        style="width: 100%;padding-bottom: 0;">
+                                        <input placeholder="Search" matInput [formControl]="purposeFormControl"
+                                            type="text">
+                                    </mat-form-field>
+                                    <mat-option *ngFor="let purpose of filteredPurposes$ | async" [value]="purpose.id">
+                                        {{purpose.name}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="propertiesFormControl.purpose.hasError('required')">
+                                    Purpose is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field class="form-field">
+                                <mat-label>Price *</mat-label>
+                                <input matInput formControlName="price">
+                                <mat-error *ngIf="propertiesFormControl.price.hasError('required')">
+                                    Price is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+
+                            <mat-form-field class="form-field" *ngIf="propertiesFormControl.purpose.value == 1">
+                                <mat-label>Completion Status</mat-label>
+                                <mat-select formControlName="completion_status">
+                                    <mat-form-field class="autocomplete-form-field"
+                                        style="width: 100%;padding-bottom: 0;">
+                                        <input placeholder="Search" matInput [formControl]="completionStatusFormControl"
+                                            type="text">
+                                    </mat-form-field>
+                                    <mat-option *ngFor="let status of filteredCompletionStatus$ | async"
+                                        [value]="status.id">
+                                        {{status.title}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+
+                            <mat-form-field class="form-field" *ngIf="propertiesFormControl.purpose.value == 2">
+                                <mat-label>Frequency</mat-label>
+                                <mat-select formControlName="frequency">
+                                    <mat-form-field class="autocomplete-form-field"
+                                        style="width: 100%;padding-bottom: 0;">
+                                        <input placeholder="Search" matInput [formControl]="frequencyFormControl"
+                                            type="text">
+                                    </mat-form-field>
+                                    <mat-option *ngFor="let frequency of filteredFrequencies$ | async"
+                                        [value]="frequency.id">
+                                        {{frequency.name}}
+                                    </mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="epform-card">
+                        <div mat-subheader>
+                            <div>Property location</div>
+                        </div>
+                        <div class="form">
+                            <mat-form-field class="form-field">
+                                <mat-label>City *</mat-label>
+                                <mat-select formControlName="city">
+                                    <mat-form-field class="autocomplete-form-field"
+                                        style="width: 100%;padding-bottom: 0;">
+                                        <input placeholder="Search" matInput [formControl]="cityFormControl"
+                                            type="text">
+                                    </mat-form-field>
+                                    <mat-option *ngFor="let city of filteredCities$ | async" [value]="city.id">
+                                        {{city.name}}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="propertiesFormControl.city.hasError('required')">
+                                    City is <strong>required</strong>
+                                </mat-error>
+                            </mat-form-field>
+                            <agm-map [latitude]="lat" [longitude]="lng" [disableDefaultUI]="false">
+                                <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat"
+                                    [longitude]="m.lng" [label]="m.label" [markerDraggable]="m.draggable"
+                                    (dragEnd)="markerDragEnd(m, $event)">
+                                    <agm-info-window>
+                                        <strong>t</strong>
+                                    </agm-info-window>
+                                </agm-marker>
+                            </agm-map>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </mat-tab>
+        <mat-tab label="Property amenities">
+            <mat-selection-list class="amenity-list" formControlName="amenities">
+                <div style="margin-top: 1rem;" *ngFor="let category of amenityCategoryList">
+                    <div mat-subheader>{{category.name}}</div>
+                    <div style="display: flex;">
+                        <div *ngFor="let amenity of category.amenities" style="flex: 0 0 33.333333%;">
+                            <mat-list-option [value]="amenity.id">
+                                <img width="50px" height="50px" style="margin-right: 1rem;"
+                                    [src]="imageBaseUrl + amenity.icon" [alt]="amenity.name">
+                                <div style="flex: 1;">{{amenity.name}}</div>
+                            </mat-list-option>
+                        </div>
+                    </div>
+                </div>
+            </mat-selection-list>
+
+        </mat-tab>
+    </mat-tab-group>
+</form>
