@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { map, catchError } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { FlashMessageComponent } from '../components/flash-message/flash-message.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SharedCrudService {
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient, private _snackBar: MatSnackBar) { }
 
   getData(url, params) {
     return this.http.get<any[]>(url, { params }).pipe(map(response => {
@@ -48,7 +50,13 @@ export class SharedCrudService {
   }
 
   editItem(url, item, id) {
-    return this.http.put(`${url}/${id}`, item);
+    return this.http.put(`${url}/${id}`, item).pipe(map(response => {
+      this.handleSuccess('Updated successfully');
+      return response;
+    }), catchError(error => {
+      this.handleError(error);
+      return error
+    }));
   }
 
   changeAttribute(url, items, attribute, value) {
@@ -56,6 +64,31 @@ export class SharedCrudService {
       ids: this.getItemsIdsFromSelection(items),
       attribute: attribute,
       value: value
+    });
+  }
+
+  handleSuccess(message) {
+    this._snackBar.openFromComponent(FlashMessageComponent, {
+      duration: 5000,
+      panelClass: ["flash-success"],
+      data: { title: 'Success', text: message, type: 'success' },
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
+    });
+  }
+
+  handleError(error) {
+    console.log(error);
+    
+    let message = 'Something went wrong, try again later.';
+    if (error.message) message = error.message;
+    if (error.error && error.error.message) message = error.error.message;
+    this._snackBar.openFromComponent(FlashMessageComponent, {
+      duration: 5000,
+      panelClass: ["flash-error"],
+      data: { title: 'Error', text: message, type: 'error' },
+      horizontalPosition: 'center',
+      verticalPosition: 'top',
     });
   }
 }

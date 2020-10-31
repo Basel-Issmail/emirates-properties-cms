@@ -252,3 +252,29 @@ body {
   margin: 0 !important;
 
 }
+
+
+// Flash messages
+.flash-success {
+  background: white;
+  border-left: 5px solid #56c95f;
+
+  .mat-icon {
+    color: #56c95f;
+    font-size: 3rem;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.flash-error {
+  background: white;
+  border-left: 5px solid #f75a5b;
+
+  .mat-icon {
+    color: #f75a5b;
+    font-size: 3rem;
+    width: 100%;
+    height: 100%;
+  }
+}

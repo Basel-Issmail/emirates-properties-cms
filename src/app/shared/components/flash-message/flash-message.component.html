@@ -1,0 +1,10 @@
+<div style="display: flex;align-items: center;">
+    <div>
+        <mat-icon *ngIf="data.type == 'success'">check_circle_outline</mat-icon>
+        <mat-icon *ngIf="data.type == 'error'">highlight_off</mat-icon>
+    </div>
+    <div style="flex: 1;margin-left: .5rem;">
+        <h2 style="color: black;margin-bottom: .2rem;">{{data.title}}</h2>
+        <p style="color: #bbc2c8;font-size: 1rem; margin-bottom: 0;">{{data.text}}</p>
+    </div>
+</div>
