@@ -48,7 +48,7 @@
                                     </mat-optgroup>
                                 </mat-select>
                             </mat-form-field>
-                            <mat-form-field *ngIf="member"  class="form-field">
+                            <mat-form-field *ngIf="member" class="form-field">
                                 <mat-label>Member</mat-label>
                                 <input matInput [value]="member.full_name" disabled>
                             </mat-form-field>
@@ -153,6 +153,12 @@
                             <div>Property media</div>
                         </div>
                         <div class="form">
+                            <ep-image-uploader [allowCaption]="true" id="images"  [crop]="true" [aspectRatio]="340 / 230" [url]="uploadPhoto" (triggerChange)="getImages($event)"
+                            [firstMain]="true" [uploadedFiles]="[]"
+                            [pathPrefix]="imageBaseUrl"></ep-image-uploader>
+
+
+                            <input type="image" formControlName="images" placeholder="Upload File">
                             <mat-form-field class="form-field">
                                 <mat-label>Images</mat-label>
                                 <textarea matInput formControlName="images"></textarea>
@@ -177,18 +183,18 @@
                             <div>Property Status</div>
                         </div>
                         <div class="form">
-                            <mat-slide-toggle class="form-toggle" style="margin-bottom: .5rem" formControlName="active" color="primary"
-                                [labelPosition]="'before'">Active
+                            <mat-slide-toggle class="form-toggle" style="margin-bottom: .5rem" formControlName="active"
+                                color="primary" [labelPosition]="'before'">Active
                                 Property
                             </mat-slide-toggle>
 
-                            <mat-slide-toggle class="form-toggle" style="margin-bottom: .5rem" formControlName="approve" color="primary"
-                                [labelPosition]="'before'">Approved
+                            <mat-slide-toggle class="form-toggle" style="margin-bottom: .5rem" formControlName="approve"
+                                color="primary" [labelPosition]="'before'">Approved
                                 Property
                             </mat-slide-toggle>
 
-                            <mat-slide-toggle class="form-toggle" style="margin-bottom: 1rem" formControlName="verified" color="primary"
-                                [labelPosition]="'before'">Verified
+                            <mat-slide-toggle class="form-toggle" style="margin-bottom: 1rem" formControlName="verified"
+                                color="primary" [labelPosition]="'before'">Verified
                                 Property </mat-slide-toggle>
 
                             <table class="form-field" cellspacing="0">

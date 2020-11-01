@@ -1,0 +1,53 @@
+<div class="img-ul" [ngClass]="{'img-ul-file-is-over': fileOver}">
+    <div class="img-ul-file-upload img-ul-hr-inline-group">
+        <label *ngIf="fileCounter != max" class="mat-raised-button secondary img-ul-upload img-ul-button"
+            [ngClass]="{'img-ul-disabled': disabled}">
+            <span>{{ buttonCaption }}</span>
+            <input type="file" [disabled]="disabled" [accept]="supportedExtensions" [multiple]="(max > 1)"
+                (change)="onFileChange(input.files)" #input>
+        </label>
+        <button *ngIf="fileCounter > 0 && clearButton" [disabled]="disabled"
+            class="mat-raised-button img-ul-clear img-ul-button" (click)="deleteAll()"
+            style="background-color: #f44336">
+            Clear
+        </button>
+    </div>
+
+    <p class="img-ul-file-too-large" *ngIf="showFileTooLargeMessage" [innerText]="fileTooLargeMessage"></p>
+
+    <div *ngIf="preview" class="img-ul-container img-ul-hr-inline-group example-list"
+        cdkDropListOrientation="horizontal" cdkDropList (cdkDropListDropped)="drop($event)">
+        <div class="img-ul-image draggable-elements" *ngFor="let file of files;let i = index"
+            [ngStyle]="{'background-image': 'url('+ file.src +')'}" [ngClass]="{'img-ul-first': (i == 0 && firstMain)}"
+            cdkDrag>
+            <div *ngIf="file.pending" class="img-ul-loading-overlay">
+                <div class="img-ul-spinning-circle"></div>
+            </div>
+            <div class="img-actions">
+                <!-- <div title="Add Caption" *ngIf="!file.pending && allowCaption" [ngClass]="{'img-ul-disabled': disabled}"
+                    class="img-ul-caption" (click)="addCaption(file)"> 
+                    <i class="material-icons"> add_photo_alternate </i>
+                </div>-->
+                <div title="Delete Image" *ngIf="!file.pending" [ngClass]="{'img-ul-disabled': disabled}"
+                    (click)="deleteFile(file)" class="img-ul-delete">
+                    <i class="material-icons"> delete_forever </i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div style="padding: 4px;padding-right: 16px;padding-left: 16px"
+        *ngIf="readyToUpload.length > 0 && fileCounter != max && crop">
+        <hr>
+        <p style="padding-bottom: 8px;margin: 0">Select Images To Crop and Upload</p>
+        <div *ngFor="let blobObject of readyToUpload;let i = index"
+            style="display: inline-block;position: relative;margin-right: 8px;">
+            <img matTooltip="Crop and Upload Image" (click)="openUploadImageDialog( blobObject.file, i)"
+                [src]="blobObject.src" alt="pending upload" width="100" height="100" class="ready-top-upload">
+            <div title="remove pending Image" (click)="deletePendingFile(i)" class="img-ul-delete"
+                style="position: absolute;bottom: 0;right: 40%;cursor: pointer;">
+                <i class="material-icons"> delete_forever </i>
+            </div>
+        </div>
+    </div>
+</div>

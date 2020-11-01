@@ -1,3 +1,4 @@
 export enum CoreApis {
-    refresh = 'auth/refresh'
+    refresh = 'auth/refresh',
+    uploadPhoto = 'upload-photo'
 }

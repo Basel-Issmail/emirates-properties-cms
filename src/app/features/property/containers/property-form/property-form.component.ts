@@ -9,6 +9,7 @@ import * as moment from 'moment';
 import { Observable } from 'rxjs';
 import { PropertyApis } from '../../property.constants';
 import { environment } from 'src/environments/environment';
+import { CoreApis } from 'src/app/core/core.constants';
 
 interface Marker {
   lat: number;
@@ -33,7 +34,10 @@ export class PropertyFormComponent implements OnInit {
   formType = null;
   FormTypes = FormTypes;
   member = null;
-
+  uploadPhoto = CoreApis.uploadPhoto;
+  images = [];
+  floorPlans = [];
+  videos = [];
   // Map Variables
   markers: Marker[] = [{
     lat: 24.44313948954762,
@@ -226,5 +230,12 @@ export class PropertyFormComponent implements OnInit {
   refreshLocation(location) {
     this.propertiesFormControl.latitude.setValue(location.latitude);
     this.propertiesFormControl.longitude.setValue(location.longitude);
+  }
+
+  getImages(event) {
+    this.images = event;
+    this.images.forEach(
+      (value) => (value.name = value.caption ? value.caption : "Image")
+    );
   }
 }
