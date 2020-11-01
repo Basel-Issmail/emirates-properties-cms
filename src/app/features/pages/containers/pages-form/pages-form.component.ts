@@ -8,6 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import * as moment from 'moment';
 import { PagesApis } from '../../pages.constants';
 import { Observable } from 'rxjs';
+import { CoreApis } from 'src/app/core/core.constants';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'ep-pages-form',
@@ -22,6 +24,9 @@ export class PagesFormComponent implements OnInit {
   };
   formType = null;
   FormTypes = FormTypes;
+  imageBaseUrl = environment.imageBaseUrl;
+  uploadPhoto = CoreApis.uploadPhoto;
+  images = [];
 
   // data to autocomplete
   typeFormControl = new FormControl('');
@@ -49,7 +54,7 @@ export class PagesFormComponent implements OnInit {
       content: [''],
       heading: [''],
       image: [''],
-      language: [''],
+      language: ['', Validators.required],
       meta_description: [''],
       meta_title: [''],
       parent_id: [0],
@@ -103,14 +108,11 @@ export class PagesFormComponent implements OnInit {
       ...this.pagesForm.value,
       publish_start_date: (this.pagesFormControl.publish_start_date.value) ? moment(this.pagesFormControl.publish_start_date.value).format('YYYY-MM-DD') : '',
       publish_end_date: (this.pagesFormControl.publish_end_date.value) ? moment(this.pagesFormControl.publish_end_date.value).format('YYYY-MM-DD') : '',
+      image: (Array.isArray(this.images) && this.images.length > 0) ? this.images[0].path : ''
     }
   }
 
   addNew(formDirective: FormGroupDirective) {
-    console.log(this.pagesFormControl.name);
-    console.log(this.pagesFormControl.url);
-    console.log(this.pagesFormControl.sort_order);
-
     if (this.pagesForm.valid) {
       this.sharedCrudService.addItem(PagesApis.add, this.prcessedData)
         .subscribe(response => {
@@ -162,5 +164,12 @@ export class PagesFormComponent implements OnInit {
   clearPublishingInputs($event) {
     this.pagesFormControl.publish_start_date.setValue('');
     this.pagesFormControl.publish_end_date.setValue('');
+  }
+
+  getImage(event) {
+    this.images = event;
+    this.images.forEach(
+      (value) => (value.name = value.caption ? value.caption : "Page image")
+    );
   }
 }

@@ -42,7 +42,7 @@
                             </td>
                             <td>
                                 <mat-form-field class="form-field">
-                                    <mat-label>Brief</mat-label>
+                                    <mat-label>Brief *</mat-label>
                                     <input matInput formControlName="brief">
                                     <mat-error *ngIf="newsFormControl.brief.hasError('required')">
                                         Brief is <strong>required</strong>
@@ -52,7 +52,7 @@
                         </tr>
                     </table>
                     <mat-form-field class="form-field">
-                        <mat-label>Description</mat-label>
+                        <mat-label>Description *</mat-label>
                         <textarea matInput formControlName="content"></textarea>
                         <mat-error *ngIf="newsFormControl.content.hasError('required')">
                             Content is <strong>required</strong>
@@ -65,10 +65,11 @@
                     <div>Media</div>
                 </div>
                 <div class="form">
-                    <mat-form-field class="form-field">
-                        <mat-label>Images</mat-label>
-                        <textarea matInput formControlName="media"></textarea>
-                    </mat-form-field>
+                    <ep-image-uploader buttonCaption="Select news images" style="margin-bottom: 1rem;display: block;"
+                        [allowCaption]="true" [crop]="true" [url]="uploadPhoto" (triggerChange)="getImages($event)"
+                        [firstMain]="true"
+                        [uploadedFiles]="(newsFormControl.media.value)?newsFormControl.media.value: []"
+                        [pathPrefix]="imageBaseUrl"></ep-image-uploader>
                 </div>
             </div>
         </div>
@@ -95,7 +96,7 @@
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="form-field">
-                        <mat-label>Publishing date</mat-label>
+                        <mat-label>Publishing date *</mat-label>
                         <input matInput [matDatepicker]="datePicker" formControlName="date">
                         <mat-datepicker-toggle matSuffix [for]="datePicker"></mat-datepicker-toggle>
                         <mat-datepicker #datePicker></mat-datepicker>

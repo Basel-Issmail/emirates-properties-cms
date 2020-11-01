@@ -1,4 +1,4 @@
-<form class="epform"  [formGroup]="companyForm" #formDirective="ngForm" >
+<form class="epform" [formGroup]="companyForm" #formDirective="ngForm">
     <div class="epform-breadcrumb">
         <div class="return">
             <a mat-icon-button [routerLink]="['/companies']">
@@ -7,15 +7,18 @@
             <h1 class="epform-title">Companies list</h1>
         </div>
         <div *ngIf="formType.type === FormTypes.add">
-            <button type="submit" mat-stroked-button color="primary" (click)="saveAsDraft(formDirective)">Save as draft</button>
-            <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary" (click)="addNew(formDirective)">Add new company</button>
+            <button type="submit" mat-stroked-button color="primary" (click)="saveAsDraft(formDirective)">Save as
+                draft</button>
+            <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary"
+                (click)="addNew(formDirective)">Add new company</button>
         </div>
         <div *ngIf="formType.type === FormTypes.edit">
             <button type="submit" mat-flat-button color="primary" (click)="edit()">Edit company</button>
         </div>
         <div *ngIf="formType.type === FormTypes.editDraft">
-            <button type="submit" mat-stroked-button color="primary" (click)="editDraft()">Edit draft company</button>       
-            <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary" (click)="publish()">Publish company</button>
+            <button type="submit" mat-stroked-button color="primary" (click)="editDraft()">Edit draft company</button>
+            <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary" (click)="publish()">Publish
+                company</button>
         </div>
     </div>
 
@@ -56,10 +59,10 @@
                     <div>Media</div>
                 </div>
                 <div class="form">
-                    <mat-form-field class="form-field">
-                        <mat-label>Description</mat-label>
-                        <textarea matInput></textarea>
-                    </mat-form-field>
+                    <ep-image-uploader [buttonCaption]="'Select Image'" [url]="uploadPhoto" id="page-image"
+                        [pathPrefix]="imageBaseUrl" (triggerChange)="getImage($event)" [max]="1"
+                        [uploadedFiles]="(companyFormControl.logo.value)? [{path: companyFormControl.logo.value}] : []">
+                    </ep-image-uploader>
                 </div>
             </div>
         </div>
@@ -69,7 +72,8 @@
                     <div>Status Info</div>
                 </div>
                 <div class="form">
-                    <mat-slide-toggle formControlName="active" color="primary" [labelPosition]="'before'">Active company</mat-slide-toggle>
+                    <mat-slide-toggle formControlName="active" color="primary" [labelPosition]="'before'">Active company
+                    </mat-slide-toggle>
                 </div>
             </div>
             <div class="epform-card">

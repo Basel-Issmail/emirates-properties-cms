@@ -35,6 +35,7 @@ export class PropertyFormComponent implements OnInit {
   FormTypes = FormTypes;
   member = null;
   uploadPhoto = CoreApis.uploadPhoto;
+  uploadFile = CoreApis.uploadFile;
   images = [];
   floorPlans = [];
   videos = [];
@@ -91,7 +92,7 @@ export class PropertyFormComponent implements OnInit {
       images: [''],
       latitude: [''],
       longitude: [''],
-      maidroom: [''],
+      maidroom: ['', Validators.required],
       price: ['', Validators.required],
       publish_date: [''],
       purpose: ['', Validators.required],
@@ -166,6 +167,9 @@ export class PropertyFormComponent implements OnInit {
       ...this.propertiesForm.value,
       publish_date: (this.propertiesFormControl.publish_date.value) ? moment(this.propertiesFormControl.publish_date.value).format('YYYY-MM-DD') : '',
       expiry_date: (this.propertiesFormControl.expiry_date.value) ? moment(this.propertiesFormControl.expiry_date.value).format('YYYY-MM-DD') : '',
+      images: this.images,
+      floor_plans: this.floorPlans,
+      videos: this.videos
     }
   }
 
@@ -236,6 +240,20 @@ export class PropertyFormComponent implements OnInit {
     this.images = event;
     this.images.forEach(
       (value) => (value.name = value.caption ? value.caption : "Image")
+    );
+  }
+
+  getFloorPlans(event) {
+    this.floorPlans = event;
+    this.floorPlans.forEach(
+      (value) => (value.name = value.caption ? value.caption : "Floor plan image")
+    );
+  }
+
+  getVideo(event) {
+    this.videos = event;
+    this.videos.forEach(
+      (value) => (value.name = value.caption ? value.caption : "Floor plan image")
     );
   }
 }

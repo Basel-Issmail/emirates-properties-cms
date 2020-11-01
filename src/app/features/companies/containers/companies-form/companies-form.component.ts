@@ -6,6 +6,8 @@ import { FormTypeService } from 'src/app/shared/services/form-type.service';
 import { FormTypes } from 'src/app/shared/constants/form-types';
 import { first, switchMap, map } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CoreApis } from 'src/app/core/core.constants';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'ep-companies-form',
@@ -17,6 +19,11 @@ export class CompaniesFormComponent implements OnInit {
   emptyCompanyObj = { active: true, description: '', email: '', head_office: '', logo: '', name: '', orn_number: '', phone: '' };
   formType = null;
   FormTypes = FormTypes;
+
+  imageBaseUrl = environment.imageBaseUrl;
+  uploadPhoto = CoreApis.uploadPhoto;
+  images = [];
+
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -53,9 +60,16 @@ export class CompaniesFormComponent implements OnInit {
     return this.companyForm.controls;
   }
 
+  get prcessedData() {
+    return {
+      ...this.companyForm.value,
+      logo: (Array.isArray(this.images) && this.images.length > 0) ? this.images[0].path : ''
+    }
+  }
+
   addNew(formDirective: FormGroupDirective) {
     if (this.companyForm.valid) {
-      this.sharedCrudService.addItem(CompaniesApis.add, this.companyForm.value)
+      this.sharedCrudService.addItem(CompaniesApis.add, this.prcessedData)
         .subscribe(response => {
           formDirective.resetForm();
           this.companyForm.reset(this.emptyCompanyObj);
@@ -65,7 +79,7 @@ export class CompaniesFormComponent implements OnInit {
 
   saveAsDraft(formDirective: FormGroupDirective) {
     if (this.companyForm.valid) {
-      this.sharedCrudService.addItem(CompaniesApis.addDraft, this.companyForm.value)
+      this.sharedCrudService.addItem(CompaniesApis.addDraft, this.prcessedData)
         .subscribe(response => {
           formDirective.resetForm();
           this.companyForm.reset(this.emptyCompanyObj);
@@ -75,7 +89,7 @@ export class CompaniesFormComponent implements OnInit {
 
   edit() {
     if (this.companyForm.valid) {
-      this.sharedCrudService.editItem(CompaniesApis.update, this.companyForm.value, this.formType.id)
+      this.sharedCrudService.editItem(CompaniesApis.update, this.prcessedData, this.formType.id)
         .subscribe(response => {
         });
     }
@@ -83,7 +97,7 @@ export class CompaniesFormComponent implements OnInit {
 
   editDraft() {
     if (this.companyForm.valid) {
-      this.sharedCrudService.editItem(CompaniesApis.updateDraft, this.companyForm.value, this.formType.id)
+      this.sharedCrudService.editItem(CompaniesApis.updateDraft, this.prcessedData, this.formType.id)
         .subscribe(response => {
         });
     }
@@ -91,7 +105,7 @@ export class CompaniesFormComponent implements OnInit {
 
   publish() {
     if (this.companyForm.valid) {
-      this.sharedCrudService.addItem(CompaniesApis.add, this.companyForm.value)
+      this.sharedCrudService.addItem(CompaniesApis.add, this.prcessedData)
         .pipe(switchMap(addedItem =>
           this.sharedCrudService.delete(CompaniesApis.deleteDraft, [{ id: this.formType.id }])
             .pipe(map(res => addedItem))
@@ -100,5 +114,12 @@ export class CompaniesFormComponent implements OnInit {
           this.router.navigate([`/companies/edit/${response.data.id}`])
         });
     }
+  }
+
+  getImage(event) {
+    this.images = event;
+    this.images.forEach(
+      (value) => (value.name = value.caption ? value.caption : "Page image")
+    );
   }
 }

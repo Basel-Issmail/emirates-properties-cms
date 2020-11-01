@@ -17,9 +17,18 @@
 
     <div *ngIf="preview" class="img-ul-container img-ul-hr-inline-group example-list"
         cdkDropListOrientation="horizontal" cdkDropList (cdkDropListDropped)="drop($event)">
+
+
         <div class="img-ul-image draggable-elements" *ngFor="let file of files;let i = index"
             [ngStyle]="{'background-image': 'url('+ file.src +')'}" [ngClass]="{'img-ul-first': (i == 0 && firstMain)}"
             cdkDrag>
+
+            <video *ngIf="!file.pending && supportedExtensions[0].includes('video')" controls>
+                <source [src]="file.src" type="video/mp4">
+                <source [src]="file.src" type="video/ogg">
+                Your browser does not support the video tag.
+            </video>
+
             <div *ngIf="file.pending" class="img-ul-loading-overlay">
                 <div class="img-ul-spinning-circle"></div>
             </div>

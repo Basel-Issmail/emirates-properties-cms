@@ -98,10 +98,12 @@
                     <div>Media</div>
                 </div>
                 <div class="form">
-                    <mat-form-field class="form-field">
-                        <mat-label>Image</mat-label>
-                        <textarea matInput formControlName="image"></textarea>
-                    </mat-form-field>
+                    <ep-image-uploader [crop]="true" [aspectRatio]="1570 / 328" [buttonCaption]="'Select Image'"
+                        [url]="uploadPhoto" id="page-image" [pathPrefix]="imageBaseUrl"
+                        (triggerChange)="getImage($event)" [max]="1"
+                        [uploadedFiles]="(pagesFormControl.image.value)? [{path: pagesFormControl.image.value}] : []">
+                    </ep-image-uploader>
+
                 </div>
             </div>
         </div>
@@ -138,15 +140,20 @@
                                 {{language.name }}
                             </mat-option>
                         </mat-select>
+                        <mat-error *ngIf="pagesFormControl.language.hasError('required')">
+                            Language is <strong>required</strong>
+                        </mat-error>
                     </mat-form-field>
 
-                    <mat-slide-toggle (change)="clearPublishingInputs($event)" formControlName="publish_in_date" color="primary" [labelPosition]="'before'">
+                    <mat-slide-toggle (change)="clearPublishingInputs($event)" formControlName="publish_in_date"
+                        color="primary" [labelPosition]="'before'">
                         Publish in date
                     </mat-slide-toggle>
 
                     <mat-form-field class="form-field">
                         <mat-label>Publishing start date</mat-label>
-                        <input matInput [matDatepicker]="publishStartDatePicker" formControlName="publish_start_date" [disabled]="!pagesFormControl.publish_in_date.value">
+                        <input matInput [matDatepicker]="publishStartDatePicker" formControlName="publish_start_date"
+                            [disabled]="!pagesFormControl.publish_in_date.value">
                         <mat-datepicker-toggle matSuffix [for]="publishStartDatePicker"></mat-datepicker-toggle>
                         <mat-datepicker #publishStartDatePicker></mat-datepicker>
                         <mat-error *ngIf="pagesFormControl.publish_start_date.hasError('required')">
@@ -156,7 +163,8 @@
 
                     <mat-form-field class="form-field">
                         <mat-label>Publishing end date</mat-label>
-                        <input matInput [matDatepicker]="publishEndDatePicker" formControlName="publish_end_date" [disabled]="!pagesFormControl.publish_in_date.value">
+                        <input matInput [matDatepicker]="publishEndDatePicker" formControlName="publish_end_date"
+                            [disabled]="!pagesFormControl.publish_in_date.value">
                         <mat-datepicker-toggle matSuffix [for]="publishEndDatePicker"></mat-datepicker-toggle>
                         <mat-datepicker #publishEndDatePicker></mat-datepicker>
                         <mat-error *ngIf="pagesFormControl.publish_end_date.hasError('required')">

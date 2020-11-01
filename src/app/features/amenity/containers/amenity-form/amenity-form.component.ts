@@ -7,6 +7,8 @@ import { FormTypes } from 'src/app/shared/constants/form-types';
 import { first, startWith, map, switchMap } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { CoreApis } from 'src/app/core/core.constants';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'ep-amenity-form',
@@ -18,6 +20,12 @@ export class AmenityFormComponent implements OnInit {
   emptyAmenityObj = { category_id: '', description: '', icon: '', name: '' };
   formType = null;
   FormTypes = FormTypes;
+
+  imageBaseUrl = environment.imageBaseUrl;
+  uploadPhoto = CoreApis.uploadPhoto;
+  images = [];
+  isSubmitted = false;
+
   // data to autocomplete
   categoryFormControl = new FormControl('');
   filteredCategories$: Observable<any[]>;
@@ -34,7 +42,7 @@ export class AmenityFormComponent implements OnInit {
     this.amenityForm = this.fb.group({
       category_id: ["", Validators.required],
       description: [""],
-      icon: ["", Validators.required],
+      icon: [""],
       name: ["", Validators.required],
     });
 
@@ -60,45 +68,59 @@ export class AmenityFormComponent implements OnInit {
     return this.amenityForm.controls;
   }
 
+  get prcessedData() {
+    return {
+      ...this.amenityForm.value,
+      icon: (Array.isArray(this.images) && this.images.length > 0) ? this.images[0].path : ''
+    }
+  }
+
   addNew(formDirective: FormGroupDirective) {
-    if (this.amenityForm.valid) {
-      this.sharedCrudService.addItem(AmenityApis.add, this.amenityForm.value)
+    this.isSubmitted = true;
+    if (this.amenityForm.valid && this.prcessedData.icon) {
+      this.sharedCrudService.addItem(AmenityApis.add, this.prcessedData)
         .subscribe(response => {
           formDirective.resetForm();
           this.amenityForm.reset(this.emptyAmenityObj);
+          this.isSubmitted = false;
         });
     }
   }
 
   saveAsDraft(formDirective: FormGroupDirective) {
-    if (this.amenityForm.valid) {
-      this.sharedCrudService.addItem(AmenityApis.addDraft, this.amenityForm.value)
+    this.isSubmitted = true;
+    if (this.amenityForm.valid && this.prcessedData.icon) {
+      this.sharedCrudService.addItem(AmenityApis.addDraft, this.prcessedData)
         .subscribe(response => {
           formDirective.resetForm();
           this.amenityForm.reset(this.emptyAmenityObj);
+          this.isSubmitted = false;
         });
     }
   }
 
   edit() {
-    if (this.amenityForm.valid) {
-      this.sharedCrudService.editItem(AmenityApis.update, this.amenityForm.value, this.formType.id)
+    this.isSubmitted = true;
+    if (this.amenityForm.valid && this.prcessedData.icon) {
+      this.sharedCrudService.editItem(AmenityApis.update, this.prcessedData, this.formType.id)
         .subscribe(response => {
         });
     }
   }
 
   editDraft() {
-    if (this.amenityForm.valid) {
-      this.sharedCrudService.editItem(AmenityApis.updateDraft, this.amenityForm.value, this.formType.id)
+    this.isSubmitted = true;
+    if (this.amenityForm.valid && this.prcessedData.icon) {
+      this.sharedCrudService.editItem(AmenityApis.updateDraft, this.prcessedData, this.formType.id)
         .subscribe(response => {
         });
     }
   }
 
   publish() {
-    if (this.amenityForm.valid) {
-      this.sharedCrudService.addItem(AmenityApis.add, this.amenityForm.value)
+    this.isSubmitted = true;
+    if (this.amenityForm.valid && this.prcessedData.icon) {
+      this.sharedCrudService.addItem(AmenityApis.add, this.prcessedData)
         .pipe(switchMap(addedItem =>
           this.sharedCrudService.delete(AmenityApis.deleteDraft, [{ id: this.formType.id }])
             .pipe(map(res => addedItem))
@@ -107,6 +129,13 @@ export class AmenityFormComponent implements OnInit {
           this.router.navigate([`/amenity/edit/${response.data.id}`])
         });
     }
+  }
+
+  getImage(event) {
+    this.images = event;
+    this.images.forEach(
+      (value) => (value.name = value.caption ? value.caption : "Amenity logo")
+    );
   }
 
 }

@@ -131,8 +131,11 @@
                                 <tr>
                                     <td>
                                         <mat-form-field class="form-field">
-                                            <mat-label>Maidrooms</mat-label>
+                                            <mat-label>Maidrooms *</mat-label>
                                             <input matInput formControlName="maidroom">
+                                            <mat-error *ngIf="propertiesFormControl.maidroom.hasError('required')">
+                                                Maidroom is <strong>required</strong>
+                                            </mat-error>
                                         </mat-form-field>
                                     </td>
                                     <td>
@@ -153,24 +156,26 @@
                             <div>Property media</div>
                         </div>
                         <div class="form">
-                            <ep-image-uploader [allowCaption]="true" id="images"  [crop]="true" [aspectRatio]="340 / 230" [url]="uploadPhoto" (triggerChange)="getImages($event)"
-                            [firstMain]="true" [uploadedFiles]="[]"
-                            [pathPrefix]="imageBaseUrl"></ep-image-uploader>
+                            <ep-image-uploader buttonCaption="Select property images" style="margin-bottom: 1rem;display: block;" [allowCaption]="true"
+                                [crop]="true" [aspectRatio]="340 / 230" [url]="uploadPhoto"
+                                (triggerChange)="getImages($event)" [firstMain]="true"
+                                [uploadedFiles]="(propertiesFormControl.images.value)?propertiesFormControl.images.value: []"
+                                [pathPrefix]="imageBaseUrl"></ep-image-uploader>
 
 
-                            <input type="image" formControlName="images" placeholder="Upload File">
-                            <mat-form-field class="form-field">
-                                <mat-label>Images</mat-label>
-                                <textarea matInput formControlName="images"></textarea>
-                            </mat-form-field>
-                            <mat-form-field class="form-field">
-                                <mat-label>Floor plans</mat-label>
-                                <textarea matInput formControlName="floor_plans"></textarea>
-                            </mat-form-field>
-                            <mat-form-field class="form-field">
-                                <mat-label>Videos</mat-label>
-                                <textarea matInput formControlName="videos"></textarea>
-                            </mat-form-field>
+                            <ep-image-uploader buttonCaption="Select property floor plans" style="margin-bottom: 1rem;display: block;" [allowCaption]="true"
+                                [crop]="true" [aspectRatio]="340 / 230" [url]="uploadPhoto"
+                                (triggerChange)="getFloorPlans($event)" [firstMain]="true"
+                                [uploadedFiles]="(propertiesFormControl.floor_plans.value)?propertiesFormControl.floor_plans.value: []"
+                                [pathPrefix]="imageBaseUrl"></ep-image-uploader>
+
+
+                            <ep-image-uploader buttonCaption="Select property videos" style="margin-bottom: 1rem;display: block;" [allowCaption]="true"
+                                [url]="uploadFile" partName="file" [supportedExtensions]="['video/*']"
+                                (triggerChange)="getVideo($event)" [firstMain]="true"
+                                [uploadedFiles]="(propertiesFormControl.videos.value)?propertiesFormControl.videos.value: []"
+                                [pathPrefix]="imageBaseUrl">
+                            </ep-image-uploader>
                         </div>
                     </div>
 

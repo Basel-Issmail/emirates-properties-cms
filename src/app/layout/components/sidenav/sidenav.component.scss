@@ -1,6 +1,10 @@
 .sidenav-content {
   margin-top: 1rem;
 
+  a {
+    text-decoration: none;
+  }
+
   .mat-expansion-panel-header,
   .mat-expansion-panel {
     box-shadow: none;

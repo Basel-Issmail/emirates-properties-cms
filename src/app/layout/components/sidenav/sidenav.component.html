@@ -7,26 +7,31 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <mat-selection-list [multiple]="false">
-                <mat-list-option [routerLink]="['/pages']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>file_copy</mat-icon>
-                    <div mat-line>Pages</div>
-                </mat-list-option>
 
-                <mat-list-option [routerLink]="['/companies']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>domain</mat-icon>
-                    <div mat-line>Companies</div>
-                </mat-list-option>
-
-                <mat-list-option [routerLink]="['/agents']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>support_agent</mat-icon>
-                    <div mat-line>Agents</div>
-                </mat-list-option>
-
-                <mat-list-option [routerLink]="['/requests']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>request_page</mat-icon>
-                    <div mat-line>Requests</div>
-                </mat-list-option>
-
+                <a [routerLink]="['/pages']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>file_copy</mat-icon>
+                        <div mat-line>Pages</div>
+                    </mat-list-option>
+                </a>
+                <a [routerLink]="['/companies']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>domain</mat-icon>
+                        <div mat-line>Companies</div>
+                    </mat-list-option>
+                </a>
+                <a [routerLink]="['/agents']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>support_agent</mat-icon>
+                        <div mat-line>Agents</div>
+                    </mat-list-option>
+                </a>
+                <a [routerLink]="['/requests']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>request_page</mat-icon>
+                        <div mat-line>Requests</div>
+                    </mat-list-option>
+                </a>
             </mat-selection-list>
         </mat-expansion-panel>
 
@@ -37,43 +42,53 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <mat-selection-list [multiple]="false">
-                <mat-list-option [routerLink]="['/property']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>domain</mat-icon>
-                    <div mat-line>Property</div>
-                </mat-list-option>
-
-                <mat-list-option [routerLink]="['/amenity']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>golf_course</mat-icon>
-                    <div mat-line>Amenity</div>
-                </mat-list-option>
-
-
-                <mat-list-option [routerLink]="['/amenity-category']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>tapas</mat-icon>
-                    <div mat-line>Amenity categories</div>
-                </mat-list-option>
-
-                <mat-list-option [routerLink]="['/property-type']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>home_work</mat-icon>
-                    <div mat-line>Property types</div>
-                </mat-list-option>
-
-                <mat-list-option [routerLink]="['/property-type-category']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>construction</mat-icon>
-                    <div mat-line>Property types categories</div>
-                </mat-list-option>
-
-                <mat-list-option [routerLink]="['/members']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>group</mat-icon>
-                    <div mat-line>Members</div>
-                </mat-list-option>
+                <a [routerLink]="['/property']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>domain</mat-icon>
+                        <div mat-line>Property</div>
+                    </mat-list-option>
+                </a>
+                <a [routerLink]="['/amenity']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>golf_course</mat-icon>
+                        <div mat-line>Amenity</div>
+                    </mat-list-option>
+                </a>
 
 
-                <mat-list-option [routerLink]="['/completion-status']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>fact_check</mat-icon>
-                    <div mat-line>Completion status</div>
-                </mat-list-option>
+                <a [routerLink]="['/amenity-category']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>tapas</mat-icon>
+                        <div mat-line>Amenity categories</div>
+                    </mat-list-option>
+                </a>
 
+                <a [routerLink]="['/property-type']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>home_work</mat-icon>
+                        <div mat-line>Property types</div>
+                    </mat-list-option>
+                </a>
+                <a [routerLink]="['/property-type-category']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>construction</mat-icon>
+                        <div mat-line>Property types categories</div>
+                    </mat-list-option>
+                </a>
+                <a [routerLink]="['/members']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>group</mat-icon>
+                        <div mat-line>Members</div>
+                    </mat-list-option>
+                </a>
+
+
+                <a [routerLink]="['/completion-status']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>fact_check</mat-icon>
+                        <div mat-line>Completion status</div>
+                    </mat-list-option>
+                </a>
             </mat-selection-list>
         </mat-expansion-panel>
 
@@ -85,38 +100,48 @@
             </mat-expansion-panel-header>
             <mat-selection-list [multiple]="false">
 
+                <a [routerLink]="['/users']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>supervised_user_circle</mat-icon>
+                        <div mat-line>Users</div>
+                    </mat-list-option>
+                </a>
 
-                <mat-list-option [routerLink]="['/users']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>supervised_user_circle</mat-icon>
-                    <div mat-line>Users</div>
-                </mat-list-option>
+                <a [routerLink]="['/roles']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>verified_user</mat-icon>
+                        <div mat-line>Roles</div>
+                    </mat-list-option>
+                </a>
 
-                <mat-list-option [routerLink]="['/roles']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>verified_user</mat-icon>
-                    <div mat-line>Roles</div>
-                </mat-list-option>
+                <a [routerLink]="['/permissions']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>admin_panel_settings</mat-icon>
+                        <div mat-line>Persmissions</div>
+                    </mat-list-option>
+                </a>
 
 
-                <mat-list-option [routerLink]="['/permissions']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>admin_panel_settings</mat-icon>
-                    <div mat-line>Persmissions</div>
-                </mat-list-option>
+                <a [routerLink]="['/settings']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>settings_input_composite</mat-icon>
+                        <div mat-line>Settings</div>
+                    </mat-list-option>
+                </a>
 
-                <mat-list-option [routerLink]="['/settings']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>settings_input_composite</mat-icon>
-                    <div mat-line>Settings</div>
-                </mat-list-option>
+                <a [routerLink]="['/careers']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>work_outline</mat-icon>
+                        <div mat-line>Careers</div>
+                    </mat-list-option>
+                </a>
 
-                <mat-list-option [routerLink]="['/careers']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>work_outline</mat-icon>
-                    <div mat-line>Careers</div>
-                </mat-list-option>
-
-                <mat-list-option [routerLink]="['/news']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>cast</mat-icon>
-                    <div mat-line>News</div>
-                </mat-list-option>
-
+                <a [routerLink]="['/news']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>cast</mat-icon>
+                        <div mat-line>News</div>
+                    </mat-list-option>
+                </a>
             </mat-selection-list>
         </mat-expansion-panel>
 
@@ -130,17 +155,18 @@
             </mat-expansion-panel-header>
             <mat-selection-list [multiple]="false">
 
-
-                <mat-list-option [routerLink]="['/countries']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>public</mat-icon>
-                    <div mat-line>Countries</div>
-                </mat-list-option>
-
-                <mat-list-option [routerLink]="['/cities']" routerLinkActive="active">
-                    <mat-icon mat-list-icon>location_on</mat-icon>
-                    <div mat-line>Cities</div>
-                </mat-list-option>
-
+                <a [routerLink]="['/countries']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>public</mat-icon>
+                        <div mat-line>Countries</div>
+                    </mat-list-option>
+                </a>
+                <a [routerLink]="['/cities']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>location_on</mat-icon>
+                        <div mat-line>Cities</div>
+                    </mat-list-option>
+                </a>
 
 
             </mat-selection-list>

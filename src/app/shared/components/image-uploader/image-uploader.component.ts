@@ -160,6 +160,7 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
 
       ++this.fileCounter;
     }
+    this.triggerChange.emit(this.getProcessedResult());
 
   }
 

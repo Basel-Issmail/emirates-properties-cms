@@ -7,6 +7,8 @@ import { first, switchMap, map } from 'rxjs/operators';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NewsApis } from '../../news.constants';
 import * as moment from 'moment';
+import { CoreApis } from 'src/app/core/core.constants';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'ep-news-form',
@@ -18,6 +20,11 @@ export class NewsFormComponent implements OnInit {
   emptyNewsObj = { active: true, brief: '', content: '', date: '', meta_description: '', meta_keywords: '', meta_title: '', name: '', url: '', media: '' };
   formType = null;
   FormTypes = FormTypes;
+
+  imageBaseUrl = environment.imageBaseUrl;
+  uploadPhoto = CoreApis.uploadPhoto;
+  images = [];
+
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -57,7 +64,7 @@ export class NewsFormComponent implements OnInit {
   }
 
   get prcessedData() {
-    return { ...this.newsForm.value, date: moment(this.newsFormControl.date.value).format('YYYY-MM-DD') }
+    return { ...this.newsForm.value, date: moment(this.newsFormControl.date.value).format('YYYY-MM-DD'), media: this.images }
   }
 
   addNew(formDirective: FormGroupDirective) {
@@ -111,5 +118,19 @@ export class NewsFormComponent implements OnInit {
           this.router.navigate([`/news/edit/${response.data.id}`])
         });
     }
+  }
+
+  getImages(event) {
+    this.images = event;
+    this.images.forEach(
+      (value, index) => {
+        value.name = value.caption ? value.caption : "Image";
+        if (index === 0) {
+          value.main_photo = true;
+        } else {
+          value.main_photo = false;
+        }
+      }
+    );
   }
 }
