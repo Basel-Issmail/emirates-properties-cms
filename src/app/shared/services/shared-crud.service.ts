@@ -37,9 +37,6 @@ export class SharedCrudService {
     return this.http.post(url, { ids: this.getItemsIdsFromSelection(items) }).pipe(map(response => {
       this.handleSuccess('Deleted successfully');
       return response;
-    }), catchError(error => {
-      this.handleError(error);
-      return error
     }));
   }
 
@@ -47,9 +44,6 @@ export class SharedCrudService {
     return this.http.post(url, { ids: this.getItemsIdsFromSelection(items) }).pipe(map(response => {
       this.handleSuccess(message);
       return response;
-    }), catchError(error => {
-      this.handleError(error);
-      return error
     }));
   }
 
@@ -57,9 +51,6 @@ export class SharedCrudService {
     return this.http.post(url, { ids: this.getItemsIdsFromSelection(items) }).pipe(map(response => {
       this.handleSuccess('Restored successfully');
       return response;
-    }), catchError(error => {
-      this.handleError(error);
-      return error
     }));
   }
 
@@ -67,9 +58,6 @@ export class SharedCrudService {
     return this.http.post(url, item).pipe(map(response => {
       this.handleSuccess('Added successfully');
       return response;
-    }), catchError(error => {
-      this.handleError(error);
-      return error
     }));
   }
 
@@ -77,9 +65,6 @@ export class SharedCrudService {
     return this.http.put(`${url}/${id}`, item).pipe(map(response => {
       this.handleSuccess('Updated successfully');
       return response;
-    }), catchError(error => {
-      this.handleError(error);
-      return error
     }));
   }
 
@@ -91,9 +76,6 @@ export class SharedCrudService {
     }).pipe(map(response => {
       this.handleSuccess('Attribute changed successfully');
       return response;
-    }), catchError(error => {
-      this.handleError(error);
-      return error
     }));
   }
 
@@ -107,18 +89,5 @@ export class SharedCrudService {
     });
   }
 
-  handleError(error) {
-    console.log(error);
 
-    let message = 'Something went wrong, try again later.';
-    if (error.message) message = error.message;
-    if (error.error && error.error.message) message = error.error.message;
-    this._snackBar.openFromComponent(FlashMessageComponent, {
-      duration: 5000,
-      panelClass: ["flash-error"],
-      data: { title: 'Error', text: message, type: 'error' },
-      horizontalPosition: 'center',
-      verticalPosition: 'top',
-    });
-  }
 }
