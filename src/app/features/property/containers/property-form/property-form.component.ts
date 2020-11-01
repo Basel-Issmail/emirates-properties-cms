@@ -144,6 +144,11 @@ export class PropertyFormComponent implements OnInit {
         .pipe(first(), map(value => {
           value.amenities = value.amenities.map(amenityItem => Number(amenityItem.id));
           this.member = value.member;
+          if (Array.isArray(value.images)) {
+            value.images.forEach(element => {
+              element.caption = element.name;
+            });
+          }
           return value;
         }))
         .subscribe(x => this.propertiesForm.patchValue(x));
@@ -152,6 +157,11 @@ export class PropertyFormComponent implements OnInit {
       this.sharedCrudService.getDraftItemDetails(PropertyApis.getDraftDetails, this.formType.id)
         .pipe(first(), map(value => {
           this.member = value.member;
+          if (Array.isArray(value.images)) {
+            value.images.forEach(element => {
+              element.caption = element.name;
+            });
+          }
           return value;
         }))
         .subscribe(x => this.propertiesForm.patchValue(x));

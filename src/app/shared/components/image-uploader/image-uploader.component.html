@@ -33,10 +33,10 @@
                 <div class="img-ul-spinning-circle"></div>
             </div>
             <div class="img-actions">
-                <!-- <div title="Add Caption" *ngIf="!file.pending && allowCaption" [ngClass]="{'img-ul-disabled': disabled}"
+                <div title="Add Caption" *ngIf="!file.pending && allowCaption" [ngClass]="{'img-ul-disabled': disabled}"
                     class="img-ul-caption" (click)="addCaption(file)"> 
                     <i class="material-icons"> add_photo_alternate </i>
-                </div>-->
+                </div>
                 <div title="Delete Image" *ngIf="!file.pending" [ngClass]="{'img-ul-disabled': disabled}"
                     (click)="deleteFile(file)" class="img-ul-delete">
                     <i class="material-icons"> delete_forever </i>

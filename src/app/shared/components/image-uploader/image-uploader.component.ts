@@ -5,6 +5,7 @@ import { ImageComponentComponent } from '../image-component/image-component.comp
 import { DomSanitizer } from '@angular/platform-browser';
 import { MatDialog } from '@angular/material/dialog';
 import { ImageUploaderService } from './image-uploader.service';
+import { CaptionComponent } from '../caption/caption.component';
 
 @Component({
   selector: 'ep-image-uploader',
@@ -74,19 +75,19 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
     this.triggerChange.emit(this.getProcessedResult());
   }
 
-  // addCaption(file: FileHolder) {
-  //   const dialogRef = this.dialog.open(CaptionComponent, {
-  //     data: file['caption'],
-  //     width: '400px'
-  //   });
+  addCaption(file: FileHolder) {
+    const dialogRef = this.dialog.open(CaptionComponent, {
+      data: file['caption'],
+      width: '400px'
+    });
 
-  //   dialogRef.afterClosed().subscribe(formData => {
-  //     if (formData) {
-  //       file['caption'] = formData;
-  //       this.triggerChange.emit(this.getProcessedResult());
-  //     }
-  //   });
-  // }
+    dialogRef.afterClosed().subscribe(formData => {
+      if (formData) {
+        file['caption'] = formData;
+        this.triggerChange.emit(this.getProcessedResult());
+      }
+    });
+  }
 
   ngOnChanges(changes) {
     console.log(this.uploadedFiles);
