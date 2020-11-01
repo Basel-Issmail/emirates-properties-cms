@@ -87,11 +87,7 @@ export class RoleFormComponent implements OnInit {
 
   publish() {
     if (this.roleForm.valid) {
-      this.sharedCrudService.addItem(RoleApis.add, this.roleForm.value)
-        .pipe(switchMap(addedItem =>
-          this.sharedCrudService.delete(RoleApis.deleteDraft, [{ id: this.formType.id }])
-            .pipe(map(res => addedItem))
-        ))
+      this.sharedCrudService.publish(RoleApis.add, RoleApis.deleteDraft, this.roleForm.value, this.formType.id)
         .subscribe((response: any) => {
           this.router.navigate([`/roles/edit/${response.data.id}`])
         });

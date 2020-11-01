@@ -150,11 +150,7 @@ export class PagesFormComponent implements OnInit {
 
   publish() {
     if (this.pagesForm.valid) {
-      this.sharedCrudService.addItem(PagesApis.add, this.prcessedData)
-        .pipe(switchMap(addedItem =>
-          this.sharedCrudService.delete(PagesApis.deleteDraft, [{ id: this.formType.id }])
-            .pipe(map(res => addedItem))
-        ))
+      this.sharedCrudService.publish(PagesApis.add, PagesApis.deleteDraft, this.prcessedData, this.formType.id)
         .subscribe((response: any) => {
           this.router.navigate([`/pages/edit/${response.data.id}`])
         });

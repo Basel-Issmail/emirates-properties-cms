@@ -87,11 +87,7 @@ export class CompletionStatusFormComponent implements OnInit {
 
   publish() {
     if (this.completionStatusForm.valid) {
-      this.sharedCrudService.addItem(CompletionStatusApis.add, this.completionStatusForm.value)
-        .pipe(switchMap(addedItem =>
-          this.sharedCrudService.delete(CompletionStatusApis.deleteDraft, [{ id: this.formType.id }])
-            .pipe(map(res => addedItem))
-        ))
+      this.sharedCrudService.publish(CompletionStatusApis.add, CompletionStatusApis.deleteDraft, this.completionStatusForm.value, this.formType.id)
         .subscribe((response: any) => {
           this.router.navigate([`/completion-status/edit/${response.data.id}`])
         });

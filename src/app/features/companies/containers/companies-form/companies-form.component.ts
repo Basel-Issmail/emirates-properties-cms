@@ -105,11 +105,7 @@ export class CompaniesFormComponent implements OnInit {
 
   publish() {
     if (this.companyForm.valid) {
-      this.sharedCrudService.addItem(CompaniesApis.add, this.prcessedData)
-        .pipe(switchMap(addedItem =>
-          this.sharedCrudService.delete(CompaniesApis.deleteDraft, [{ id: this.formType.id }])
-            .pipe(map(res => addedItem))
-        ))
+      this.sharedCrudService.publish(CompaniesApis.add, CompaniesApis.deleteDraft, this.prcessedData, this.formType.id)
         .subscribe((response: any) => {
           this.router.navigate([`/companies/edit/${response.data.id}`])
         });

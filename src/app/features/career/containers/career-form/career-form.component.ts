@@ -95,11 +95,7 @@ export class CareerFormComponent implements OnInit {
 
   publish() {
     if (this.careerForm.valid) {
-      this.sharedCrudService.addItem(CareerApis.add, this.careerForm.value)
-        .pipe(switchMap(addedItem =>
-          this.sharedCrudService.delete(CareerApis.deleteDraft, [{ id: this.formType.id }])
-            .pipe(map(res => addedItem))
-        ))
+        this.sharedCrudService.publish(CareerApis.add, CareerApis.deleteDraft, this.careerForm.value, this.formType.id)
         .subscribe((response: any) => {
           this.router.navigate([`/careers/edit/${response.data.id}`])
         });

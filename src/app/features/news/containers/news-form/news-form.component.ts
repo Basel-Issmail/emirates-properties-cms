@@ -109,11 +109,7 @@ export class NewsFormComponent implements OnInit {
 
   publish() {
     if (this.newsForm.valid) {
-      this.sharedCrudService.addItem(NewsApis.add, this.prcessedData)
-        .pipe(switchMap(addedItem =>
-          this.sharedCrudService.delete(NewsApis.deleteDraft, [{ id: this.formType.id }])
-            .pipe(map(res => addedItem))
-        ))
+      this.sharedCrudService.publish(NewsApis.add, NewsApis.deleteDraft, this.prcessedData, this.formType.id)
         .subscribe((response: any) => {
           this.router.navigate([`/news/edit/${response.data.id}`])
         });

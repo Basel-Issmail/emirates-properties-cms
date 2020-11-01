@@ -142,11 +142,7 @@ export class AgentsFormComponent implements OnInit {
 
   publish() {
     if (this.agentForm.valid) {
-      this.sharedCrudService.addItem(AgentsApis.add, this.agentForm.value)
-        .pipe(switchMap(addedItem =>
-          this.sharedCrudService.delete(AgentsApis.deleteDraft, [{ id: this.formType.id }])
-            .pipe(map(res => addedItem))
-        ))
+      this.sharedCrudService.publish(AgentsApis.add, AgentsApis.deleteDraft, this.agentForm.value, this.formType.id)
         .subscribe((response: any) => {
           this.router.navigate([`/agents/edit/${response.data.id}`])
         });

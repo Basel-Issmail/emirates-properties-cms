@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { map, catchError } from 'rxjs/operators';
+import { map, catchError, switchMap } from 'rxjs/operators';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { FlashMessageComponent } from '../components/flash-message/flash-message.component';
 
@@ -33,9 +33,9 @@ export class SharedCrudService {
     return items.map(val => val.id)
   }
 
-  delete(url, items) {
+  delete(url, items, showMessage = true) {
     return this.http.post(url, { ids: this.getItemsIdsFromSelection(items) }).pipe(map(response => {
-      this.handleSuccess('Deleted successfully');
+      if (showMessage) this.handleSuccess('Deleted successfully');
       return response;
     }));
   }
@@ -54,9 +54,9 @@ export class SharedCrudService {
     }));
   }
 
-  addItem(url, item) {
+  addItem(url, item, showMessage = true) {
     return this.http.post(url, item).pipe(map(response => {
-      this.handleSuccess('Added successfully');
+      if (showMessage) this.handleSuccess('Added successfully');
       return response;
     }));
   }
@@ -77,6 +77,17 @@ export class SharedCrudService {
       this.handleSuccess('Attribute changed successfully');
       return response;
     }));
+  }
+
+  publish(addUrl, deleteUrl, value, id) {
+    return this.addItem(addUrl, value, false)
+      .pipe(switchMap(addedItem =>
+        this.delete(deleteUrl, [{ id: id }], false)
+          .pipe(map(res => {
+            this.handleSuccess('Published successfully');
+            return addedItem
+          }))
+      ))
   }
 
   handleSuccess(message) {

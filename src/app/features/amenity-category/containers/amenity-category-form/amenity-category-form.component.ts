@@ -94,11 +94,7 @@ export class AmenityCategoryFormComponent implements OnInit {
 
   publish() {
     if (this.amenityCategoryForm.valid) {
-      this.sharedCrudService.addItem(AmenityCategoryApis.add, this.amenityCategoryForm.value)
-        .pipe(switchMap(addedItem =>
-          this.sharedCrudService.delete(AmenityCategoryApis.deleteDraft, [{ id: this.formType.id }])
-            .pipe(map(res => addedItem))
-        ))
+      this.sharedCrudService.publish(AmenityCategoryApis.add, AmenityCategoryApis.deleteDraft, this.amenityCategoryForm.value, this.formType.id)
         .subscribe((response: any) => {
           this.router.navigate([`/amenity-category/edit/${response.data.id}`])
         });

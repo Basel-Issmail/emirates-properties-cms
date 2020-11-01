@@ -120,11 +120,7 @@ export class AmenityFormComponent implements OnInit {
   publish() {
     this.isSubmitted = true;
     if (this.amenityForm.valid && this.prcessedData.icon) {
-      this.sharedCrudService.addItem(AmenityApis.add, this.prcessedData)
-        .pipe(switchMap(addedItem =>
-          this.sharedCrudService.delete(AmenityApis.deleteDraft, [{ id: this.formType.id }])
-            .pipe(map(res => addedItem))
-        ))
+      this.sharedCrudService.publish(AmenityApis.add, AmenityApis.deleteDraft, this.prcessedData, this.formType.id)
         .subscribe((response: any) => {
           this.router.navigate([`/amenity/edit/${response.data.id}`])
         });

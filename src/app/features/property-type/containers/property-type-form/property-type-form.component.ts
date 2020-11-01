@@ -97,11 +97,7 @@ export class PropertyTypeFormComponent implements OnInit {
 
   publish() {
     if (this.propertyTypeForm.valid) {
-      this.sharedCrudService.addItem(PropertyTypeApis.add, this.propertyTypeForm.value)
-        .pipe(switchMap(addedItem =>
-          this.sharedCrudService.delete(PropertyTypeApis.deleteDraft, [{ id: this.formType.id }])
-            .pipe(map(res => addedItem))
-        ))
+      this.sharedCrudService.publish(PropertyTypeApis.add, PropertyTypeApis.deleteDraft, this.propertyTypeForm.value, this.formType.id)
         .subscribe((response: any) => {
           this.router.navigate([`/property-type/edit/${response.data.id}`])
         });
