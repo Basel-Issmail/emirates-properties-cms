@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormGroupDirective, FormControl } from '@angular/forms';
 import { SharedCrudService } from 'src/app/shared/services/shared-crud.service';
 import { AmenityApis } from '../../amenity.constants';
@@ -20,6 +20,8 @@ export class AmenityFormComponent implements OnInit {
   emptyAmenityObj = { category_id: '', description: '', icon: '', name: '' };
   formType = null;
   FormTypes = FormTypes;
+
+  @ViewChild('imageUploader') imageUploader;
 
   imageBaseUrl = environment.imageBaseUrl;
   uploadPhoto = CoreApis.uploadPhoto;
@@ -82,6 +84,7 @@ export class AmenityFormComponent implements OnInit {
         .subscribe(response => {
           formDirective.resetForm();
           this.amenityForm.reset(this.emptyAmenityObj);
+          this.imageUploader.deleteAll();
           this.isSubmitted = false;
         });
     }
@@ -94,6 +97,7 @@ export class AmenityFormComponent implements OnInit {
         .subscribe(response => {
           formDirective.resetForm();
           this.amenityForm.reset(this.emptyAmenityObj);
+          this.imageUploader.deleteAll();
           this.isSubmitted = false;
         });
     }

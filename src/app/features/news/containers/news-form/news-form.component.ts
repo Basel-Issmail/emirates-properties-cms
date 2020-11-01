@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 import { SharedCrudService } from 'src/app/shared/services/shared-crud.service';
 import { FormTypeService } from 'src/app/shared/services/form-type.service';
@@ -20,6 +20,8 @@ export class NewsFormComponent implements OnInit {
   emptyNewsObj = { active: true, brief: '', content: '', date: '', meta_description: '', meta_keywords: '', meta_title: '', name: '', url: '', media: '' };
   formType = null;
   FormTypes = FormTypes;
+  
+  @ViewChild('imageUploader') imageUploader;
 
   imageBaseUrl = environment.imageBaseUrl;
   uploadPhoto = CoreApis.uploadPhoto;
@@ -68,15 +70,12 @@ export class NewsFormComponent implements OnInit {
   }
 
   addNew(formDirective: FormGroupDirective) {
-    console.log(this.newsFormControl.name);
-    console.log(this.newsFormControl.url);
-    console.log(this.newsFormControl.sort_order);
-
     if (this.newsForm.valid) {
       this.sharedCrudService.addItem(NewsApis.add, this.prcessedData)
         .subscribe(response => {
           formDirective.resetForm();
           this.newsForm.reset(this.emptyNewsObj);
+          this.imageUploader.deleteAll();
         });
     }
   }
@@ -87,6 +86,7 @@ export class NewsFormComponent implements OnInit {
         .subscribe(response => {
           formDirective.resetForm();
           this.newsForm.reset(this.emptyNewsObj);
+          this.imageUploader.deleteAll();
         });
     }
   }

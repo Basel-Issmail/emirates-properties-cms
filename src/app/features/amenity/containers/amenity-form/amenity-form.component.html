@@ -72,7 +72,7 @@
                     <div>Media</div>
                 </div>
                 <div class="form">
-                    <ep-image-uploader [crop]="true" [aspectRatio]="1" buttonCaption="Select Icon"
+                    <ep-image-uploader #imageUploader [crop]="true" [aspectRatio]="1" buttonCaption="Select Icon"
                     [url]="uploadPhoto" id="page-image" [pathPrefix]="imageBaseUrl"
                     (triggerChange)="getImage($event)" [max]="1"
                     [uploadedFiles]="(amenityFormControl.icon.value)? [{path: amenityFormControl.icon.value}] : []">

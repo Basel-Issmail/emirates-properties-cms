@@ -156,7 +156,7 @@
                             <div>Property media</div>
                         </div>
                         <div class="form">
-                            <ep-image-uploader buttonCaption="Select property images"
+                            <ep-image-uploader #imageUploader buttonCaption="Select property images"
                                 style="margin-bottom: 1rem;display: block;" [allowCaption]="true" [crop]="true"
                                 [aspectRatio]="340 / 230" [url]="uploadPhoto" (triggerChange)="getImages($event)"
                                 [firstMain]="true"
@@ -164,14 +164,14 @@
                                 [pathPrefix]="imageBaseUrl"></ep-image-uploader>
 
 
-                            <ep-image-uploader buttonCaption="Select property floor plans"
+                            <ep-image-uploader #floorPlanUploader buttonCaption="Select property floor plans"
                                 style="margin-bottom: 1rem;display: block;" [crop]="true" [aspectRatio]="340 / 230"
                                 [url]="uploadPhoto" (triggerChange)="getFloorPlans($event)" [firstMain]="true"
                                 [uploadedFiles]="(propertiesFormControl.floor_plans.value)?propertiesFormControl.floor_plans.value: []"
                                 [pathPrefix]="imageBaseUrl"></ep-image-uploader>
 
 
-                            <ep-image-uploader buttonCaption="Select property videos"
+                            <ep-image-uploader #videoUploader buttonCaption="Select property videos"
                                 style="margin-bottom: 1rem;display: block;" [url]="uploadFile" partName="file"
                                 [supportedExtensions]="['video/*']" (triggerChange)="getVideo($event)"
                                 [firstMain]="true"

@@ -34,6 +34,10 @@ export class PropertyFormComponent implements OnInit {
   formType = null;
   FormTypes = FormTypes;
   member = null;
+  @ViewChild('imageUploader') imageUploader;
+  @ViewChild('floorPlanUploader') floorPlanUploader;
+  @ViewChild('videoUploader') videoUploader;
+
   uploadPhoto = CoreApis.uploadPhoto;
   uploadFile = CoreApis.uploadFile;
   images = [];
@@ -189,6 +193,10 @@ export class PropertyFormComponent implements OnInit {
         .subscribe(response => {
           formDirective.resetForm();
           this.propertiesForm.reset(this.emptyPropertiesObj);
+          this.imageUploader.deleteAll();
+          this.floorPlanUploader.deleteAll();
+          this.videoUploader.deleteAll();
+
         });
     }
   }
@@ -199,6 +207,9 @@ export class PropertyFormComponent implements OnInit {
         .subscribe(response => {
           formDirective.resetForm();
           this.propertiesForm.reset(this.emptyPropertiesObj);
+          this.imageUploader.deleteAll();
+          this.floorPlanUploader.deleteAll();
+          this.videoUploader.deleteAll();
         });
     }
   }

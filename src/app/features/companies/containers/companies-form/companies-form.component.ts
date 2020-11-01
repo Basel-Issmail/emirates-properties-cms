@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 import { SharedCrudService } from 'src/app/shared/services/shared-crud.service';
 import { CompaniesApis } from '../../companies.constants';
@@ -19,6 +19,8 @@ export class CompaniesFormComponent implements OnInit {
   emptyCompanyObj = { active: true, description: '', email: '', head_office: '', logo: '', name: '', orn_number: '', phone: '' };
   formType = null;
   FormTypes = FormTypes;
+
+  @ViewChild('imageUploader') imageUploader;
 
   imageBaseUrl = environment.imageBaseUrl;
   uploadPhoto = CoreApis.uploadPhoto;
@@ -73,6 +75,7 @@ export class CompaniesFormComponent implements OnInit {
         .subscribe(response => {
           formDirective.resetForm();
           this.companyForm.reset(this.emptyCompanyObj);
+          this.imageUploader.deleteAll();
         });
     }
   }
@@ -83,6 +86,7 @@ export class CompaniesFormComponent implements OnInit {
         .subscribe(response => {
           formDirective.resetForm();
           this.companyForm.reset(this.emptyCompanyObj);
+          this.imageUploader.deleteAll();
         });
     }
   }

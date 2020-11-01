@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormGroupDirective, FormControl } from '@angular/forms';
 import { SharedCrudService } from 'src/app/shared/services/shared-crud.service';
 import { FormTypeService } from 'src/app/shared/services/form-type.service';
@@ -24,6 +24,8 @@ export class PagesFormComponent implements OnInit {
   };
   formType = null;
   FormTypes = FormTypes;
+  @ViewChild('imageUploader') imageUploader;
+
   imageBaseUrl = environment.imageBaseUrl;
   uploadPhoto = CoreApis.uploadPhoto;
   images = [];
@@ -118,6 +120,7 @@ export class PagesFormComponent implements OnInit {
         .subscribe(response => {
           formDirective.resetForm();
           this.pagesForm.reset(this.emptyPagesObj);
+          this.imageUploader.deleteAll();
         });
     }
   }
@@ -128,6 +131,7 @@ export class PagesFormComponent implements OnInit {
         .subscribe(response => {
           formDirective.resetForm();
           this.pagesForm.reset(this.emptyPagesObj);
+          this.imageUploader.deleteAll();
         });
     }
   }
