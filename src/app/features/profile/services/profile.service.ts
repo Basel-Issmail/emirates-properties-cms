@@ -23,7 +23,10 @@ export class ProfileService {
 
 
   changePassword(passwordObj) {
-    return this.http.post(ProfileApis.changePassword, passwordObj);
+    return this.http.post(ProfileApis.changePassword, passwordObj).pipe(map((response: any) => {
+      this.handleSuccess('Password updated successfully');
+      return response;
+    }));
   }
 
 

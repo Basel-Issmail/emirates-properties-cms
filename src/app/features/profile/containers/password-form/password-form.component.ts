@@ -42,9 +42,7 @@ export class PasswordFormComponent implements OnInit {
     if (this.passwordForm.valid) {
       this.profileService.changePassword(this.passwordForm.value).subscribe(
         response => {
-          alert('updated')
         });
-      console.table(this.passwordForm.value);
     }
 
   }

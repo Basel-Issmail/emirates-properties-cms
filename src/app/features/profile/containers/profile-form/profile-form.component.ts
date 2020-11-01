@@ -38,7 +38,6 @@ export class ProfileFormComponent implements OnInit {
     if (this.userForm.valid) {
       this.profileService.updateProfile(this.userForm.value).subscribe(
         response => {
-          alert('updated')
         });
       console.table(this.userForm.value);
     }
