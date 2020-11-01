@@ -19,8 +19,8 @@
                 <header class="access_card-header">
                     <div class="access_card-header-text">
                         <h2>Privacy & personalization</h2>
-                        <p>See the data in your Google Account and choose what activity is saved to
-                            personalize your Google experience</p>
+                        <p>See the data in your CMS and
+                            personalize your CMS experience</p>
                     </div>
                     <div class="access_card-header-image">
                         <img src="assets/images/privacy_tip.svg" alt="">
@@ -36,14 +36,24 @@
                             </mat-expansion-panel-header>
                             <mat-selection-list [multiple]="false">
                                 <mat-list-option [routerLink]="['/profile']">
-                                    <mat-icon mat-list-icon>account</mat-icon>
+                                    <mat-icon mat-list-icon>account_circle</mat-icon>
                                     <div mat-line>Profile</div>
                                 </mat-list-option>
-                                <mat-divider></mat-divider>
-                                <mat-list-option [routerLink]="['/profile']">
-                                    <mat-icon mat-list-icon>lock_open</mat-icon>
+                                <mat-list-option [routerLink]="['/users']">
+                                    <mat-icon mat-list-icon>supervised_user_circle</mat-icon>
                                     <div mat-line>Users</div>
                                 </mat-list-option>
+
+                                <mat-list-option [routerLink]="['/roles']">
+                                    <mat-icon mat-list-icon>verified_user</mat-icon>
+                                    <div mat-line>Roles</div>
+                                </mat-list-option>
+
+                                <mat-list-option [routerLink]="['/settings']">
+                                    <mat-icon mat-list-icon>settings_input_composite</mat-icon>
+                                    <div mat-line>Settings</div>
+                                </mat-list-option>
+
                             </mat-selection-list>
                         </mat-expansion-panel>
                     </mat-accordion>
@@ -72,14 +82,82 @@
                                 </mat-panel-title>
                             </mat-expansion-panel-header>
                             <mat-selection-list [multiple]="false">
-                                <mat-list-option [routerLink]="['/profile']">
-                                    <mat-icon mat-list-icon>home</mat-icon>
+
+                                <mat-list-option [routerLink]="['/property']">
+                                    <mat-icon mat-list-icon>domain</mat-icon>
                                     <div mat-line>Property</div>
                                 </mat-list-option>
-                                <mat-divider></mat-divider>
-                                <mat-list-option [routerLink]="['/profile']">
-                                    <mat-icon mat-list-icon>weekend</mat-icon>
+
+                                <mat-list-option [routerLink]="['/amenity']">
+                                    <mat-icon mat-list-icon>golf_course</mat-icon>
                                     <div mat-line>Amenity</div>
+                                </mat-list-option>
+
+
+                                <mat-list-option [routerLink]="['/amenity-category']">
+                                    <mat-icon mat-list-icon>tapas</mat-icon>
+                                    <div mat-line>Amenity categories</div>
+                                </mat-list-option>
+
+                                <mat-list-option [routerLink]="['/property-type']">
+                                    <mat-icon mat-list-icon>home_work</mat-icon>
+                                    <div mat-line>Property types</div>
+                                </mat-list-option>
+
+                                <mat-list-option [routerLink]="['/property-type-category']">
+                                    <mat-icon mat-list-icon>construction</mat-icon>
+                                    <div mat-line>Property types categories</div>
+                                </mat-list-option>
+
+                                <mat-list-option [routerLink]="['/members']">
+                                    <mat-icon mat-list-icon>group</mat-icon>
+                                    <div mat-line>Members</div>
+                                </mat-list-option>
+
+                                <mat-list-option [routerLink]="['/completion-status']">
+                                    <mat-icon mat-list-icon>fact_check</mat-icon>
+                                    <div mat-line>Completion status</div>
+                                </mat-list-option>
+
+                            </mat-selection-list>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </footer>
+            </div>
+        </div>
+
+        <div class="access_card">
+            <div class="access_card-content">
+                <header class="access_card-header">
+                    <div class="access_card-header-text">
+                        <h2>Manage Website</h2>
+                        <p>Add edit or delete webpages on your EP website.</p>
+                    </div>
+                    <div class="access_card-header-image">
+                        <img src="assets/images/construction.svg" alt="">
+                    </div>
+                </header>
+                <footer class="access_card-footer">
+                    <mat-accordion multi>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    View Properties Pages
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-selection-list [multiple]="false">
+
+                                <mat-list-option [routerLink]="['/pages']">
+                                    <mat-icon mat-list-icon>file_copy</mat-icon>
+                                    <div mat-line>Pages</div>
+                                </mat-list-option>
+                                <mat-list-option [routerLink]="['/careers']">
+                                    <mat-icon mat-list-icon>work_outline</mat-icon>
+                                    <div mat-line>Careers</div>
+                                </mat-list-option>
+                                <mat-list-option [routerLink]="['/news']">
+                                    <mat-icon mat-list-icon>cast</mat-icon>
+                                    <div mat-line>News</div>
                                 </mat-list-option>
                             </mat-selection-list>
                         </mat-expansion-panel>
@@ -87,6 +165,50 @@
                 </footer>
             </div>
         </div>
+
+        <div class="access_card">
+            <div class="access_card-content">
+                <header class="access_card-header">
+                    <div class="access_card-header-text">
+                        <h2>Track Changes</h2>
+                        <p>View requests details and add edit and delete members/agents.</p>
+                    </div>
+                    <div class="access_card-header-image">
+                        <img src="assets/images/track_changes.svg" alt="">
+                    </div>
+                </header>
+                <footer class="access_card-footer">
+                    <mat-accordion multi>
+                        <mat-expansion-panel>
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    View Properties Pages
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <mat-selection-list [multiple]="false">
+
+                                <mat-list-option [routerLink]="['/companies']">
+                                    <mat-icon mat-list-icon>domain</mat-icon>
+                                    <div mat-line>Companies</div>
+                                </mat-list-option>
+
+                                <mat-list-option [routerLink]="['/agents']">
+                                    <mat-icon mat-list-icon>support_agent</mat-icon>
+                                    <div mat-line>Agents</div>
+                                </mat-list-option>
+
+                                <mat-list-option [routerLink]="['/requests']">
+                                    <mat-icon mat-list-icon>request_page</mat-icon>
+                                    <div mat-line>Requests</div>
+                                </mat-list-option>
+
+                            </mat-selection-list>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </footer>
+            </div>
+        </div>
+
 
     </div>
 </div>
