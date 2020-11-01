@@ -7,7 +7,7 @@
     </button>
     <span class="l-spacer"></span>
     <button mat-icon-button [matMenuTriggerFor]="menu">
-        <img class="header-profile_image" src="assets/images/default-profile.svg" alt="Profile Picture">
+        <img class="header-profile_image" [src]="user.profile_picture? imageBaseUrl + user.profile_picture:'assets/images/default-profile.svg'" alt="Profile Picture">
     </button>
     <mat-menu #menu="matMenu" xPosition="before">
         <button mat-menu-item [routerLink]="['/profile']">

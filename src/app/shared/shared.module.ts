@@ -26,7 +26,8 @@ import { CaptionComponent } from './components/caption/caption.component';
     GridTabsComponent,
     GridLoadingComponent,
     GridColumnsDisplayMenuComponent,
-    ImageUploaderComponent
+    ImageUploaderComponent,
+    ImageComponentComponent
   ]
 })
 export class SharedModule { }

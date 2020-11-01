@@ -1,11 +1,15 @@
 <div class="dashboard">
     <div class="dashboard-image">
         <div class="img-wrapper">
-            <img src="assets/images/default-profile.svg" alt="Profile Picture">
+            <img [src]="user.profile_picture? imageBaseUrl + user.profile_picture:'assets/images/default-profile.svg'"
+                alt="Profile Picture">
         </div>
         <div class="dashboard-image-edit">
             <div class="dashboard-image-edit-effect"></div>
         </div>
+
+        <input type="file" style="opacity: 0;width: 100%;height: 100%;position: absolute;cursor: pointer; top: 0"
+            (change)="onFileChange(input.files)" #input>
     </div>
     <h1 class="dashboard-title">Welcome, {{user.first_name}} {{user.last_name}}</h1>
     <div class="dashboard-caption">Manage your info, privacy, and security to make CMS work better for you. </div>
