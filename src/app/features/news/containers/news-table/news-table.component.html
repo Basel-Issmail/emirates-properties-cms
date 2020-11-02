@@ -74,7 +74,8 @@
                 <mat-paginator [length]="resultsLength" [pageSize]="pageSize"></mat-paginator>
             </div>
 
-            <table mat-table [dataSource]="data" class="datatable-table" matSort matSortActive="" matSortDisableClear>
+            <div class="responsive-table">
+<table mat-table [dataSource]="data" class="datatable-table" matSort matSortActive="" matSortDisableClear>
 
                 <!-- Checkbox Column -->
                 <ng-container matColumnDef="select">
@@ -186,7 +187,7 @@
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
                 <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
+            </table></div>
 
         </div>
 
