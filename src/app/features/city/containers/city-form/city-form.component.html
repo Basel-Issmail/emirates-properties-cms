@@ -78,19 +78,17 @@
                     <div>Location on map</div>
                 </div>
                 <div class="form">
-                    <agm-map [latitude]="lat" [longitude]="lng" [disableDefaultUI]="false">
-                        <agm-marker *ngFor="let m of markers; let i = index" [latitude]="m.lat" [longitude]="m.lng"
-                            [label]="m.label" [markerDraggable]="m.draggable" (dragEnd)="markerDragEnd(m, $event)">
+                    <agm-map [latitude]="mapCoords.lat" [longitude]="mapCoords.lng" [disableDefaultUI]="false"
+                        (mapClick)="placeMarker($event)">
+                        <agm-marker [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="true"
+                            (dragEnd)="placeMarker($event)">
                             <agm-info-window>
-                                <strong>t</strong>
+                                <strong>City location</strong>
                             </agm-info-window>
                         </agm-marker>
                     </agm-map>
                 </div>
             </div>
-        </div>
-        <div class="form-right_col">
-
         </div>
     </div>
 </form>

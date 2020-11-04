@@ -32,13 +32,8 @@ export class CityFormComponent implements OnInit {
   filteredParentCities$: Observable<any[]>;
 
   // Map Variables
-  markers: Marker[] = [{
-    lat: 24.44313948954762,
-    lng: 54.371185302734375,
-    draggable: true
-  }];
-  lat = 24.44313948954762;
-  lng = 54.371185302734375;
+  marker = { lng: 54.371185302734375, lat: 24.44313948954762 };
+  mapCoords = { lng: 54.371185302734375, lat: 24.44313948954762 };
 
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -56,6 +51,9 @@ export class CityFormComponent implements OnInit {
       latitude: ['', Validators.required],
       longitude: ['', Validators.required],
     });
+    if (this.formType.type === FormTypes.add) {
+      this.listenToCityList();
+    }
 
     // autocomplete data
     this.filteredCcountries$ = this.countryFormControl.valueChanges.pipe(
@@ -73,15 +71,23 @@ export class CityFormComponent implements OnInit {
         .pipe(first())
         .subscribe(x => {
           this.cityForm.patchValue(x);
-          this.lat = this.markers[0].lat = +this.cityFormControl.latitude.value;
-          this.lng = this.markers[0].lng = +this.cityFormControl.longitude.value;
-          const location = {
-            latitude: this.lat,
-            longitude: this.lng
-          };
-          this.refreshLocation(location);
+          this.marker = { lng: Number(x.longitude), lat: Number(x.latitude) };
+          this.mapCoords = { lng: Number(x.longitude), lat: Number(x.latitude) };
+          this.refreshLocation(this.marker);
+          this.listenToCityList();
         });
     }
+  }
+
+  listenToCityList() {
+    this.cityFormControl.parent_id.valueChanges.subscribe(x => {
+      if (x) {
+        let chosenCity = this.route.snapshot.data.buidler.city_list.find(val => val.id == x);
+        this.marker = { lng: Number(chosenCity.longitude), lat: Number(chosenCity.latitude) };
+        this.mapCoords = { lng: Number(chosenCity.longitude), lat: Number(chosenCity.latitude) };
+        this.refreshLocation(this.marker);
+      }
+    });
   }
 
   get cityFormControl() {
@@ -106,17 +112,15 @@ export class CityFormComponent implements OnInit {
     }
   }
 
-  markerDragEnd(m: Marker, $event) {
-    const location = {
-      latitude: $event.latLng.lat(),
-      longitude: $event.latLng.lng()
-    };
-    this.refreshLocation(location);
+  refreshLocation(location) {
+    this.cityFormControl.latitude.setValue(location.lat);
+    this.cityFormControl.longitude.setValue(location.lng);
   }
 
-  refreshLocation(location) {
-    this.cityFormControl.latitude.setValue(location.latitude);
-    this.cityFormControl.longitude.setValue(location.longitude);
+  placeMarker($event) {
+    this.marker = { lng: $event.coords.lng, lat: $event.coords.lat };
+    this.refreshLocation(this.marker);
   }
 
 }
+// (dragEnd)="markerDragEnd($event)"
