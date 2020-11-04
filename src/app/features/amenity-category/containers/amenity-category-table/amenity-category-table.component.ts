@@ -14,11 +14,10 @@ import { AmenityCategoryApis } from '../../amenity-category.constants';
   styleUrls: ['./amenity-category-table.component.scss']
 })
 export class AmenityCategoryTableComponent implements AfterViewInit {
-  displayedColumns: string[] = ['select', 'status', 'name', 'updated_at', 'actions'];
+  displayedColumns: string[] = ['select', 'name', 'updated_at', 'actions'];
   columns = {
-    cols: ['select', 'status', 'name', 'updated_at', 'actions'],
+    cols: ['select', 'name', 'updated_at', 'actions'],
     select: { isShown: true, label: '', canHide: false },
-    status: { isShown: true, label: '', canHide: false },
     name: { isShown: true, label: 'Name', canHide: true },
     updated_at: { isShown: true, label: 'updated at', canHide: true },
     actions: { isShown: true, label: '', canHide: false },
@@ -27,7 +26,7 @@ export class AmenityCategoryTableComponent implements AfterViewInit {
   tab: any = 'all';
   tabs = [
     { value: 'all', label: 'All', icon: 'done_all' },
-    { value: 'remind', label: 'Reminders', icon: 'alarm' },
+    
     { value: 'draft', label: 'Drafts', icon: 'drafts' },
     { value: 'delete', label: 'Deleted', icon: 'delete_outline' }]
   selectedTab = new Subject<string>();

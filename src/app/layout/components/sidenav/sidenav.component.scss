@@ -18,10 +18,14 @@
   .mat-list-base .mat-list-item.mat-list-item-with-avatar,
   .mat-list-base .mat-list-option.mat-list-item-with-avatar {
     height: 32px;
-    color: black;
+    color: #666;
+
+    &:hover {
+      color: #333;
+    }
 
     &.active {
-      background: #d3371e;
+      background: #d2001b;
       color: white;
     }
   }

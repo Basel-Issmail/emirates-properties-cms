@@ -26,7 +26,7 @@ export class RoleTableComponent implements AfterViewInit {
   tab: any = 'all';
   tabs = [
     { value: 'all', label: 'All', icon: 'done_all' },
-    { value: 'remind', label: 'Reminders', icon: 'alarm' },
+    
     { value: 'draft', label: 'Drafts', icon: 'drafts' },
     { value: 'delete', label: 'Deleted', icon: 'delete_outline' }]
   selectedTab = new Subject<string>();

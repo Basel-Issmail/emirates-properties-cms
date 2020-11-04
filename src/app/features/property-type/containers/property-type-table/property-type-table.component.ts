@@ -14,11 +14,10 @@ import { PropertyTypeApis } from '../../property-type.constants';
   styleUrls: ['./property-type-table.component.scss']
 })
 export class PropertyTypeTableComponent implements AfterViewInit {
-  displayedColumns: string[] = ['select', 'status', 'name', 'category', 'updated_at', 'actions'];
+  displayedColumns: string[] = ['select', 'name', 'category', 'updated_at', 'actions'];
   columns = {
-    cols: ['select', 'status', 'name', 'category', 'updated_at', 'actions'],
+    cols: ['select', 'name', 'category', 'updated_at', 'actions'],
     select: { isShown: true, label: '', canHide: false },
-    status: { isShown: true, label: '', canHide: false },
     name: { isShown: true, label: 'Name', canHide: true },
     category: { isShown: true, label: 'Category', canHide: true },
     updated_at: { isShown: true, label: 'updated at', canHide: true },
@@ -28,7 +27,7 @@ export class PropertyTypeTableComponent implements AfterViewInit {
   tab: any = 'all';
   tabs = [
     { value: 'all', label: 'All', icon: 'done_all' },
-    { value: 'remind', label: 'Reminders', icon: 'alarm' },
+    
     { value: 'draft', label: 'Drafts', icon: 'drafts' },
     { value: 'delete', label: 'Deleted', icon: 'delete_outline' }]
   selectedTab = new Subject<string>();

@@ -10,7 +10,7 @@ $title: mat-typography-level(1.375rem),
 $emirates-properties-cms-background: (
   status-bar: black,
   app-bar: white,
-  background: white,
+  background: #f8f8f8,
   hover: rgba(white, 0.04), // TODO(kara): check style with Material Design UX
   card: white,
   dialog: white,
@@ -51,7 +51,7 @@ $emirates-properties-cms-foreground: (
 
   .mat-progress-spinner, .mat-spinner {
     circle {
-      stroke: #d3371e;
+      stroke: #d2001b;
     }
 
     &.mat-accent circle {

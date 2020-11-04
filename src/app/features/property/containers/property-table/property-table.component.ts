@@ -27,7 +27,7 @@ export class PropertyTableComponent implements AfterViewInit {
   tab: any = 'approved';
   tabs = [
     { value: 'approved', label: 'Approved', icon: 'done_all' },
-    { value: 'pending_approval', label: 'Pedngin Approval', icon: 'alarm' },
+    { value: 'pending_approval', label: 'Pending Approval', icon: 'alarm' },
     { value: 'draft', label: 'Drafts', icon: 'drafts' },
     { value: 'delete', label: 'Deleted', icon: 'delete_outline' }]
   selectedTab = new Subject<string>();
