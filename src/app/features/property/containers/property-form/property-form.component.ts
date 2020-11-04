@@ -26,7 +26,7 @@ interface Marker {
 export class PropertyFormComponent implements OnInit {
   imageBaseUrl = environment.imageBaseUrl;
   propertiesForm: FormGroup;
-  areaMeters = true;
+  areaFeets = true;
   emptyPropertiesObj = {
     active: true, agent_id: '', amenities: '', approve: false, area: '', areaFt: '', bathrooms: '', bedrooms: '', city: '', completion_status: '', description: '',
     expiry_date: '', floor_plans: '', frequency: '', furnished: false, images: '', latitude: '', longitude: '', maidroom: '', price: '', publish_date: '',
@@ -209,7 +209,7 @@ export class PropertyFormComponent implements OnInit {
       images: this.images,
       floor_plans: this.floorPlans,
       videos: this.videos,
-      area: (this.areaMeters) ? +this.propertiesFormControl.area.value : (+this.propertiesFormControl.area.value == 0) ? 0 : +this.propertiesFormControl.area.value / 10.763910417
+      area: (this.areaFeets) ? +this.propertiesFormControl.area.value : (+this.propertiesFormControl.area.value == 0) ? 0 : +this.propertiesFormControl.area.value * 10.763910417
     }
   }
 
@@ -300,6 +300,6 @@ export class PropertyFormComponent implements OnInit {
   }
 
   swapParam() {
-    this.areaMeters = !this.areaMeters;
+    this.areaFeets = !this.areaFeets;
   }
 }
