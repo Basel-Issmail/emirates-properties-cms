@@ -44,13 +44,8 @@ export class PropertyFormComponent implements OnInit {
   floorPlans = [];
   videos = [];
   // Map Variables
-  markers: Marker[] = [{
-    lat: 24.44313948954762,
-    lng: 54.371185302734375,
-    draggable: true
-  }];
-  lat = 24.44313948954762;
-  lng = 54.371185302734375;
+  marker = { lng: 54.371185302734375, lat: 24.44313948954762 };
+  mapCoords = { lng: 54.371185302734375, lat: 24.44313948954762 };
 
   //amenities
   amenityCategoryList: any = [];
@@ -108,6 +103,10 @@ export class PropertyFormComponent implements OnInit {
       videos: [''],
     });
 
+    if (this.formType.type === FormTypes.add) {
+      this.listenToCityList();
+    }
+
     // autocomplete data
     this.filteredAgents$ = this.agentFormControl.valueChanges.pipe(
       startWith(''),
@@ -155,7 +154,13 @@ export class PropertyFormComponent implements OnInit {
           }
           return value;
         }))
-        .subscribe(x => this.propertiesForm.patchValue(x));
+        .subscribe(x => {
+          this.propertiesForm.patchValue(x)
+          this.marker = { lng: Number(x.longitude), lat: Number(x.latitude) };
+          this.mapCoords = { lng: Number(x.longitude), lat: Number(x.latitude) };
+          this.refreshLocation(this.marker);
+          this.listenToCityList();
+        });
     }
     if (this.formType.type === FormTypes.editDraft) {
       this.sharedCrudService.getDraftItemDetails(PropertyApis.getDraftDetails, this.formType.id)
@@ -168,8 +173,25 @@ export class PropertyFormComponent implements OnInit {
           }
           return value;
         }))
-        .subscribe(x => this.propertiesForm.patchValue(x));
+        .subscribe(x => {
+          this.propertiesForm.patchValue(x);
+          this.marker = { lng: Number(x.longitude), lat: Number(x.latitude) };
+          this.mapCoords = { lng: Number(x.longitude), lat: Number(x.latitude) };
+          this.refreshLocation(this.marker);
+          this.listenToCityList();
+        });
     }
+  }
+
+  listenToCityList() {
+    this.propertiesFormControl.city.valueChanges.subscribe(x => {
+      if (x) {
+        let chosenCity = this.route.snapshot.data.buidler.city_list.find(val => val.id == x);
+        this.marker = { lng: Number(chosenCity.longitude), lat: Number(chosenCity.latitude) };
+        this.mapCoords = { lng: Number(chosenCity.longitude), lat: Number(chosenCity.latitude) };
+        this.refreshLocation(this.marker);
+      }
+    });
   }
 
   get propertiesFormControl() {
@@ -239,19 +261,18 @@ export class PropertyFormComponent implements OnInit {
     }
   }
 
-
-  markerDragEnd(m: Marker, $event) {
-    const location = {
-      latitude: $event.latLng.lat(),
-      longitude: $event.latLng.lng()
-    };
-    this.refreshLocation(location);
-  }
-
   refreshLocation(location) {
-    this.propertiesFormControl.latitude.setValue(location.latitude);
-    this.propertiesFormControl.longitude.setValue(location.longitude);
+    this.propertiesFormControl.latitude.setValue(location.lat);
+    this.propertiesFormControl.longitude.setValue(location.lng);
+    console.log(location);
+
   }
+
+  placeMarker($event) {
+    this.marker = { lng: $event.coords.lng, lat: $event.coords.lat };
+    this.refreshLocation(this.marker);
+  }
+
 
   getImages(event) {
     this.images = event;
