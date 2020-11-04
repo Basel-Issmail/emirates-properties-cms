@@ -1,5 +1,38 @@
 @import '~@angular/material/theming';
 
+$mat-primary: (
+  50: #eceff1,
+  100: #cfd8dc,
+  200: #b0bec5,
+  300: #90a4ae,
+  400: #78909c,
+  500: #333,
+  600: #546e7a,
+  700: #455a64,
+  800: #37474f,
+  900: #263238,
+  A100: #cfd8dc,
+  A200: #b0bec5,
+  A400: #78909c,
+  A700: #455a64,
+  contrast: (
+    50: $dark-primary-text,
+    100: $dark-primary-text,
+    200: $dark-primary-text,
+    300: $dark-primary-text,
+    400: $light-primary-text,
+    500: $light-primary-text,
+    600: $light-primary-text,
+    700: $light-primary-text,
+    800: $light-primary-text,
+    900: $light-primary-text,
+    A100: $dark-primary-text,
+    A200: $dark-primary-text,
+    A400: $light-primary-text,
+    A700: $light-primary-text,
+  )
+);
+
 
 $emirates-properties-cms: mat-typography-config(
 $headline: mat-typography-level(1.75rem),
@@ -77,7 +110,7 @@ $emirates-properties-cms-foreground: (
 
   $label-disabled-color: mat-color($foreground, disabled-text);
   $outline-color: mat-color($foreground, divider, if($is-dark-theme, 0.3, 0.12));
-  $outline-color-hover: #546e7a;
+  $outline-color-hover: #333;
   $outline-color-primary: mat-color($primary);
   $outline-color-accent: mat-color($accent);
   $outline-color-warn: mat-color($warn);
@@ -137,7 +170,7 @@ $emirates-properties-cms-foreground: (
   }
 
 
-$emirates-properties-cms-primary: mat-palette($mat-blue-grey);
+$emirates-properties-cms-primary: mat-palette($mat-primary);
 $emirates-properties-cms-accent: mat-palette($mat-red);
 
 // The warn palette is optional (defaults to red).
