@@ -3,11 +3,11 @@ tr.example-detail-row {
 }
 
 tr.example-element-row:not(.example-expanded-row):hover {
-  background: whitesmoke;
+  cursor: pointer;
 }
 
 tr.example-element-row:not(.example-expanded-row):active {
-  background: #efefef;
+  cursor: pointer;
 }
 
 .example-element-row td {
