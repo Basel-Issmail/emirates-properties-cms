@@ -6,7 +6,7 @@ import { BuilderResolverService } from 'src/app/shared/services/builder-resolver
 import { PropertyApis } from './property.constants';
 
 const routes: Routes = [
-  { path: '', component: PropertyTableComponent },
+  { path: '', component: PropertyTableComponent, resolve: { buidler: BuilderResolverService }, data: { builderAPI: PropertyApis.builder } },
   { path: 'add', component: PropertyFormComponent, resolve: { buidler: BuilderResolverService }, data: { builderAPI: PropertyApis.builder } },
   { path: 'edit/:id', component: PropertyFormComponent, resolve: { buidler: BuilderResolverService }, data: { builderAPI: PropertyApis.builder } },
   { path: 'edit-draft/:id', component: PropertyFormComponent, resolve: { buidler: BuilderResolverService }, data: { builderAPI: PropertyApis.builder } }

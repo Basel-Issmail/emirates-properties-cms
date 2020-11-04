@@ -77,127 +77,181 @@
             </div>
 
             <div class="responsive-table">
-<table mat-table [dataSource]="data" class="datatable-table" matSort matSortActive="" matSortDisableClear>
+                <table mat-table [dataSource]="data" class="datatable-table" matSort matSortActive=""
+                    matSortDisableClear multiTemplateDataRows>
 
-                <!-- Checkbox Column -->
-                <ng-container matColumnDef="select">
-                    <th class="datatable-actions-row" mat-header-cell *matHeaderCellDef>
-                        <mat-checkbox (change)="$event ? masterToggle() : null"
-                            [checked]="selection.hasValue() && isAllSelected()"
-                            [indeterminate]="selection.hasValue() && !isAllSelected()">
-                        </mat-checkbox>
-                    </th>
-                    <td class="datatable-actions-row" mat-cell *matCellDef="let row">
-                        <mat-checkbox (click)="$event.stopPropagation()"
-                            (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
-                        </mat-checkbox>
-                    </td>
-                </ng-container>
+                    <!-- Checkbox Column -->
+                    <ng-container matColumnDef="select">
+                        <th class="datatable-actions-row" mat-header-cell *matHeaderCellDef>
+                            <mat-checkbox (change)="$event ? masterToggle() : null"
+                                [checked]="selection.hasValue() && isAllSelected()"
+                                [indeterminate]="selection.hasValue() && !isAllSelected()">
+                            </mat-checkbox>
+                        </th>
+                        <td class="datatable-actions-row" mat-cell *matCellDef="let row">
+                            <mat-checkbox (click)="$event.stopPropagation()"
+                                (change)="$event ? selection.toggle(row) : null" [checked]="selection.isSelected(row)">
+                            </mat-checkbox>
+                        </td>
+                    </ng-container>
 
-                <!-- Status Column -->
-                <ng-container matColumnDef="status">
-                    <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let row">
-                        <mat-chip-list *ngIf="tab === 'pending_approval' || tab === 'approved'">
-                            <mat-chip *ngIf="row.active" style="background: #2e7d32;color: white">Active</mat-chip>
-                            <mat-chip *ngIf="!row.active" style="background: #b71c1c;color: white">Inactive</mat-chip>
-                            <mat-chip *ngIf="row.verified" style="background: #2e7d32;color: white">Verified</mat-chip>
-                            <mat-chip *ngIf="!row.verified" style="background: #b71c1c;color: white">Not verified
-                            </mat-chip>
-                        </mat-chip-list>
+                    <!-- Status Column -->
+                    <ng-container matColumnDef="status">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let row">
+                            <mat-chip-list *ngIf="tab === 'pending_approval' || tab === 'approved'">
+                                <mat-chip *ngIf="row.active" style="background: #2e7d32;color: white">Active</mat-chip>
+                                <mat-chip *ngIf="!row.active" style="background: #b71c1c;color: white">Inactive
+                                </mat-chip>
+                                <mat-chip *ngIf="row.verified" style="background: #2e7d32;color: white">Verified
+                                </mat-chip>
+                                <mat-chip *ngIf="!row.verified" style="background: #b71c1c;color: white">Not verified
+                                </mat-chip>
+                            </mat-chip-list>
 
-                    </td>
-                </ng-container>
+                        </td>
+                    </ng-container>
 
-                <!-- Title Column -->
-                <ng-container matColumnDef="title">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{columns['title'].label}}</th>
-                    <td mat-cell *matCellDef="let row">{{row.title}}</td>
-                </ng-container>
+                    <!-- Reference Column -->
+                    <ng-container matColumnDef="reference">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{columns['reference'].label}}</th>
+                        <td mat-cell *matCellDef="let row">{{row.reference}}</td>
+                    </ng-container>
 
-                <!-- Title Column -->
-                <ng-container matColumnDef="agent_name">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>{{columns['agent_name'].label}}</th>
-                    <td mat-cell *matCellDef="let row">{{row.agent?.name}}</td>
-                </ng-container>
-
-
-                <!-- Created Column -->
-                <ng-container matColumnDef="created_at">
-                    <th mat-header-cell *matHeaderCellDef mat-sort-header>
-                        {{columns['created_at'].label}}
-                    </th>
-                    <td mat-cell *matCellDef="let row">{{row.created_at | date}}</td>
-                </ng-container>
+                    <!-- Purpose Column -->
+                    <ng-container matColumnDef="purpose">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{columns['purpose'].label}}</th>
+                        <td mat-cell *matCellDef="let row">{{purposeObj[row.purpose]}}</td>
+                    </ng-container>
 
 
+                    <!-- Price Column -->
+                    <ng-container matColumnDef="price">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{columns['price'].label}}</th>
+                        <td mat-cell *matCellDef="let row">AED {{row.price}}</td>
+                    </ng-container>
 
-                <!-- Actions Column -->
-                <ng-container matColumnDef="actions">
-                    <th mat-header-cell *matHeaderCellDef></th>
-                    <td mat-cell *matCellDef="let row">
-
-                        <span *ngIf="tab === 'delete'">
-                            <button (click)="deleteForever([row])" matTooltip="Delete selected permanently"
-                                mat-icon-button class="fab-secondary" color="secondary">
-                                <i class="material-icons">delete_forever</i>
-                            </button>
-
-                            <button (click)="restore([row])" matTooltip="Restore selected" mat-icon-button
-                                class="fab-secondary" color="secondary">
-                                <i class="material-icons">restore</i>
-                            </button>
-                        </span>
+                    <!-- Published by Column -->
+                    <ng-container matColumnDef="published_by">
+                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{columns['published_by'].label}}</th>
+                        <td mat-cell *matCellDef="let row">
+                            {{(row.agent && row.agent.name)? 'Agent: ' + row.agent.name: (row.member && row.member.full_name)? 'Member: ' + row.member.full_name: '' }}
+                        </td>
+                    </ng-container>
 
 
-                        <span *ngIf="tab === 'draft'">
-                            <button (click)="deleteDraft([row])" matTooltip="Delete selected" mat-icon-button
-                                class="fab-secondary" color="secondary">
-                                <i class="material-icons">delete</i>
-                            </button>
-                            <button [routerLink]="['/property/edit-draft/' + row.id]" matTooltip="edit selected draft"
-                                mat-icon-button class="fab-secondary" color="secondary">
-                                <i class="material-icons">edit</i>
-                            </button>
-                        </span>
+
+                    <!-- Actions Column -->
+                    <ng-container matColumnDef="actions">
+                        <th mat-header-cell *matHeaderCellDef></th>
+                        <td mat-cell *matCellDef="let row">
+
+                            <span *ngIf="tab === 'delete'">
+                                <button (click)="deleteForever([row])" matTooltip="Delete selected permanently"
+                                    mat-icon-button class="fab-secondary" color="secondary">
+                                    <i class="material-icons">delete_forever</i>
+                                </button>
+
+                                <button (click)="restore([row])" matTooltip="Restore selected" mat-icon-button
+                                    class="fab-secondary" color="secondary">
+                                    <i class="material-icons">restore</i>
+                                </button>
+                            </span>
 
 
-                        <span *ngIf="tab !== 'delete' && tab !== 'draft'">
-                            <button [routerLink]="['/property/edit/' + row.id]" matTooltip="edit selected"
-                                mat-icon-button class="fab-secondary" color="secondary">
-                                <i class="material-icons">edit</i>
-                            </button>
-                            <button *ngIf="tab !== 'approved'" (click)="approve([row])" matTooltip="Approve selected"
-                                mat-icon-button class="fab-secondary" color="secondary">
-                                <i class="material-icons">thumb_up_alt</i>
-                            </button>
-                            <button *ngIf="tab !== 'pending_approval'" (click)="disapprove([row])"
-                                matTooltip="Disapprove selected" mat-icon-button class="fab-secondary"
-                                color="secondary">
-                                <i class="material-icons">thumb_down_alt</i>
-                            </button>
-
-                            <button (click)="delete([row])" matTooltip="Delete selected" mat-icon-button
-                                class="fab-secondary" color="secondary">
-                                <i class="material-icons">delete</i>
-                            </button>
-
-                            <button (click)="changeStatus([row], 'active', 1)" matTooltip="Mark selected as active"
-                                mat-icon-button class="fab-secondary" color="secondary">
-                                <i class="material-icons">check_circle_outline</i>
-                            </button>
-                            <button (click)="changeStatus([row], 'active', 0)" matTooltip="Deactivate selected"
-                                mat-icon-button class="fab-secondary" color="secondary">
-                                <i class="material-icons">highlight_off</i>
-                            </button>
-                        </span>
-                    </td>
-                </ng-container>
+                            <span *ngIf="tab === 'draft'">
+                                <button (click)="deleteDraft([row])" matTooltip="Delete selected" mat-icon-button
+                                    class="fab-secondary" color="secondary">
+                                    <i class="material-icons">delete</i>
+                                </button>
+                                <button [routerLink]="['/property/edit-draft/' + row.id]"
+                                    matTooltip="edit selected draft" mat-icon-button class="fab-secondary"
+                                    color="secondary">
+                                    <i class="material-icons">edit</i>
+                                </button>
+                            </span>
 
 
-                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table></div>
+                            <span *ngIf="tab !== 'delete' && tab !== 'draft'">
+                                <button [routerLink]="['/property/edit/' + row.id]" matTooltip="edit selected"
+                                    mat-icon-button class="fab-secondary" color="secondary">
+                                    <i class="material-icons">edit</i>
+                                </button>
+                                <button *ngIf="tab !== 'approved'" (click)="approve([row])"
+                                    matTooltip="Approve selected" mat-icon-button class="fab-secondary"
+                                    color="secondary">
+                                    <i class="material-icons">thumb_up_alt</i>
+                                </button>
+                                <button *ngIf="tab !== 'pending_approval'" (click)="disapprove([row])"
+                                    matTooltip="Disapprove selected" mat-icon-button class="fab-secondary"
+                                    color="secondary">
+                                    <i class="material-icons">thumb_down_alt</i>
+                                </button>
+
+                                <button (click)="delete([row])" matTooltip="Delete selected" mat-icon-button
+                                    class="fab-secondary" color="secondary">
+                                    <i class="material-icons">delete</i>
+                                </button>
+
+                                <button (click)="changeStatus([row], 'active', 1)" matTooltip="Mark selected as active"
+                                    mat-icon-button class="fab-secondary" color="secondary">
+                                    <i class="material-icons">check_circle_outline</i>
+                                </button>
+                                <button (click)="changeStatus([row], 'active', 0)" matTooltip="Deactivate selected"
+                                    mat-icon-button class="fab-secondary" color="secondary">
+                                    <i class="material-icons">highlight_off</i>
+                                </button>
+                            </span>
+                        </td>
+                    </ng-container>
+
+                    <!-- Expanded Content Column - The detail row is made up of this one column that spans across all columns -->
+                    <ng-container matColumnDef="expandedDetail">
+                        <td mat-cell *matCellDef="let element" [attr.colspan]="displayedColumns.length">
+                            <div class="example-element-detail"
+                                [@detailExpand]="element == expandedElement ? 'expanded' : 'collapsed'">
+
+                                <div style="padding: 1rem">
+                                    <img style="width: 300px;height: auto;"
+                                        [src]="imageBaseUrl + element.images[0].path" [alt]="element.images[0].name">
+                                </div>
+                                <div style="padding: 1rem">
+                                    <h2>{{element.title}}</h2>
+                                    <h3>{{element.type.name}}, {{cityObj[element.city]}}</h3>
+                                    <div style="display: flex;align-items: center;font-size: 1rem;margin-bottom: 1rem;">
+                                        <div style="display: flex;align-items: center;font-size: 1.2rem;"><img
+                                                style="width: 30px;height: 30px" src="assets/images/bed.svg"
+                                                alt="Beds number"> <span
+                                                style="margin: .5rem;">{{element.bedrooms}}</span></div>
+                                        <div style="display: flex;align-items: center;font-size: 1.2rem;"><img
+                                                style="width: 30px;height: 30px" src="assets/images/bathtub.svg"
+                                                alt="Bathtub number"> <span
+                                                style="margin: .5rem;">{{element.bathrooms}}</span></div>
+                                        <div style="display: flex;align-items: center;font-size: 1.2rem;"><img
+                                                style="width: 28px;height: 28px" src="assets/images/dimensions.svg"
+                                                alt="Beds number"> <span style="margin: .5rem;">{{element.area}}
+                                                sqf</span></div>
+                                    </div>
+                                    <p><span style="font-weight: bold;">Created on</span> {{element.created_at | date}}
+                                        <span *ngIf="element.publish_date">, <span style="font-weight: bold;">published
+                                                on</span> {{element.publish_date | date}}</span> <span
+                                            *ngIf="element.expiry_date">, <span
+                                                [ngStyle]="{'color': isExpiredDate(element.expiry_date)}"> <span
+                                                    style="font-weight: bold;">Expired
+                                                    on</span> {{element.expiry_date | date}}</span></span> </p>
+                                </div>
+
+                            </div>
+                        </td>
+                    </ng-container>
+
+                    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                    <tr mat-row *matRowDef="let element; columns: displayedColumns;" class="example-element-row"
+                        [class.example-expanded-row]="expandedElement === element"
+                        (click)="expandedElement = expandedElement === element ? null : element">
+                    <tr mat-row *matRowDef="let row; columns: ['expandedDetail']" class="example-detail-row"></tr>
+                </table>
+            </div>
 
         </div>
 

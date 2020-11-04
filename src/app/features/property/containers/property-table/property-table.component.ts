@@ -7,20 +7,34 @@ import { merge, of as observableOf, Subject } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { SharedCrudService } from 'src/app/shared/services/shared-crud.service';
 import { PropertyApis } from '../../property.constants';
+import { trigger, state, style, transition, animate } from '@angular/animations';
+import { ActivatedRoute } from '@angular/router';
+import { environment } from 'src/environments/environment';
+import * as moment from 'moment';
 @Component({
   selector: 'ep-property-table',
   templateUrl: './property-table.component.html',
-  styleUrls: ['./property-table.component.scss']
+  styleUrls: ['./property-table.component.scss'],
+  animations: [
+    trigger('detailExpand', [
+      state('collapsed', style({ height: '0px', minHeight: '0' })),
+      state('expanded', style({ height: '*' })),
+      transition('expanded <=> collapsed', animate('225ms cubic-bezier(0.4, 0.0, 0.2, 1)')),
+    ]),
+  ],
 })
 export class PropertyTableComponent implements AfterViewInit {
-  displayedColumns: string[] = ['select', 'status', 'title', 'agent_name', 'created_at', 'actions'];
+  imageBaseUrl = environment.imageBaseUrl;
+  expandedElement: any | null;
+  displayedColumns: string[] = ['select', 'status', 'reference', 'purpose', 'price', 'published_by', 'actions'];
   columns = {
-    cols: ['select', 'status', 'title', 'agent_name', 'created_at', 'actions'],
+    cols: ['select', 'status', 'reference', 'purpose', 'price', 'published_by', 'actions'],
     select: { isShown: true, label: '', canHide: false },
     status: { isShown: true, label: '', canHide: false },
-    title: { isShown: true, label: 'Title', canHide: true },
-    agent_name: { isShown: true, label: 'Agent name', canHide: true },
-    created_at: { isShown: true, label: 'Created at', canHide: true },
+    reference: { isShown: true, label: 'Reference', canHide: true },
+    purpose: { isShown: true, label: 'Purpose', canHide: true },
+    price: { isShown: true, label: 'Price', canHide: true },
+    published_by: { isShown: true, label: 'Published by', canHide: true },
     actions: { isShown: true, label: '', canHide: false },
   }
   data: any[] = [];
@@ -35,14 +49,22 @@ export class PropertyTableComponent implements AfterViewInit {
   resultsLength = 0;
   isLoadingResults: boolean = true;
   pageSize = 30;
+  purposeObj: any = {};
+  cityObj: any = {};
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
   selection = new SelectionModel<any>(true, []);
 
-  constructor(private sharedCrudService: SharedCrudService) { }
+  constructor(private sharedCrudService: SharedCrudService, private route: ActivatedRoute) { }
 
   ngAfterViewInit() {
+    this.route.snapshot.data.buidler.purpose_list.forEach(element => {
+      this.purposeObj[element.id] = element.name;
+    });
+    this.route.snapshot.data.buidler.city_list.forEach(element => {
+      this.cityObj[element.id] = element.name;
+    });
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
     merge(this.sort.sortChange, this.paginator.page, this.selectedTab, this.changedData)
@@ -131,5 +153,9 @@ export class PropertyTableComponent implements AfterViewInit {
     // this.sharedCrudService.postRequest(PropertyApis.approve, selected).subscribe(response => {
     //   this.changedData.next();
     // })
+  }
+
+  isExpiredDate(date){
+    return moment().isAfter(date)? '#d2001b': 'black'; 
   }
 }
