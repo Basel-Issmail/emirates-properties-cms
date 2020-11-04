@@ -7,13 +7,6 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <mat-selection-list [multiple]="false">
-
-                <a [routerLink]="['/pages']">
-                    <mat-list-option routerLinkActive="active">
-                        <mat-icon mat-list-icon>file_copy</mat-icon>
-                        <div mat-line>Pages</div>
-                    </mat-list-option>
-                </a>
                 <a [routerLink]="['/companies']">
                     <mat-list-option routerLinkActive="active">
                         <mat-icon mat-list-icon>domain</mat-icon>
@@ -24,6 +17,12 @@
                     <mat-list-option routerLinkActive="active">
                         <mat-icon mat-list-icon>support_agent</mat-icon>
                         <div mat-line>Agents</div>
+                    </mat-list-option>
+                </a>
+                <a [routerLink]="['/members']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>group</mat-icon>
+                        <div mat-line>Members</div>
                     </mat-list-option>
                 </a>
                 <a [routerLink]="['/requests']">
@@ -75,12 +74,6 @@
                         <div mat-line>Property types categories</div>
                     </mat-list-option>
                 </a>
-                <a [routerLink]="['/members']">
-                    <mat-list-option routerLinkActive="active">
-                        <mat-icon mat-list-icon>group</mat-icon>
-                        <div mat-line>Members</div>
-                    </mat-list-option>
-                </a>
 
 
                 <a [routerLink]="['/completion-status']">
@@ -99,7 +92,12 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <mat-selection-list [multiple]="false">
-
+                <a [routerLink]="['/pages']">
+                    <mat-list-option routerLinkActive="active">
+                        <mat-icon mat-list-icon>file_copy</mat-icon>
+                        <div mat-line>Pages</div>
+                    </mat-list-option>
+                </a>
                 <a [routerLink]="['/users']">
                     <mat-list-option routerLinkActive="active">
                         <mat-icon mat-list-icon>supervised_user_circle</mat-icon>
