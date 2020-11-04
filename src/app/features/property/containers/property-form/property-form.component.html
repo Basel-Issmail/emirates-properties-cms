@@ -139,13 +139,24 @@
                                         </mat-form-field>
                                     </td>
                                     <td>
-                                        <mat-form-field class="form-field">
-                                            <mat-label>Area SQM *</mat-label>
-                                            <input matInput formControlName="area">
-                                            <mat-error *ngIf="propertiesFormControl.area.hasError('required')">
-                                                Area is <strong>required</strong>
-                                            </mat-error>
-                                        </mat-form-field>
+                                        <div style="display:flex">
+                                            <mat-form-field style="flex: 1" class="form-field">
+                                                <mat-label>Area {{areaMeters? 'SQM' : 'SQF'}} *</mat-label>
+                                                <input matInput formControlName="area">
+                                                <mat-error *ngIf="propertiesFormControl.area.hasError('required')">
+                                                    Area is <strong>required</strong>
+                                                </mat-error>
+                                            </mat-form-field>
+                                            <button mat-icon-button (click)="swapParam()"
+                                                style="margin: 0.4rem .5rem 0 .5rem;">
+                                                <mat-icon>sync_alt</mat-icon>
+                                            </button>
+                                            <mat-form-field style="flex: 1" class="form-field">
+                                                <mat-label>Area {{!areaMeters? 'SQM' : 'SQF'}}</mat-label>
+                                                <input matInput readonly disabled
+                                                    [value]="areaMeters? +propertiesFormControl.area.value * 10.763910417 : (+propertiesFormControl.area.value == 0)? 0: +propertiesFormControl.area.value / 10.763910417">
+                                            </mat-form-field>
+                                        </div>
                                     </td>
                                 </tr>
                             </table>

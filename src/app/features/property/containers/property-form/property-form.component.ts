@@ -26,8 +26,9 @@ interface Marker {
 export class PropertyFormComponent implements OnInit {
   imageBaseUrl = environment.imageBaseUrl;
   propertiesForm: FormGroup;
+  areaMeters = true;
   emptyPropertiesObj = {
-    active: true, agent_id: '', amenities: '', approve: false, area: '', bathrooms: '', bedrooms: '', city: '', completion_status: '', description: '',
+    active: true, agent_id: '', amenities: '', approve: false, area: '', areaFt: '', bathrooms: '', bedrooms: '', city: '', completion_status: '', description: '',
     expiry_date: '', floor_plans: '', frequency: '', furnished: false, images: '', latitude: '', longitude: '', maidroom: '', price: '', publish_date: '',
     purpose: '', reference: '', title: '', trakheesi_permit: '', type_id: '', verified: false, videos: '',
   };
@@ -79,6 +80,7 @@ export class PropertyFormComponent implements OnInit {
       amenities: [''],
       approve: [false],
       area: ['', Validators.required],
+      areaFt: [''],
       bathrooms: [''],
       bedrooms: [''],
       city: ['', Validators.required],
@@ -106,6 +108,7 @@ export class PropertyFormComponent implements OnInit {
     if (this.formType.type === FormTypes.add) {
       this.listenToCityList();
     }
+
 
     // autocomplete data
     this.filteredAgents$ = this.agentFormControl.valueChanges.pipe(
@@ -205,7 +208,8 @@ export class PropertyFormComponent implements OnInit {
       expiry_date: (this.propertiesFormControl.expiry_date.value) ? moment(this.propertiesFormControl.expiry_date.value).format('YYYY-MM-DD') : '',
       images: this.images,
       floor_plans: this.floorPlans,
-      videos: this.videos
+      videos: this.videos,
+      area: (this.areaMeters) ? +this.propertiesFormControl.area.value * 10.763910417 : (+this.propertiesFormControl.area.value == 0) ? 0 : +this.propertiesFormControl.area.value / 10.763910417
     }
   }
 
@@ -293,5 +297,9 @@ export class PropertyFormComponent implements OnInit {
     this.videos.forEach(
       (value) => (value.name = value.caption ? value.caption : "Floor plan image")
     );
+  }
+
+  swapParam() {
+    this.areaMeters = !this.areaMeters;
   }
 }
