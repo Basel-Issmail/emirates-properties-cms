@@ -134,16 +134,6 @@
                                     class="fab-secondary" color="secondary">
                                     <i class="material-icons">delete</i>
                                 </button>
-                                <button (click)="changeStatus([row], 'reminder', 1)" *ngIf="tab !== 'remind'"
-                                    matTooltip="Add selected to remind" mat-icon-button class="fab-secondary"
-                                    color="secondary">
-                                    <i class="material-icons">alarm_on</i>
-                                </button>
-                                <button (click)="changeStatus([row], 'reminder', 0)"
-                                    matTooltip="Remove selected to remind" mat-icon-button class="fab-secondary"
-                                    color="secondary">
-                                    <i class="material-icons">alarm_off</i>
-                                </button>
                             </span>
                         </td>
                     </ng-container>
