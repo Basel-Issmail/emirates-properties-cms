@@ -209,7 +209,7 @@ export class PropertyFormComponent implements OnInit {
       images: this.images,
       floor_plans: this.floorPlans,
       videos: this.videos,
-      area: (this.areaMeters) ? +this.propertiesFormControl.area.value * 10.763910417 : (+this.propertiesFormControl.area.value == 0) ? 0 : +this.propertiesFormControl.area.value / 10.763910417
+      area: (this.areaMeters) ? +this.propertiesFormControl.area.value : (+this.propertiesFormControl.area.value == 0) ? 0 : +this.propertiesFormControl.area.value / 10.763910417
     }
   }
 
