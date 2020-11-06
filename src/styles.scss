@@ -105,8 +105,16 @@ body {
       width: 100%;
     }
 
-    td {
-      padding-right: 8px;
+    table {
+      tr {
+        display: flex;
+        flex-wrap: wrap;
+      }
+
+      td {
+        flex: 1;
+        padding-right: 8px;
+      }
     }
 
     .form-submit {
@@ -154,16 +162,17 @@ body {
 .form-row {
   display: flex;
   justify-content: center;
+  flex-wrap: wrap;
 
   .form-left_col {
     flex: 1;
-    flex-basis: 60%;
+    flex-basis: calc(60% - 1rem);
     margin-right: 1rem;
   }
 
   .form-right_col {
     flex: 1;
-    flex-basis: 40%;
+    flex-basis: calc(40% - 1rem);
     margin-left: 1rem;
 
     .form-toggle {
