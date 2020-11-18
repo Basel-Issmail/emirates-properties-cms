@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
+  isPassVisible = false;
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email,]],
     password: ['', Validators.required],

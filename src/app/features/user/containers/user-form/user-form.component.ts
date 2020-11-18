@@ -14,6 +14,7 @@ import { UserApis } from '../../user.constants';
   styleUrls: ['./user-form.component.scss']
 })
 export class UserFormComponent implements OnInit {
+  isPassVisible = false;
   userForm: FormGroup;
   emptyUserObj = { active: true, first_name: '', last_name: '', email: '', password: '', role: '', mobile: '' };
   formType = null;

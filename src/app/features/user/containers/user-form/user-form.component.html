@@ -63,7 +63,11 @@
                             <td *ngIf="formType.type === FormTypes.add">
                                 <mat-form-field class="form-field">
                                     <mat-label>Password *</mat-label>
-                                    <input matInput formControlName="password">
+                                    <input [type]="isPassVisible? 'text': 'password'" matInput formControlName="password">
+                                    <button type="button" mat-button matSuffix mat-icon-button
+                                        (click)="isPassVisible = !isPassVisible">
+                                        <mat-icon>{{isPassVisible? 'visibility':'visibility_off'}}</mat-icon>
+                                    </button>
                                     <mat-error *ngIf="userFormControl.password.hasError('required')">
                                         Password is <strong>required</strong>
                                     </mat-error>

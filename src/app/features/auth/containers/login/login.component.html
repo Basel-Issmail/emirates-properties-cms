@@ -12,7 +12,10 @@
     </mat-form-field>
     <mat-form-field>
         <mat-label>Password</mat-label>
-        <input type="password" matInput formControlName="password">
+        <input [type]="isPassVisible? 'text': 'password'" matInput formControlName="password">
+        <button type="button" mat-button matSuffix mat-icon-button (click)="isPassVisible = !isPassVisible">
+            <mat-icon>{{isPassVisible? 'visibility':'visibility_off'}}</mat-icon>
+        </button>
         <mat-error *ngIf="loginFormControl.password.hasError('required')">
             Password is <strong>required</strong>
         </mat-error>
