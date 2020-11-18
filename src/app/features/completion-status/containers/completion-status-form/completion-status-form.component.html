@@ -7,19 +7,11 @@
             <h1 class="epform-title">Completion status</h1>
         </div>
         <div *ngIf="formType.type === FormTypes.add">
-            <button type="submit" mat-stroked-button color="primary" (click)="saveAsDraft(formDirective)">Save as
-                draft</button>
             <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary"
                 (click)="addNew(formDirective)">Add new completion status</button>
         </div>
         <div *ngIf="formType.type === FormTypes.edit">
             <button type="submit" mat-flat-button color="primary" (click)="edit()">Edit completion status</button>
-        </div>
-        <div *ngIf="formType.type === FormTypes.editDraft">
-            <button type="submit" mat-stroked-button color="primary" (click)="editDraft()">Edit draft completion
-                status</button>
-            <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary" (click)="publish()">Publish
-                completion status</button>
         </div>
     </div>
 

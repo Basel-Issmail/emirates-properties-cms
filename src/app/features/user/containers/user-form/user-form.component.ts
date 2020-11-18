@@ -68,11 +68,6 @@ export class UserFormComponent implements OnInit {
         }))
         .subscribe(x => this.userForm.patchValue(x));
     }
-    if (this.formType.type === FormTypes.editDraft) {
-      this.sharedCrudService.getDraftItemDetails(UserApis.getDraftDetails, this.formType.id)
-        .pipe(first())
-        .subscribe(x => this.userForm.patchValue(x));
-    }
   }
 
   get userFormControl() {
@@ -100,16 +95,6 @@ export class UserFormComponent implements OnInit {
     }
   }
 
-  saveAsDraft(formDirective: FormGroupDirective) {
-    if (this.userForm.valid) {
-      this.sharedCrudService.addItem(UserApis.addDraft, this.userForm.value)
-        .subscribe(response => {
-          formDirective.resetForm();
-          this.userForm.reset(this.emptyUserObj);
-        });
-    }
-  }
-
   edit() {
     if (this.userForm.valid) {
       this.sharedCrudService.editItem(UserApis.update, this.userEditValues, this.formType.id)
@@ -117,26 +102,4 @@ export class UserFormComponent implements OnInit {
         });
     }
   }
-
-  editDraft() {
-    if (this.userForm.valid) {
-      this.sharedCrudService.editItem(UserApis.updateDraft, this.userEditValues, this.formType.id)
-        .subscribe(response => {
-        });
-    }
-  }
-
-  publish() {
-    if (this.userForm.valid) {
-      this.sharedCrudService.addItem(UserApis.add, this.userForm.value)
-        .pipe(switchMap(addedItem =>
-          this.sharedCrudService.delete(UserApis.deleteDraft, [{ id: this.formType.id }])
-            .pipe(map(res => addedItem))
-        ))
-        .subscribe((response: any) => {
-          this.router.navigate([`/user/edit/${response.data.id}`])
-        });
-    }
-  }
-
 }

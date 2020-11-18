@@ -46,11 +46,6 @@ export class PropertyTypeCategoryFormComponent implements OnInit {
         .pipe(first())
         .subscribe(x => this.PropertyTypeCategoryForm.patchValue(x));
     }
-    if (this.formType.type === FormTypes.editDraft) {
-      this.sharedCrudService.getDraftItemDetails(PropertyTypeCategoryApis.getDraftDetails, this.formType.id)
-        .pipe(first())
-        .subscribe(x => this.PropertyTypeCategoryForm.patchValue(x));
-    }
   }
 
   get PropertyTypeCategoryFormControl() {
@@ -67,16 +62,6 @@ export class PropertyTypeCategoryFormComponent implements OnInit {
     }
   }
 
-  saveAsDraft(formDirective: FormGroupDirective) {
-    if (this.PropertyTypeCategoryForm.valid) {
-      this.sharedCrudService.addItem(PropertyTypeCategoryApis.addDraft, this.PropertyTypeCategoryForm.value)
-        .subscribe(response => {
-          formDirective.resetForm();
-          this.PropertyTypeCategoryForm.reset(this.emptyPropertyTypeCategoryObj);
-        });
-    }
-  }
-
   edit() {
     if (this.PropertyTypeCategoryForm.valid) {
       this.sharedCrudService.editItem(PropertyTypeCategoryApis.update, this.PropertyTypeCategoryForm.value, this.formType.id)
@@ -84,22 +69,4 @@ export class PropertyTypeCategoryFormComponent implements OnInit {
         });
     }
   }
-
-  editDraft() {
-    if (this.PropertyTypeCategoryForm.valid) {
-      this.sharedCrudService.editItem(PropertyTypeCategoryApis.updateDraft, this.PropertyTypeCategoryForm.value, this.formType.id)
-        .subscribe(response => {
-        });
-    }
-  }
-
-  publish() {
-    if (this.PropertyTypeCategoryForm.valid) {
-      this.sharedCrudService.publish(PropertyTypeCategoryApis.add, PropertyTypeCategoryApis.deleteDraft, this.PropertyTypeCategoryForm.value, this.formType.id)
-        .subscribe((response: any) => {
-          this.router.navigate([`/property-type-category/edit/${response.data.id}`])
-        });
-    }
-  }
-
 }

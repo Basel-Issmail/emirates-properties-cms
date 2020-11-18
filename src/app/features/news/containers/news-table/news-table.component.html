@@ -1,12 +1,12 @@
 <div class="datatable">
 
     <div class="actions-container">
-        <button [routerLink]="['/news/add']" matTooltip="Add new Item" mat-fab class="action-main">
+        <button [routerLink]="['/blog/add']" matTooltip="Add new Item" mat-fab class="action-main">
             <i class="material-icons">add</i>
         </button>
         <div *ngIf="selection.hasValue()">
             <span *ngIf="tab === 'draft'">
-                <button [routerLink]="['/news/edit-draft/' + selection.selected[0].id]"
+                <button [routerLink]="['/blog/edit-draft/' + selection.selected[0].id]"
                     *ngIf="selection.selected.length === 1" matTooltip="edit selected draft" mat-mini-fab
                     class="fab-secondary" color="secondary">
                     <i class="material-icons">edit</i>
@@ -19,7 +19,7 @@
 
 
             <span *ngIf="tab !== 'draft'">
-                <button [routerLink]="['/news/edit/' + selection.selected[0].id]"
+                <button [routerLink]="['/blog/edit/' + selection.selected[0].id]"
                     *ngIf="tab === 'all' && selection.selected.length === 1" matTooltip="edit selected" mat-mini-fab
                     class="fab-secondary" color="secondary">
                     <i class="material-icons">edit</i>
@@ -109,7 +109,7 @@
                         <th mat-header-cell *matHeaderCellDef></th>
                         <td mat-cell *matCellDef="let row">
                             <span *ngIf="tab !== 'draft'">
-                                <button [routerLink]="['/news/edit/' + row.id]" *ngIf="tab === 'all'"
+                                <button [routerLink]="['/blog/edit/' + row.id]" *ngIf="tab === 'all'"
                                     matTooltip="edit selected" mat-icon-button class="fab-secondary" color="secondary">
                                     <i class="material-icons">edit</i>
                                 </button>

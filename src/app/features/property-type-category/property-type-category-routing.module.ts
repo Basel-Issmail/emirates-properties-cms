@@ -7,7 +7,6 @@ const routes: Routes = [
   { path: '', component: PropertyTypeCategoryTableComponent },
   { path: 'add', component: PropertyTypeCategoryFormComponent },
   { path: 'edit/:id', component: PropertyTypeCategoryFormComponent },
-  { path: 'edit-draft/:id', component: PropertyTypeCategoryFormComponent },
 ];
 
 @NgModule({

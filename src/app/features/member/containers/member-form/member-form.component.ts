@@ -92,12 +92,6 @@ export class MemberFormComponent implements OnInit {
           this.memberForm.patchValue(x);
         });
     }
-
-    if (this.formType.type === FormTypes.editDraft) {
-      this.sharedCrudService.getDraftItemDetails(MemberApis.getDraftDetails, this.formType.id)
-        .pipe(first())
-        .subscribe(x => this.memberForm.patchValue(x));
-    }
   }
 
   get memberFormControl() {

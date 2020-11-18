@@ -9,7 +9,6 @@ const routes: Routes = [
   { path: '', component: AmenityTableComponent },
   { path: 'add', component: AmenityFormComponent, resolve: { buidler: BuilderResolverService }, data: { builderAPI: AmenityApis.builder } },
   { path: 'edit/:id', component: AmenityFormComponent, resolve: { buidler: BuilderResolverService }, data: { builderAPI: AmenityApis.builder } },
-  { path: 'edit-draft/:id', component: AmenityFormComponent, resolve: { buidler: BuilderResolverService }, data: { builderAPI: AmenityApis.builder } },
 ];
 
 @NgModule({

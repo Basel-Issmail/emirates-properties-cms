@@ -9,7 +9,6 @@ const routes: Routes = [
   { path: '', component: PropertyTypeTableComponent },
   { path: 'add', component: PropertyTypeFormComponent, resolve: { buidler: BuilderResolverService }, data: { builderAPI: PropertyTypeApis.builder } },
   { path: 'edit/:id', component: PropertyTypeFormComponent, resolve: { buidler: BuilderResolverService }, data: { builderAPI: PropertyTypeApis.builder } },
-  { path: 'edit-draft/:id', component: PropertyTypeFormComponent, resolve: { buidler: BuilderResolverService }, data: { builderAPI: PropertyTypeApis.builder } },
 ];
 
 @NgModule({

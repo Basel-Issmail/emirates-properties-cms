@@ -51,11 +51,6 @@ export class CompaniesFormComponent implements OnInit {
         .pipe(first())
         .subscribe(x => this.companyForm.patchValue(x));
     }
-    if (this.formType.type === FormTypes.editDraft) {
-      this.sharedCrudService.getDraftItemDetails(CompaniesApis.getDraftDetails, this.formType.id)
-        .pipe(first())
-        .subscribe(x => this.companyForm.patchValue(x));
-    }
   }
 
   get companyFormControl() {
@@ -80,38 +75,10 @@ export class CompaniesFormComponent implements OnInit {
     }
   }
 
-  saveAsDraft(formDirective: FormGroupDirective) {
-    if (this.companyForm.valid) {
-      this.sharedCrudService.addItem(CompaniesApis.addDraft, this.prcessedData)
-        .subscribe(response => {
-          formDirective.resetForm();
-          this.companyForm.reset(this.emptyCompanyObj);
-          this.imageUploader.deleteAll();
-        });
-    }
-  }
-
   edit() {
     if (this.companyForm.valid) {
       this.sharedCrudService.editItem(CompaniesApis.update, this.prcessedData, this.formType.id)
         .subscribe(response => {
-        });
-    }
-  }
-
-  editDraft() {
-    if (this.companyForm.valid) {
-      this.sharedCrudService.editItem(CompaniesApis.updateDraft, this.prcessedData, this.formType.id)
-        .subscribe(response => {
-        });
-    }
-  }
-
-  publish() {
-    if (this.companyForm.valid) {
-      this.sharedCrudService.publish(CompaniesApis.add, CompaniesApis.deleteDraft, this.prcessedData, this.formType.id)
-        .subscribe((response: any) => {
-          this.router.navigate([`/companies/edit/${response.data.id}`])
         });
     }
   }

@@ -94,11 +94,6 @@ export class PagesFormComponent implements OnInit {
         }))
         .subscribe(x => this.pagesForm.patchValue(x));
     }
-    if (this.formType.type === FormTypes.editDraft) {
-      this.sharedCrudService.getDraftItemDetails(PagesApis.getDraftDetails, this.formType.id)
-        .pipe(first())
-        .subscribe(x => this.pagesForm.patchValue(x));
-    }
   }
 
   get pagesFormControl() {
@@ -125,38 +120,10 @@ export class PagesFormComponent implements OnInit {
     }
   }
 
-  saveAsDraft(formDirective: FormGroupDirective) {
-    if (this.pagesForm.valid) {
-      this.sharedCrudService.addItem(PagesApis.addDraft, this.prcessedData)
-        .subscribe(response => {
-          formDirective.resetForm();
-          this.pagesForm.reset(this.emptyPagesObj);
-          this.imageUploader.deleteAll();
-        });
-    }
-  }
-
   edit() {
     if (this.pagesForm.valid) {
       this.sharedCrudService.editItem(PagesApis.update, this.prcessedData, this.formType.id)
         .subscribe(response => {
-        });
-    }
-  }
-
-  editDraft() {
-    if (this.pagesForm.valid) {
-      this.sharedCrudService.editItem(PagesApis.updateDraft, this.prcessedData, this.formType.id)
-        .subscribe(response => {
-        });
-    }
-  }
-
-  publish() {
-    if (this.pagesForm.valid) {
-      this.sharedCrudService.publish(PagesApis.add, PagesApis.deleteDraft, this.prcessedData, this.formType.id)
-        .subscribe((response: any) => {
-          this.router.navigate([`/pages/edit/${response.data.id}`])
         });
     }
   }

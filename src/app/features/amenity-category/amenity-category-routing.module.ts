@@ -6,8 +6,7 @@ import { AmenityCategoryFormComponent } from './containers/amenity-category-form
 const routes: Routes = [
   { path: '', component: AmenityCategoryTableComponent },
   { path: 'add', component: AmenityCategoryFormComponent },
-  { path: 'edit/:id', component: AmenityCategoryFormComponent },
-  { path: 'edit-draft/:id', component: AmenityCategoryFormComponent },
+  { path: 'edit/:id', component: AmenityCategoryFormComponent }
 ];
 
 @NgModule({

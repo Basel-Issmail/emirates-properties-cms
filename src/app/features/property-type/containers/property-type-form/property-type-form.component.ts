@@ -48,11 +48,6 @@ export class PropertyTypeFormComponent implements OnInit {
         .pipe(first())
         .subscribe(x => this.propertyTypeForm.patchValue(x));
     }
-    if (this.formType.type === FormTypes.editDraft) {
-      this.sharedCrudService.getDraftItemDetails(PropertyTypeApis.getDraftDetails, this.formType.id)
-        .pipe(first())
-        .subscribe(x => this.propertyTypeForm.patchValue(x));
-    }
   }
 
   get propertyTypeFormControl() {
@@ -69,37 +64,10 @@ export class PropertyTypeFormComponent implements OnInit {
     }
   }
 
-  saveAsDraft(formDirective: FormGroupDirective) {
-    if (this.propertyTypeForm.valid) {
-      this.sharedCrudService.addItem(PropertyTypeApis.addDraft, this.propertyTypeForm.value)
-        .subscribe(response => {
-          formDirective.resetForm();
-          this.propertyTypeForm.reset(this.emptyPropertyTypeObj);
-        });
-    }
-  }
-
   edit() {
     if (this.propertyTypeForm.valid) {
       this.sharedCrudService.editItem(PropertyTypeApis.update, this.propertyTypeForm.value, this.formType.id)
         .subscribe(response => {
-        });
-    }
-  }
-
-  editDraft() {
-    if (this.propertyTypeForm.valid) {
-      this.sharedCrudService.editItem(PropertyTypeApis.updateDraft, this.propertyTypeForm.value, this.formType.id)
-        .subscribe(response => {
-        });
-    }
-  }
-
-  publish() {
-    if (this.propertyTypeForm.valid) {
-      this.sharedCrudService.publish(PropertyTypeApis.add, PropertyTypeApis.deleteDraft, this.propertyTypeForm.value, this.formType.id)
-        .subscribe((response: any) => {
-          this.router.navigate([`/property-type/edit/${response.data.id}`])
         });
     }
   }

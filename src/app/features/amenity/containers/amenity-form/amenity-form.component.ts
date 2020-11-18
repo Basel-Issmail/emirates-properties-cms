@@ -59,11 +59,6 @@ export class AmenityFormComponent implements OnInit {
         .pipe(first())
         .subscribe(x => this.amenityForm.patchValue(x));
     }
-    if (this.formType.type === FormTypes.editDraft) {
-      this.sharedCrudService.getDraftItemDetails(AmenityApis.getDraftDetails, this.formType.id)
-        .pipe(first())
-        .subscribe(x => this.amenityForm.patchValue(x));
-    }
   }
 
   get amenityFormControl() {
@@ -90,43 +85,11 @@ export class AmenityFormComponent implements OnInit {
     }
   }
 
-  saveAsDraft(formDirective: FormGroupDirective) {
-    this.isSubmitted = true;
-    if (this.amenityForm.valid && this.prcessedData.icon) {
-      this.sharedCrudService.addItem(AmenityApis.addDraft, this.prcessedData)
-        .subscribe(response => {
-          formDirective.resetForm();
-          this.amenityForm.reset(this.emptyAmenityObj);
-          this.imageUploader.deleteAll();
-          this.isSubmitted = false;
-        });
-    }
-  }
-
   edit() {
     this.isSubmitted = true;
     if (this.amenityForm.valid && this.prcessedData.icon) {
       this.sharedCrudService.editItem(AmenityApis.update, this.prcessedData, this.formType.id)
         .subscribe(response => {
-        });
-    }
-  }
-
-  editDraft() {
-    this.isSubmitted = true;
-    if (this.amenityForm.valid && this.prcessedData.icon) {
-      this.sharedCrudService.editItem(AmenityApis.updateDraft, this.prcessedData, this.formType.id)
-        .subscribe(response => {
-        });
-    }
-  }
-
-  publish() {
-    this.isSubmitted = true;
-    if (this.amenityForm.valid && this.prcessedData.icon) {
-      this.sharedCrudService.publish(AmenityApis.add, AmenityApis.deleteDraft, this.prcessedData, this.formType.id)
-        .subscribe((response: any) => {
-          this.router.navigate([`/amenity/edit/${response.data.id}`])
         });
     }
   }

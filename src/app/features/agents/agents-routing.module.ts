@@ -8,8 +8,7 @@ import { AgentsApis } from './agents.constants';
 const routes: Routes = [
   { path: '', component: AgentsTableComponent },
   { path: 'add', component: AgentsFormComponent, resolve: { buidler: BuilderResolverService }, data: { builderAPI: AgentsApis.builder } },
-  { path: 'edit/:id', component: AgentsFormComponent, resolve: { buidler: BuilderResolverService }, data: { builderAPI: AgentsApis.builder } },
-  { path: 'edit-draft/:id', component: AgentsFormComponent, resolve: { buidler: BuilderResolverService }, data: { builderAPI: AgentsApis.builder } }
+  { path: 'edit/:id', component: AgentsFormComponent, resolve: { buidler: BuilderResolverService }, data: { builderAPI: AgentsApis.builder } }
 ];
 
 @NgModule({

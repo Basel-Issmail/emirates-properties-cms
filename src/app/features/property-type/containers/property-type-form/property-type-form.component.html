@@ -7,17 +7,11 @@
             <h1 class="epform-title">Property types</h1>
         </div>
         <div *ngIf="formType.type === FormTypes.add">
-            <button type="submit" mat-stroked-button color="primary" (click)="saveAsDraft(formDirective)">Save as
-                draft</button>
             <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary"
                 (click)="addNew(formDirective)">Add new property type</button>
         </div>
         <div *ngIf="formType.type === FormTypes.edit">
             <button type="submit" mat-flat-button color="primary" (click)="edit()">Edit property type</button>
-        </div>
-        <div *ngIf="formType.type === FormTypes.editDraft">
-            <button type="submit" mat-stroked-button color="primary" (click)="editDraft()">Edit draft property type</button>       
-            <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary" (click)="publish()">Publish property type</button>
         </div>
     </div>
 

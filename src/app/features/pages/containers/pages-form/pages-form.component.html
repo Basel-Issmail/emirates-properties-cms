@@ -7,18 +7,11 @@
             <h1 class="epform-title">Pages</h1>
         </div>
         <div *ngIf="formType.type === FormTypes.add">
-            <button type="submit" mat-stroked-button color="primary" (click)="saveAsDraft(formDirective)">Save as
-                draft</button>
             <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary"
                 (click)="addNew(formDirective)">Add new Page</button>
         </div>
         <div *ngIf="formType.type === FormTypes.edit">
             <button type="submit" mat-flat-button color="primary" (click)="edit()">Edit Page</button>
-        </div>
-        <div *ngIf="formType.type === FormTypes.editDraft">
-            <button type="submit" mat-stroked-button color="primary" (click)="editDraft()">Edit draft Page</button>
-            <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary" (click)="publish()">Publish
-                Page</button>
         </div>
     </div>
 
@@ -98,8 +91,8 @@
                     <div>Media</div>
                 </div>
                 <div class="form">
-                    <ep-image-uploader #imageUploader [crop]="true" [aspectRatio]="1570 / 328" [buttonCaption]="'Select Image'"
-                        [url]="uploadPhoto" id="page-image" [pathPrefix]="imageBaseUrl"
+                    <ep-image-uploader #imageUploader [crop]="true" [aspectRatio]="1570 / 328"
+                        [buttonCaption]="'Select Image'" [url]="uploadPhoto" id="page-image" [pathPrefix]="imageBaseUrl"
                         (triggerChange)="getImage($event)" [max]="1"
                         [uploadedFiles]="(pagesFormControl.image.value)? [{path: pagesFormControl.image.value}] : []">
                     </ep-image-uploader>

@@ -6,8 +6,7 @@ import { CompaniesFormComponent } from './containers/companies-form/companies-fo
 const routes: Routes = [
   { path: '', component: CompaniesTableComponent },
   { path: 'add', component: CompaniesFormComponent },
-  { path: 'edit/:id', component: CompaniesFormComponent },
-  { path: 'edit-draft/:id', component: CompaniesFormComponent }
+  { path: 'edit/:id', component: CompaniesFormComponent }
 ];
 
 @NgModule({

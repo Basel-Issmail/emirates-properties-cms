@@ -45,11 +45,6 @@ export class AmenityCategoryFormComponent implements OnInit {
         .pipe(first())
         .subscribe(x => this.amenityCategoryForm.patchValue(x));
     }
-    if (this.formType.type === FormTypes.editDraft) {
-      this.sharedCrudService.getDraftItemDetails(AmenityCategoryApis.getDraftDetails, this.formType.id)
-        .pipe(first())
-        .subscribe(x => this.amenityCategoryForm.patchValue(x));
-    }
   }
 
   get amenityCategoryFormControl() {
@@ -66,37 +61,10 @@ export class AmenityCategoryFormComponent implements OnInit {
     }
   }
 
-  saveAsDraft(formDirective: FormGroupDirective) {
-    if (this.amenityCategoryForm.valid) {
-      this.sharedCrudService.addItem(AmenityCategoryApis.addDraft, this.amenityCategoryForm.value)
-        .subscribe(response => {
-          formDirective.resetForm();
-          this.amenityCategoryForm.reset(this.emptyAmenityObj);
-        });
-    }
-  }
-
   edit() {
     if (this.amenityCategoryForm.valid) {
       this.sharedCrudService.editItem(AmenityCategoryApis.update, this.amenityCategoryForm.value, this.formType.id)
         .subscribe(response => {
-        });
-    }
-  }
-
-  editDraft() {
-    if (this.amenityCategoryForm.valid) {
-      this.sharedCrudService.editItem(AmenityCategoryApis.updateDraft, this.amenityCategoryForm.value, this.formType.id)
-        .subscribe(response => {
-        });
-    }
-  }
-
-  publish() {
-    if (this.amenityCategoryForm.valid) {
-      this.sharedCrudService.publish(AmenityCategoryApis.add, AmenityCategoryApis.deleteDraft, this.amenityCategoryForm.value, this.formType.id)
-        .subscribe((response: any) => {
-          this.router.navigate([`/amenity-category/edit/${response.data.id}`])
         });
     }
   }

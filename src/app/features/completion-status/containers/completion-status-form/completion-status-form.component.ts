@@ -38,11 +38,6 @@ export class CompletionStatusFormComponent implements OnInit {
         .pipe(first())
         .subscribe(x => this.completionStatusForm.patchValue(x));
     }
-    if (this.formType.type === FormTypes.editDraft) {
-      this.sharedCrudService.getDraftItemDetails(CompletionStatusApis.getDraftDetails, this.formType.id)
-        .pipe(first())
-        .subscribe(x => this.completionStatusForm.patchValue(x));
-    }
   }
 
   get completionStatusFormControl() {
@@ -59,16 +54,6 @@ export class CompletionStatusFormComponent implements OnInit {
     }
   }
 
-  saveAsDraft(formDirective: FormGroupDirective) {
-    if (this.completionStatusForm.valid) {
-      this.sharedCrudService.addItem(CompletionStatusApis.addDraft, this.completionStatusForm.value)
-        .subscribe(response => {
-          formDirective.resetForm();
-          this.completionStatusForm.reset(this.emptyCompletionStatusObj);
-        });
-    }
-  }
-
   edit() {
     if (this.completionStatusForm.valid) {
       this.sharedCrudService.editItem(CompletionStatusApis.update, this.completionStatusForm.value, this.formType.id)
@@ -76,22 +61,4 @@ export class CompletionStatusFormComponent implements OnInit {
         });
     }
   }
-
-  editDraft() {
-    if (this.completionStatusForm.valid) {
-      this.sharedCrudService.editItem(CompletionStatusApis.updateDraft, this.completionStatusForm.value, this.formType.id)
-        .subscribe(response => {
-        });
-    }
-  }
-
-  publish() {
-    if (this.completionStatusForm.valid) {
-      this.sharedCrudService.publish(CompletionStatusApis.add, CompletionStatusApis.deleteDraft, this.completionStatusForm.value, this.formType.id)
-        .subscribe((response: any) => {
-          this.router.navigate([`/completion-status/edit/${response.data.id}`])
-        });
-    }
-  }
-
 }

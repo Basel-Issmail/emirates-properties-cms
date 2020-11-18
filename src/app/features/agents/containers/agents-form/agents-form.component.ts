@@ -88,12 +88,6 @@ export class AgentsFormComponent implements OnInit {
           this.agentForm.patchValue(x);
         });
     }
-
-    if (this.formType.type === FormTypes.editDraft) {
-      this.sharedCrudService.getDraftItemDetails(AgentsApis.getDraftDetails, this.formType.id)
-        .pipe(first())
-        .subscribe(x => this.agentForm.patchValue(x));
-    }
   }
 
   get agentFormControl() {
@@ -114,37 +108,10 @@ export class AgentsFormComponent implements OnInit {
     }
   }
 
-  saveAsDraft(formDirective: FormGroupDirective) {
-    if (this.agentForm.valid) {
-      this.sharedCrudService.addItem(AgentsApis.addDraft, this.prcessedData)
-        .subscribe(response => {
-          formDirective.resetForm();
-          this.agentForm.reset(this.emptyAgentObj);
-        });
-    }
-  }
-
   edit() {
     if (this.agentForm.valid) {
       this.sharedCrudService.editItem(AgentsApis.update, this.prcessedData, this.formType.id)
         .subscribe(response => {
-        });
-    }
-  }
-
-  editDraft() {
-    if (this.agentForm.valid) {
-      this.sharedCrudService.editItem(AgentsApis.updateDraft, this.prcessedData, this.formType.id)
-        .subscribe(response => {
-        });
-    }
-  }
-
-  publish() {
-    if (this.agentForm.valid) {
-      this.sharedCrudService.publish(AgentsApis.add, AgentsApis.deleteDraft, this.agentForm.value, this.formType.id)
-        .subscribe((response: any) => {
-          this.router.navigate([`/agents/edit/${response.data.id}`])
         });
     }
   }

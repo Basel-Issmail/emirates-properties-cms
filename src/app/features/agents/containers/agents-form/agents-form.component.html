@@ -7,17 +7,11 @@
             <h1 class="epform-title">Agents</h1>
         </div>
         <div *ngIf="formType.type === FormTypes.add">
-            <button type="submit" mat-stroked-button color="primary" (click)="saveAsDraft(formDirective)">Save as
-                draft</button>
             <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary"
                 (click)="addNew(formDirective)">Add new agent</button>
         </div>
         <div *ngIf="formType.type === FormTypes.edit">
             <button type="submit" mat-flat-button color="primary" (click)="edit()">Edit agent</button>
-        </div>
-        <div *ngIf="formType.type === FormTypes.editDraft">
-            <button type="submit" mat-stroked-button color="primary" (click)="editDraft()">Edit draft agent</button>       
-            <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary" (click)="publish()">Publish agent</button>
         </div>
     </div>
 
@@ -56,8 +50,10 @@
                             <td>
                                 <mat-form-field class="form-field">
                                     <mat-label>Experience since</mat-label>
-                                    <input matInput [matDatepicker]="experiencedSincePicker" formControlName="experienced_since">
-                                    <mat-datepicker-toggle matSuffix [for]="experiencedSincePicker"></mat-datepicker-toggle>
+                                    <input matInput [matDatepicker]="experiencedSincePicker"
+                                        formControlName="experienced_since">
+                                    <mat-datepicker-toggle matSuffix [for]="experiencedSincePicker">
+                                    </mat-datepicker-toggle>
                                     <mat-datepicker #experiencedSincePicker></mat-datepicker>
                                 </mat-form-field>
                             </td>
