@@ -25,7 +25,6 @@ export class RegisterComponent implements OnInit {
   onSubmit() {
     if (this.registerationForm.valid) {
       alert('Form Submitted succesfully!!!\n Check the values in browser console.');
-      console.table(this.registerationForm.value);
     }
   }
 }

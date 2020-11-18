@@ -23,9 +23,6 @@ export class AuthService {
       this.user = response['user'];
       return response;
     }), catchError(error => {
-      this._snackBar.open('Invalid email or password', '', {
-        duration: 2000,
-      });
       return error;
     }))
   }

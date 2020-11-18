@@ -80,10 +80,14 @@ export class ApiInterceptor implements HttpInterceptor {
 
   handleError(error) {
     console.log(error);
+    console.log(error.error.message);
+    
+    if(error.url == 'https://epapi.clicemails.com/api/auth/me') return false;
 
     let message = 'Something went wrong, try again later.';
-    if (error.message) message = error.message;
     if (error.error && error.error.message) message = error.error.message;
+    else if (error.error && error.error.error) message = error.error.error;
+    else if (error.message) message = error.message;
     this._snackBar.openFromComponent(FlashMessageComponent, {
       duration: 5000,
       panelClass: ["flash-error"],

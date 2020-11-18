@@ -21,9 +21,6 @@ export class AuthGuard implements CanActivate {
         return false;
       }),
       catchError(() => {
-        this._snackBar.open('Not Authorized', '', {
-          duration: 2000,
-        });
         return of(true);
       })
     );

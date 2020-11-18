@@ -30,7 +30,6 @@ export class LoginComponent implements OnInit {
         response => {
           this.router.navigate(['/'])
         });
-      console.table(this.loginForm.value);
     }
   }
 

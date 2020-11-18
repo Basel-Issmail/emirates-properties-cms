@@ -23,7 +23,6 @@ export class ResetPasswordComponent implements OnInit {
   onSubmit() {
     if (this.resetPasswordForm.valid) {
       alert('Form Submitted succesfully!!!\n Check the values in browser console.');
-      console.table(this.resetPasswordForm.value);
     }
   }
 }

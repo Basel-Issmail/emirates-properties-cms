@@ -22,7 +22,6 @@ export class ForgotPasswordComponent implements OnInit {
   onSubmit() {
     if (this.forgotPasswordForm.valid) {
       alert('Form Submitted succesfully!!!\n Check the values in browser console.');
-      console.table(this.forgotPasswordForm.value);
     }
   }
 
