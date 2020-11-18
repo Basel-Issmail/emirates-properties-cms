@@ -28,8 +28,7 @@ export class NewsTableComponent implements AfterViewInit {
   tabs = [
     { value: 'all', label: 'All', icon: 'done_all' },
     
-    { value: 'draft', label: 'Drafts', icon: 'drafts' },
-    { value: 'delete', label: 'Deleted', icon: 'delete_outline' }]
+    { value: 'draft', label: 'Drafts', icon: 'drafts' }]
   selectedTab = new Subject<string>();
   changedData = new Subject<any>();
   resultsLength = 0;
@@ -90,19 +89,13 @@ export class NewsTableComponent implements AfterViewInit {
     this.displayedColumns = this.columns.cols.filter(val => this.columns[val].isShown);
   }
 
-  delete(selected) {
-    this.sharedCrudService.delete(NewsApis.delete, selected).subscribe(response => {
-      this.changedData.next();
-    })
-  }
-
   deleteDraft(selected) {
     this.sharedCrudService.delete(NewsApis.deleteDraft, selected).subscribe(response => {
       this.changedData.next();
     })
   }
 
-  deleteForever(selected) {
+  delete(selected) {
     this.sharedCrudService.delete(NewsApis.deleteForever, selected).subscribe(response => {
       this.changedData.next();
     })
@@ -114,9 +107,4 @@ export class NewsTableComponent implements AfterViewInit {
     })
   }
 
-  restore(selected) {
-    this.sharedCrudService.restore(NewsApis.restore, selected).subscribe(response => {
-      this.changedData.next();
-    })
-  }
 }

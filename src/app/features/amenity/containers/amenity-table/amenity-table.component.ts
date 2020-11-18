@@ -27,11 +27,7 @@ export class AmenityTableComponent implements AfterViewInit {
   data: any[] = [];
   tab: any = 'all';
   tabs = [
-    { value: 'all', label: 'All', icon: 'done_all' },
-    
-    { value: 'draft', label: 'Drafts', icon: 'drafts' },
-    { value: 'delete', label: 'Deleted', icon: 'delete_outline' }]
-  selectedTab = new Subject<string>();
+    { value: 'all', label: 'All', icon: 'done_all' }]
   changedData = new Subject<any>();
   resultsLength = 0;
   isLoadingResults: boolean = true;
@@ -46,7 +42,7 @@ export class AmenityTableComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-    merge(this.sort.sortChange, this.paginator.page, this.selectedTab, this.changedData)
+    merge(this.sort.sortChange, this.paginator.page, this.changedData)
       .pipe(
         startWith({}),
         switchMap(() => {
@@ -81,29 +77,12 @@ export class AmenityTableComponent implements AfterViewInit {
       this.data.forEach(row => this.selection.select(row));
   }
 
-  setActiveTab(tab) {
-    this.tab = tab;
-    this.selectedTab.next(tab);
-  }
-
   toggleColumn(checkbox) {
     this.columns[checkbox.item].isShown = checkbox.event.checked;
     this.displayedColumns = this.columns.cols.filter(val => this.columns[val].isShown);
   }
 
   delete(selected) {
-    this.sharedCrudService.delete(AmenityApis.delete, selected).subscribe(response => {
-      this.changedData.next();
-    })
-  }
-
-  deleteDraft(selected) {
-    this.sharedCrudService.delete(AmenityApis.deleteDraft, selected).subscribe(response => {
-      this.changedData.next();
-    })
-  }
-
-  deleteForever(selected) {
     this.sharedCrudService.delete(AmenityApis.deleteForever, selected).subscribe(response => {
       this.changedData.next();
     })
@@ -115,9 +94,4 @@ export class AmenityTableComponent implements AfterViewInit {
     })
   }
 
-  restore(selected) {
-    this.sharedCrudService.restore(AmenityApis.restore, selected).subscribe(response => {
-      this.changedData.next();
-    })
-  }
 }

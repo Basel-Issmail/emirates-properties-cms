@@ -30,10 +30,7 @@ export class MemberTableComponent implements AfterViewInit {
   data: any[] = [];
   tab: any = 'all';
   tabs = [
-    { value: 'all', label: 'All', icon: 'done_all' },
-    
-    { value: 'delete', label: 'Deleted', icon: 'delete_outline' }]
-  selectedTab = new Subject<string>();
+    { value: 'all', label: 'All', icon: 'done_all' }]
   changedData = new Subject<any>();
   resultsLength = 0;
   isLoadingResults: boolean = true;
@@ -48,7 +45,7 @@ export class MemberTableComponent implements AfterViewInit {
   ngAfterViewInit() {
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-    merge(this.sort.sortChange, this.paginator.page, this.selectedTab, this.changedData)
+    merge(this.sort.sortChange, this.paginator.page, this.changedData)
       .pipe(
         startWith({}),
         switchMap(() => {
@@ -83,42 +80,13 @@ export class MemberTableComponent implements AfterViewInit {
       this.data.forEach(row => this.selection.select(row));
   }
 
-  setActiveTab(tab) {
-    this.tab = tab;
-    this.selectedTab.next(tab);
-  }
-
   toggleColumn(checkbox) {
     this.columns[checkbox.item].isShown = checkbox.event.checked;
     this.displayedColumns = this.columns.cols.filter(val => this.columns[val].isShown);
   }
 
-  delete(selected) {
-    this.sharedCrudService.delete(MemberApis.delete, selected).subscribe(response => {
-      this.changedData.next();
-    })
-  }
-
-  deleteDraft(selected) {
-    this.sharedCrudService.delete(MemberApis.deleteDraft, selected).subscribe(response => {
-      this.changedData.next();
-    })
-  }
-
-  deleteForever(selected) {
-    this.sharedCrudService.delete(MemberApis.deleteForever, selected).subscribe(response => {
-      this.changedData.next();
-    })
-  }
-
   changeStatus(selected, attribute, value) {
     this.sharedCrudService.changeAttribute(MemberApis.changeAttribute, selected, attribute, value).subscribe(response => {
-      this.changedData.next();
-    })
-  }
-
-  restore(selected) {
-    this.sharedCrudService.restore(MemberApis.restore, selected).subscribe(response => {
       this.changedData.next();
     })
   }

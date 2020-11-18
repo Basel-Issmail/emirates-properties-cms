@@ -5,20 +5,6 @@
             <i class="material-icons">add</i>
         </button>
         <div *ngIf="selection.hasValue()">
-
-            <span *ngIf="tab === 'delete'">
-                <button (click)="deleteForever(selection.selected)" matTooltip="Delete selected permanently"
-                    mat-mini-fab class="fab-secondary" color="secondary">
-                    <i class="material-icons">delete_forever</i>
-                </button>
-
-                <button (click)="restore(selection.selected)" matTooltip="Restore selected" mat-mini-fab
-                    class="fab-secondary" color="secondary">
-                    <i class="material-icons">restore</i>
-                </button>
-            </span>
-
-
             <span *ngIf="tab === 'draft'">
                 <button [routerLink]="['/property/edit-draft/' + selection.selected[0].id]"
                     *ngIf="selection.selected.length === 1" matTooltip="edit selected draft" mat-mini-fab
@@ -32,7 +18,7 @@
             </span>
 
 
-            <span *ngIf="tab !== 'delete' && tab !== 'draft'">
+            <span *ngIf="tab !== 'draft'">
                 <button [routerLink]="['/property/edit/' + selection.selected[0].id]"
                     *ngIf="selection.selected.length === 1" matTooltip="edit selected" mat-mini-fab
                     class="fab-secondary" color="secondary">
@@ -48,7 +34,7 @@
                 </button>
 
 
-                <button (click)="delete(selection.selected)" matTooltip="Delete selected" mat-mini-fab
+                <button (click)="deleteForever(selection.selected)" matTooltip="Delete selected" mat-mini-fab
                     class="fab-secondary" color="secondary">
                     <i class="material-icons">delete</i>
                 </button>
@@ -100,7 +86,9 @@
                         <th mat-header-cell *matHeaderCellDef></th>
                         <td mat-cell *matCellDef="let row">
                             <mat-chip-list *ngIf="tab === 'pending_approval' || tab === 'approved'">
-                                <mat-slide-toggle (click)="changeStatus([row], 'active', (row.active)? 0 : 1);$event.stopPropagation()" [checked]="(row.active)? true: false"></mat-slide-toggle>
+                                <mat-slide-toggle
+                                    (click)="changeStatus([row], 'active', (row.active)? 0 : 1);$event.stopPropagation()"
+                                    [checked]="(row.active)? true: false"></mat-slide-toggle>
                             </mat-chip-list>
 
                         </td>
@@ -127,7 +115,7 @@
 
                     <!-- Published by Column -->
                     <ng-container matColumnDef="published_by">
-                        <th mat-header-cell *matHeaderCellDef mat-sort-header>{{columns['published_by'].label}}</th>
+                        <th mat-header-cell *matHeaderCellDef>{{columns['published_by'].label}}</th>
                         <td mat-cell *matCellDef="let row">
                             {{(row.agent && row.agent.name)? 'Agent: ' + row.agent.name: (row.member && row.member.full_name)? 'Member: ' + row.member.full_name: '' }}
                         </td>
@@ -139,36 +127,23 @@
                     <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef></th>
                         <td mat-cell *matCellDef="let row">
-
-                            <span *ngIf="tab === 'delete'">
-                                <button (click)="deleteForever([row]);$event.stopPropagation()" matTooltip="Delete selected permanently"
-                                    mat-icon-button class="fab-secondary" color="secondary">
-                                    <i class="material-icons">delete_forever</i>
-                                </button>
-
-                                <button (click)="restore([row]);$event.stopPropagation()" matTooltip="Restore selected" mat-icon-button
-                                    class="fab-secondary" color="secondary">
-                                    <i class="material-icons">restore</i>
-                                </button>
-                            </span>
-
-
                             <span *ngIf="tab === 'draft'">
-                                <button (click)="deleteDraft([row]);$event.stopPropagation()" matTooltip="Delete selected" mat-icon-button
-                                    class="fab-secondary" color="secondary">
+                                <button (click)="deleteDraft([row]);$event.stopPropagation()"
+                                    matTooltip="Delete selected" mat-icon-button class="fab-secondary"
+                                    color="secondary">
                                     <i class="material-icons">delete</i>
                                 </button>
-                                <button [routerLink]="['/property/edit-draft/' + row.id]" (click)="$event.stopPropagation()"
-                                    matTooltip="edit selected draft" mat-icon-button class="fab-secondary"
-                                    color="secondary">
+                                <button [routerLink]="['/property/edit-draft/' + row.id]"
+                                    (click)="$event.stopPropagation()" matTooltip="edit selected draft" mat-icon-button
+                                    class="fab-secondary" color="secondary">
                                     <i class="material-icons">edit</i>
                                 </button>
                             </span>
 
 
-                            <span *ngIf="tab !== 'delete' && tab !== 'draft'">
-                                <button [routerLink]="['/property/edit/' + row.id]" (click)="$event.stopPropagation()" matTooltip="edit selected"
-                                    mat-icon-button class="fab-secondary" color="secondary">
+                            <span *ngIf="tab !== 'draft'">
+                                <button [routerLink]="['/property/edit/' + row.id]" (click)="$event.stopPropagation()"
+                                    matTooltip="edit selected" mat-icon-button class="fab-secondary" color="secondary">
                                     <i class="material-icons">edit</i>
                                 </button>
                                 <button *ngIf="tab !== 'approved'" (click)="approve([row]);$event.stopPropagation()"
@@ -176,23 +151,27 @@
                                     color="secondary">
                                     <i class="material-icons">thumb_up_alt</i>
                                 </button>
-                                <button *ngIf="tab !== 'pending_approval'" (click)="disapprove([row]);$event.stopPropagation()"
+                                <button *ngIf="tab !== 'pending_approval'"
+                                    (click)="disapprove([row]);$event.stopPropagation()"
                                     matTooltip="Disapprove selected" mat-icon-button class="fab-secondary"
                                     color="secondary">
                                     <i class="material-icons">thumb_down_alt</i>
                                 </button>
 
-                                <button (click)="delete([row]);$event.stopPropagation()" matTooltip="Delete selected" mat-icon-button
-                                    class="fab-secondary" color="secondary">
+                                <button (click)="deleteForever([row]);$event.stopPropagation()"
+                                    matTooltip="Delete selected" mat-icon-button class="fab-secondary"
+                                    color="secondary">
                                     <i class="material-icons">delete</i>
                                 </button>
 
-                                <button (click)="changeStatus([row], 'active', 1);$event.stopPropagation()" matTooltip="Mark selected as active"
-                                    mat-icon-button class="fab-secondary" color="secondary">
+                                <button (click)="changeStatus([row], 'active', 1);$event.stopPropagation()"
+                                    matTooltip="Mark selected as active" mat-icon-button class="fab-secondary"
+                                    color="secondary">
                                     <i class="material-icons">check_circle_outline</i>
                                 </button>
-                                <button (click)="changeStatus([row], 'active', 0);$event.stopPropagation()" matTooltip="Deactivate selected"
-                                    mat-icon-button class="fab-secondary" color="secondary">
+                                <button (click)="changeStatus([row], 'active', 0);$event.stopPropagation()"
+                                    matTooltip="Deactivate selected" mat-icon-button class="fab-secondary"
+                                    color="secondary">
                                     <i class="material-icons">highlight_off</i>
                                 </button>
                             </span>
@@ -211,7 +190,7 @@
                                 </div>
                                 <div style="padding: 2rem">
                                     <h2>{{element.title}}</h2>
-                                    <h3>{{element.type.name}}, {{cityObj[element.city]}}</h3>
+                                    <h3>{{element.type?.name}}, {{cityObj[element.city]}}</h3>
                                     <div style="display: flex;align-items: center;font-size: 1rem;margin-bottom: 1rem;">
                                         <div style="display: flex;align-items: center;font-size: 1.2rem;"><img
                                                 style="width: 30px;height: 30px" src="assets/images/bed.svg"

@@ -5,50 +5,20 @@
             <i class="material-icons">add</i>
         </button>
         <div *ngIf="selection.hasValue()">
-
-            <span *ngIf="tab === 'delete'">
-                <button (click)="deleteForever(selection.selected)" matTooltip="Delete selected permanently"
-                    mat-mini-fab class="fab-secondary" color="secondary">
-                    <i class="material-icons">delete_forever</i>
-                </button>
-
-                <button (click)="restore(selection.selected)" matTooltip="Restore selected" mat-mini-fab
-                    class="fab-secondary" color="secondary">
-                    <i class="material-icons">restore</i>
-                </button>
-            </span>
-
-
-            <span *ngIf="tab === 'draft'">
-                <button [routerLink]="['/property-type/edit-draft/' + selection.selected[0].id]"
-                    *ngIf="selection.selected.length === 1" matTooltip="edit selected draft" mat-mini-fab
-                    class="fab-secondary" color="secondary">
-                    <i class="material-icons">edit</i>
-                </button>
-                <button (click)="deleteDraft(selection.selected)" matTooltip="Delete selected" mat-mini-fab
-                    class="fab-secondary" color="secondary">
-                    <i class="material-icons">delete</i>
-                </button>
-            </span>
-
-
-            <span *ngIf="tab !== 'delete' && tab !== 'draft'">
-                <button [routerLink]="['/property-type/edit/' + selection.selected[0].id]"
-                    *ngIf="tab === 'all' && selection.selected.length === 1" matTooltip="edit selected" mat-mini-fab
-                    class="fab-secondary" color="secondary">
-                    <i class="material-icons">edit</i>
-                </button>
-                <button (click)="delete(selection.selected)" matTooltip="Delete selected" mat-mini-fab
-                    class="fab-secondary" color="secondary">
-                    <i class="material-icons">delete</i>
-                </button>
-
-            </span>
+            <button [routerLink]="['/property-type/edit/' + selection.selected[0].id]"
+                *ngIf="selection.selected.length === 1" matTooltip="edit selected" mat-mini-fab class="fab-secondary"
+                color="secondary">
+                <i class="material-icons">edit</i>
+            </button>
+            <button (click)="delete(selection.selected)" matTooltip="Delete selected" mat-mini-fab class="fab-secondary"
+                color="secondary">
+                <i class="material-icons">delete</i>
+            </button>
         </div>
     </div>
 
     <div class="datatable-container">
-        <ep-grid-tabs [tabs]="tabs" (selectedTab)="setActiveTab($event)" [activeTab]="tab"></ep-grid-tabs>
+        <ep-grid-tabs [tabs]="tabs" [activeTab]="tab"></ep-grid-tabs>
         <ep-grid-loading [isLoadingResults]="isLoadingResults"></ep-grid-loading>
 
 
@@ -104,43 +74,14 @@
                     <ng-container matColumnDef="actions">
                         <th mat-header-cell *matHeaderCellDef></th>
                         <td mat-cell *matCellDef="let row">
-
-                            <span *ngIf="tab === 'delete'">
-                                <button (click)="deleteForever([row])" matTooltip="Delete selected permanently"
-                                    mat-icon-button class="fab-secondary" color="secondary">
-                                    <i class="material-icons">delete_forever</i>
-                                </button>
-
-                                <button (click)="restore([row])" matTooltip="Restore selected" mat-icon-button
-                                    class="fab-secondary" color="secondary">
-                                    <i class="material-icons">restore</i>
-                                </button>
-                            </span>
-
-
-                            <span *ngIf="tab === 'draft'">
-                                <button (click)="deleteDraft([row])" matTooltip="Delete selected" mat-icon-button
-                                    class="fab-secondary" color="secondary">
-                                    <i class="material-icons">delete</i>
-                                </button>
-                                <button [routerLink]="['/property-type/edit-draft/' + row.id]"
-                                    matTooltip="edit selected draft" mat-icon-button class="fab-secondary"
-                                    color="secondary">
-                                    <i class="material-icons">edit</i>
-                                </button>
-                            </span>
-
-
-                            <span *ngIf="tab !== 'delete' && tab !== 'draft'">
-                                <button [routerLink]="['/property-type/edit/' + row.id]" *ngIf="tab === 'all'"
-                                    matTooltip="edit selected" mat-icon-button class="fab-secondary" color="secondary">
-                                    <i class="material-icons">edit</i>
-                                </button>
-                                <button (click)="delete([row])" matTooltip="Delete selected" mat-icon-button
-                                    class="fab-secondary" color="secondary">
-                                    <i class="material-icons">delete</i>
-                                </button>
-                            </span>
+                            <button [routerLink]="['/property-type/edit/' + row.id]" matTooltip="edit selected"
+                                mat-icon-button class="fab-secondary" color="secondary">
+                                <i class="material-icons">edit</i>
+                            </button>
+                            <button (click)="delete([row])" matTooltip="Delete selected" mat-icon-button
+                                class="fab-secondary" color="secondary">
+                                <i class="material-icons">delete</i>
+                            </button>
                         </td>
                     </ng-container>
 

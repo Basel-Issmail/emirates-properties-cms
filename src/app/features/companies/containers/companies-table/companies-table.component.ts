@@ -28,11 +28,7 @@ export class CompaniesTableComponent {
   data: any[] = [];
   tab: any = 'all';
   tabs = [
-    { value: 'all', label: 'All', icon: 'done_all' },
-    
-    { value: 'draft', label: 'Drafts', icon: 'drafts' },
-    { value: 'delete', label: 'Deleted', icon: 'delete_outline' }]
-  selectedTab = new Subject<string>();
+    { value: 'all', label: 'All', icon: 'done_all' }]
   changedData = new Subject<any>();
   resultsLength = 0;
   isLoadingResults: boolean = true;
@@ -47,7 +43,7 @@ export class CompaniesTableComponent {
   ngAfterViewInit() {
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
 
-    merge(this.sort.sortChange, this.paginator.page, this.selectedTab, this.changedData)
+    merge(this.sort.sortChange, this.paginator.page, this.changedData)
       .pipe(
         startWith({}),
         switchMap(() => {
@@ -82,26 +78,9 @@ export class CompaniesTableComponent {
       this.data.forEach(row => this.selection.select(row));
   }
 
-  setActiveTab(tab) {
-    this.tab = tab;
-    this.selectedTab.next(tab);
-  }
-
   toggleColumn(checkbox) {
     this.columns[checkbox.item].isShown = checkbox.event.checked;
     this.displayedColumns = this.columns.cols.filter(val => this.columns[val].isShown);
-  }
-
-  delete(selected) {
-    this.sharedCrudService.delete(CompaniesApis.delete, selected).subscribe(response => {
-      this.changedData.next();
-    })
-  }
-
-  deleteDraft(selected) {
-    this.sharedCrudService.delete(CompaniesApis.deleteDraft, selected).subscribe(response => {
-      this.changedData.next();
-    })
   }
 
   deleteForever(selected) {
@@ -112,12 +91,6 @@ export class CompaniesTableComponent {
 
   changeStatus(selected, attribute, value) {
     this.sharedCrudService.changeAttribute(CompaniesApis.changeAttribute, selected, attribute, value).subscribe(response => {
-      this.changedData.next();
-    })
-  }
-
-  restore(selected) {
-    this.sharedCrudService.restore(CompaniesApis.restore, selected).subscribe(response => {
       this.changedData.next();
     })
   }

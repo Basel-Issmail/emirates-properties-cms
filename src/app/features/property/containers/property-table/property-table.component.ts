@@ -42,8 +42,7 @@ export class PropertyTableComponent implements AfterViewInit {
   tabs = [
     { value: 'approved', label: 'Approved', icon: 'done_all' },
     { value: 'pending_approval', label: 'Pending Approval', icon: 'alarm' },
-    { value: 'draft', label: 'Drafts', icon: 'drafts' },
-    { value: 'delete', label: 'Deleted', icon: 'delete_outline' }]
+    { value: 'draft', label: 'Drafts', icon: 'drafts' }]
   selectedTab = new Subject<string>();
   changedData = new Subject<any>();
   resultsLength = 0;
@@ -112,12 +111,6 @@ export class PropertyTableComponent implements AfterViewInit {
     this.displayedColumns = this.columns.cols.filter(val => this.columns[val].isShown);
   }
 
-  delete(selected) {
-    this.sharedCrudService.delete(PropertyApis.delete, selected).subscribe(response => {
-      this.changedData.next();
-    })
-  }
-
   deleteDraft(selected) {
     this.sharedCrudService.delete(PropertyApis.deleteDraft, selected).subscribe(response => {
       this.changedData.next();
@@ -132,12 +125,6 @@ export class PropertyTableComponent implements AfterViewInit {
 
   changeStatus(selected, attribute, value) {
     this.sharedCrudService.changeAttribute(PropertyApis.changeAttribute, selected, attribute, value).subscribe(response => {
-      this.changedData.next();
-    })
-  }
-
-  restore(selected) {
-    this.sharedCrudService.restore(PropertyApis.restore, selected).subscribe(response => {
       this.changedData.next();
     })
   }
