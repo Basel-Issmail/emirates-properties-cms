@@ -3,4 +3,5 @@ export enum AuthApis {
     me = 'auth/me',
     logout = 'auth/logout',
     forgetPassword = 'auth/forget-password',
+    resetPassword = 'auth/reset-password'
 }
