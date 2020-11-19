@@ -20,7 +20,7 @@ export class NewsFormComponent implements OnInit {
   emptyNewsObj = { active: true, brief: '', content: '', date: '', meta_description: '', meta_keywords: '', meta_title: '', name: '', url: '', media: '' };
   formType = null;
   FormTypes = FormTypes;
-  
+
   @ViewChild('imageUploader') imageUploader;
 
   imageBaseUrl = environment.imageBaseUrl;
@@ -47,6 +47,22 @@ export class NewsFormComponent implements OnInit {
       name: ['', Validators.required],
       url: ['', Validators.required],
       media: [''],
+    });
+
+    // meta autofill
+    let processedName = '';
+    this.newsFormControl.name.valueChanges.subscribe(value => {
+      processedName = (value) ? value.replace(/[^a-zA-Z1-9 ]/g, '').replace(/ /g, '-') : '';
+      let url = processedName.toString().toLowerCase();
+      url = (processedName) ? processedName.toString().toLowerCase() : '';
+      this.newsFormControl.url.setValue(url);
+      this.newsFormControl.meta_title.setValue(value);
+    });
+
+
+    this.newsFormControl.brief.valueChanges.subscribe(value => {
+      value = value || '';
+      this.newsFormControl.meta_description.setValue(value.substring(0, 256));
     });
 
     if (this.formType.type === FormTypes.edit) {

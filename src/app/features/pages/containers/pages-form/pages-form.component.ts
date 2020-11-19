@@ -66,6 +66,16 @@ export class PagesFormComponent implements OnInit {
       sort_order: [0],
     });
 
+    // meta autofill
+    let processedName = '';
+    this.pagesFormControl.name.valueChanges.subscribe(value => {
+      processedName = (value) ? value.replace(/[^a-zA-Z1-9 ]/g, '').replace(/ /g, '-') : '';
+      let url = processedName.toString().toLowerCase();
+      url = (processedName) ? processedName.toString().toLowerCase() : '';
+      this.pagesFormControl.url.setValue(url);
+      this.pagesFormControl.meta_title.setValue(value);
+    });
+
     // autocomplete data
     this.filteredTypes$ = this.typeFormControl.valueChanges.pipe(
       startWith(''),
