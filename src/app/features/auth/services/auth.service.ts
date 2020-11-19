@@ -27,6 +27,10 @@ export class AuthService {
     }))
   }
 
+  forgetPassword(email: any) {
+    return this.httpClient.post(AuthApis.forgetPassword, email);
+  }
+
   logout() {
     this.user = null;
     return this.httpClient.post(AuthApis.logout, {}).pipe(tap(response => {

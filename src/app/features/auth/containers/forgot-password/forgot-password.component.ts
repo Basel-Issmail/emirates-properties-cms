@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { SharedCrudService } from 'src/app/shared/services/shared-crud.service';
 
 @Component({
   selector: 'ep-forgot-password',
@@ -10,7 +12,7 @@ export class ForgotPasswordComponent implements OnInit {
   forgotPasswordForm = this.fb.group({
     email: ['', [Validators.required, Validators.email,]]
   })
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private authService: AuthService, private sharedCrudService: SharedCrudService) { }
 
   ngOnInit(): void {
   }
@@ -21,7 +23,10 @@ export class ForgotPasswordComponent implements OnInit {
 
   onSubmit() {
     if (this.forgotPasswordForm.valid) {
-      alert('Form Submitted succesfully!!!\n Check the values in browser console.');
+      this.authService.forgetPassword(this.forgotPasswordForm.value).subscribe(
+        response => {
+          this.sharedCrudService.handleSuccess('Link has been sent to your E-mail');
+        });
     }
   }
 
