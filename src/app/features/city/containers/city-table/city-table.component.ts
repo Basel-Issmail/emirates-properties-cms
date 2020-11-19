@@ -52,7 +52,7 @@ export class CityTableComponent implements AfterViewInit {
           this.isLoadingResults = false;
           this.selection.clear();
           this.resultsLength = data.total;
-          return data.data;
+          return this.orderNestedCities(data.data);
         }),
         catchError(() => {
           this.isLoadingResults = false;
@@ -90,5 +90,23 @@ export class CityTableComponent implements AfterViewInit {
     this.sharedCrudService.delete(CityApis.delete, selected).subscribe(response => {
       this.changedData.next();
     })
+  }
+
+  orderNestedCities(data) {
+    data.sort((a, b) => a.lft - b.lft);
+    data.forEach(element => {
+      let depth = 0;
+      if (element.country && element.country.name) {
+        element.countryName = element.country.name;
+      }
+      data.forEach(innerElement => {
+        if (element.lft > innerElement.lft && element.rgt < innerElement.rgt) {
+          depth++;
+        }
+      });
+      element.leftPadding = depth * 20;
+    });
+
+    return data;
   }
 }
