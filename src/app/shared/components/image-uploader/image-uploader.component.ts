@@ -90,9 +90,7 @@ export class ImageUploaderComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes) {
-    console.log(this.uploadedFiles);
     if (changes.uploadedFiles && changes.uploadedFiles.currentValue.length > 0) {
-      console.log(this.uploadedFiles);
       this.processUploadedFiles();
     }
   }

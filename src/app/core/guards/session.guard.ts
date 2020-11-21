@@ -13,14 +13,22 @@ export class SessionGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-      if (this.authService.user) {
-        return true;
+    // if (this.authService.user && this.authService.user.role === 'admin') {
+    //   return true;
+    // }
+
+    return this.authService.me().pipe(map(response => {
+      this.authService.user = response;
+      if (state.url.includes('companies')) {
+        if (this.authService.user.role === 'admin') return true;
+        else return false;
       }
-      
-      return this.authService.me().pipe(map(response => {
-        this.authService.user = response;
-          return true;
-      }),
+      if (state.url.includes('agents')) {
+        if (this.authService.user.role === 'admin' || this.authService.user.role === 'Company') return true;
+        return false;
+      }
+      return true;
+    }),
       catchError(() => {
         this.router.navigate(['auth/login']);
         return of(false);
