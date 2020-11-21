@@ -15,10 +15,11 @@ import * as moment from 'moment';
   styleUrls: ['./agents-form.component.scss']
 })
 export class AgentsFormComponent implements OnInit {
+  isPassVisible = false;
   agentForm: FormGroup;
   emptyAgentObj = {
     active: true, areas: '', brn: '', company_id: '', description: '', email: '', experienced_since: '', languages: '',
-    linkedin: '', name: '', nationality_id: '', phone: '', position: '', whatsapp_number: ''
+    linkedin: '', name: '', nationality_id: '', phone: '', position: '', whatsapp_number: '', user: { first_name: '', last_name: '', email: '', password: '' }
   };
   formType = null;
   FormTypes = FormTypes;
@@ -42,11 +43,17 @@ export class AgentsFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.formType = this.formTypeService.getFormTypeWithId(this.route);
+
+    const passwordValidators = [];
+    if (this.formType.type === FormTypes.add) {
+      passwordValidators.push(Validators.required);
+    }
+
     this.agentForm = this.fb.group({
       active: [true],
       areas: [''],
       brn: [''],
-      company_id: [''],
+      company_id: ['', Validators.required],
       description: [''],
       email: ['', Validators.email],
       experienced_since: [''],
@@ -57,6 +64,12 @@ export class AgentsFormComponent implements OnInit {
       phone: [''],
       position: [''],
       whatsapp_number: [''],
+      user: this.fb.group({
+        first_name: ['', Validators.required],
+        last_name: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', passwordValidators]
+      })
     });
 
     // autocomplete data
@@ -94,8 +107,17 @@ export class AgentsFormComponent implements OnInit {
     return this.agentForm.controls;
   }
 
+  get nestedUserFormControl() {
+    return this.agentForm.controls.user['controls'];
+  }
+
   get prcessedData() {
-    return { ...this.agentForm.value, experienced_since: moment(this.agentFormControl.experienced_since.value).format('YYYY-MM-DD') }
+    const data = { ...this.agentForm.value, experienced_since: moment(this.agentFormControl.experienced_since.value).format('YYYY-MM-DD') }
+
+    if (this.formType.type === FormTypes.edit) {
+      delete data.user.password;
+    }
+    return data;
   }
 
   addNew(formDirective: FormGroupDirective) {
