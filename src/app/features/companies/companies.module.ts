@@ -6,10 +6,11 @@ import { CompaniesTableComponent } from './containers/companies-table/companies-
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CompaniesFormComponent } from './containers/companies-form/companies-form.component';
+import { CompanyPasswordFormComponent } from './containers/company-password-form/company-password-form.component';
 
 
 @NgModule({
-  declarations: [CompaniesTableComponent, CompaniesFormComponent],
+  declarations: [CompaniesTableComponent, CompaniesFormComponent, CompanyPasswordFormComponent],
   imports: [
     CommonModule,
     CompaniesRoutingModule,

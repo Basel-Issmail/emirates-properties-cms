@@ -7,6 +7,8 @@ import { merge, of as observableOf, Subject } from 'rxjs';
 import { SelectionModel } from '@angular/cdk/collections';
 import { SharedCrudService } from 'src/app/shared/services/shared-crud.service';
 import { CompaniesApis } from '../../companies.constants';
+import { MatDialog } from '@angular/material/dialog';
+import { CompanyPasswordFormComponent } from '../company-password-form/company-password-form.component';
 
 @Component({
   selector: 'ep-companies-table',
@@ -14,9 +16,9 @@ import { CompaniesApis } from '../../companies.constants';
   styleUrls: ['./companies-table.component.scss']
 })
 export class CompaniesTableComponent {
-  displayedColumns: string[] = ['select', 'status', 'name', 'email', 'head_office', 'phone','actions'];
+  displayedColumns: string[] = ['select', 'status', 'name', 'email', 'head_office', 'phone', 'actions'];
   columns = {
-    cols: ['select', 'status', 'name', 'email', 'head_office', 'phone','actions'],
+    cols: ['select', 'status', 'name', 'email', 'head_office', 'phone', 'actions'],
     select: { isShown: true, label: '', canHide: false },
     status: { isShown: true, label: '', canHide: false },
     name: { isShown: true, label: 'Name', canHide: true },
@@ -38,7 +40,7 @@ export class CompaniesTableComponent {
   @ViewChild(MatSort) sort: MatSort;
   selection = new SelectionModel<any>(true, []);
 
-  constructor(private sharedCrudService: SharedCrudService) { }
+  constructor(private sharedCrudService: SharedCrudService, public dialog: MatDialog) { }
 
   ngAfterViewInit() {
     this.sort.sortChange.subscribe(() => this.paginator.pageIndex = 0);
@@ -93,5 +95,16 @@ export class CompaniesTableComponent {
     this.sharedCrudService.changeAttribute(CompaniesApis.changeAttribute, selected, attribute, value).subscribe(response => {
       this.changedData.next();
     })
+  }
+
+  openPasswordDialog(id) {
+    const dialogRef = this.dialog.open(CompanyPasswordFormComponent, {
+      width: '400px',
+      data: { id }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(`Dialog result: ${result}`);
+    });
   }
 }

@@ -14,6 +14,10 @@
         class="fab-secondary" color="secondary">
         <i class="material-icons">delete</i>
       </button>
+      <button (click)="openPasswordDialog(selection.selected[0].id)" *ngIf="selection.selected.length === 1"
+        matTooltip="Change password" mat-mini-fab class="fab-secondary" color="secondary">
+        <i class="material-icons">vpn_key</i>
+      </button>
       <button (click)="changeStatus(selection.selected, 'active', 1)" matTooltip="Mark selected as active" mat-mini-fab
         class="fab-secondary" color="secondary">
         <i class="material-icons">check_circle_outline</i>
@@ -106,6 +110,10 @@
               <button [routerLink]="['/companies/edit/' + row.id]" matTooltip="edit selected" mat-icon-button
                 class="fab-secondary" color="secondary">
                 <i class="material-icons">edit</i>
+              </button>
+              <button (click)="openPasswordDialog(row.id)" matTooltip="Change password" mat-icon-button
+                class="fab-secondary" color="secondary">
+                <i class="material-icons">vpn_key</i>
               </button>
               <button (click)="deleteForever([row])" matTooltip="Delete selected" mat-icon-button class="fab-secondary"
                 color="secondary">

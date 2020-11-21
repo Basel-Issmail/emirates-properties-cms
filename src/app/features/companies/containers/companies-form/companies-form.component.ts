@@ -15,8 +15,9 @@ import { environment } from 'src/environments/environment';
   styleUrls: ['./companies-form.component.scss']
 })
 export class CompaniesFormComponent implements OnInit {
+  isPassVisible = false;
   companyForm: FormGroup;
-  emptyCompanyObj = { active: true, description: '', email: '', head_office: '', logo: '', name: '', orn_number: '', phone: '' };
+  emptyCompanyObj = { active: true, description: '', email: '', head_office: '', logo: '', name: '', orn_number: '', phone: '', user: { first_name: '', last_name: '', email: '', password: '' } };
   formType = null;
   FormTypes = FormTypes;
 
@@ -35,15 +36,26 @@ export class CompaniesFormComponent implements OnInit {
   ngOnInit(): void {
     this.formType = this.formTypeService.getFormTypeWithId(this.route);
 
+    const passwordValidators = [];
+    if (this.formType.type === FormTypes.add) {
+      passwordValidators.push(Validators.required);
+    }
+
     this.companyForm = this.fb.group({
       active: [true],
       description: [''],
-      email: ['', Validators.email],
+      email: ['', [Validators.required, Validators.email]],
       head_office: [''],
       logo: [''],
       name: ['', Validators.required],
-      orn_number: [''],
-      phone: [''],
+      orn_number: ['', Validators.required],
+      phone: ['', Validators.required],
+      user: this.fb.group({
+        first_name: ['', Validators.required],
+        last_name: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        password: ['', passwordValidators]
+      })
     });
 
     if (this.formType.type === FormTypes.edit) {
@@ -57,14 +69,24 @@ export class CompaniesFormComponent implements OnInit {
     return this.companyForm.controls;
   }
 
+  get nestedUserFormControl() {
+    return this.companyForm.controls.user['controls'];
+  }
+
   get prcessedData() {
-    return {
+    const data = {
       ...this.companyForm.value,
       logo: (Array.isArray(this.images) && this.images.length > 0) ? this.images[0].path : ''
     }
+    if (this.formType.type === FormTypes.edit) {
+      delete data.user.password;
+    }
+    return data;
   }
 
   addNew(formDirective: FormGroupDirective) {
+    console.log(this.prcessedData);
+
     if (this.companyForm.valid) {
       this.sharedCrudService.addItem(CompaniesApis.add, this.prcessedData)
         .subscribe(response => {

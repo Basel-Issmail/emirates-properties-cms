@@ -10,7 +10,8 @@ export enum CompaniesApis {
     add = 'companies/add',
     addDraft = 'companies/add-draft',
     update = 'companies/update',
-    updateDraft = 'companies/update-draft'
+    updateDraft = 'companies/update-draft',
+    changePassword = 'companies/change-password'
  }
  
  

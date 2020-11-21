@@ -17,6 +17,62 @@
 
     <div class="form-row">
         <div class="form-left_col">
+            <div class="epform-card" formGroupName=user>
+                <div mat-subheader>
+                    <div>Account holder Info </div>
+                </div>
+                <div class="form">
+
+                    <table class="form-field" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>First name *</mat-label>
+                                    <input matInput formControlName="first_name">
+                                    <mat-error *ngIf="nestedUserFormControl.first_name.hasError('required')">
+                                        First name is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>Last name *</mat-label>
+                                    <input matInput formControlName="last_name">
+                                    <mat-error *ngIf="nestedUserFormControl.last_name.hasError('required')">
+                                        Last name is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td [attr.colspan]="(formType.type === FormTypes.add)? 1: 2">
+                                <mat-form-field class="form-field">
+                                    <mat-label>Email *</mat-label>
+                                    <input type="email" matInput formControlName="email">
+                                    <mat-error *ngIf="nestedUserFormControl.email.hasError('required')">
+                                        Email is <strong>required</strong>
+                                    </mat-error>
+                                    <mat-error *ngIf="nestedUserFormControl.email.hasError('email')">
+                                        Email is <strong>not valid</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                            <td *ngIf="formType.type === FormTypes.add">
+                                <mat-form-field class="form-field">
+                                    <mat-label>Password *</mat-label>
+                                    <input [type]="isPassVisible? 'text': 'password'" matInput formControlName="password">
+                                    <button type="button" mat-button matSuffix mat-icon-button (click)="isPassVisible = !isPassVisible">
+                                        <mat-icon>{{isPassVisible? 'visibility':'visibility_off'}}</mat-icon>
+                                    </button>
+                                    <mat-error *ngIf="nestedUserFormControl.email.hasError('password')">
+                                        Password is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
             <div class="epform-card">
                 <div mat-subheader>
                     <div>Company Info </div>
@@ -35,8 +91,11 @@
                             </td>
                             <td>
                                 <mat-form-field class="form-field">
-                                    <mat-label>ORN number</mat-label>
+                                    <mat-label>ORN number *</mat-label>
                                     <input matInput formControlName="orn_number">
+                                    <mat-error *ngIf="companyFormControl.orn_number.hasError('required')">
+                                        ORN number is <strong>required</strong>
+                                    </mat-error>
                                 </mat-form-field>
                             </td>
                         </tr>
@@ -79,12 +138,21 @@
                         <input matInput formControlName="head_office">
                     </mat-form-field>
                     <mat-form-field class="form-field">
-                        <mat-label>Phone number</mat-label>
+                        <mat-label>Phone number *</mat-label>
                         <input matInput formControlName="phone">
+                        <mat-error *ngIf="companyFormControl.phone.hasError('required')">
+                            Phone number is <strong>required</strong>
+                        </mat-error>
                     </mat-form-field>
                     <mat-form-field class="form-field">
-                        <mat-label>Email</mat-label>
+                        <mat-label>Email *</mat-label>
                         <input type="email" matInput formControlName="email">
+                        <mat-error *ngIf="companyFormControl.email.hasError('required')">
+                            Email is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="companyFormControl.email.hasError('email')">
+                            Email is <strong>not valid</strong>
+                        </mat-error>
                     </mat-form-field>
                 </div>
             </div>
