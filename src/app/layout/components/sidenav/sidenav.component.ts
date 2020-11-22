@@ -10,6 +10,14 @@ export class SidenavComponent implements OnInit {
   userRole: any;
   sideNavItems = [
     {
+      title: 'Account', permission: ['admin', 'Company', 'agent'],
+      children: [
+        { title: 'Dashboard', permission: ['admin', 'Company', 'agent'], url: '/dashboard', icon: 'dashboard' },
+        { title: 'CMS account', permission: ['admin', 'Company', 'agent'], url: '/profile', icon: 'account_circle' },
+        { title: 'Company profile', permission: ['Company'], url: '/companies', icon: 'domain' }
+      ]
+    },
+    {
       title: 'Users', permission: ['admin', 'Company'],
       children: [
         { title: 'Admins', permission: ['admin'], url: '/users', icon: 'supervised_user_circle' },

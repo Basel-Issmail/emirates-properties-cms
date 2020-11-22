@@ -8,7 +8,7 @@ const routes: Routes = [
     path: '',
     component: LayoutComponent,
     children: [
-      { path: '', component: DashboardComponent },
+      { path: 'dashboard', component: DashboardComponent },
       { path: 'profile', loadChildren: () => import('../features/profile/profile.module').then(m => m.ProfileModule) },
       { path: 'completion-status', loadChildren: () => import('../features/completion-status/completion-status.module').then(m => m.CompletionStatusModule) },
       { path: 'pages', loadChildren: () => import('../features/pages/pages.module').then(m => m.PagesModule) },
@@ -29,6 +29,7 @@ const routes: Routes = [
       { path: 'blog', loadChildren: () => import('../features/news/news.module').then(m => m.NewsModule) },
       { path: 'countries', loadChildren: () => import('../features/country/country.module').then(m => m.CountryModule) },
       { path: 'cities', loadChildren: () => import('../features/city/city.module').then(m => m.CityModule) },
+      { path: '', redirectTo: 'dashboard' },
     ]
   }
 ];
