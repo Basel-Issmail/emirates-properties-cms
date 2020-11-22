@@ -56,7 +56,7 @@ export class AgentsFormComponent implements OnInit {
       company_id: ['', Validators.required],
       description: [''],
       email: ['', Validators.email],
-      experienced_since: [''],
+      experienced_since: ['', Validators.required],
       languages: [''],
       linkedin: [''],
       name: ['', Validators.required],
