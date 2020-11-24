@@ -1,0 +1,142 @@
+.profile {
+  padding: 1rem;
+
+  .mat-divider {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .profile-title {
+    text-align: center;
+    font-size: 1.75rem;
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 2.25rem;
+    hyphens: auto;
+    word-break: break-word;
+    word-wrap: break-word;
+    margin: 0 0 8px 0;
+    padding: 0;
+  }
+
+  .profile-caption {
+    letter-spacing: .00625em;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5rem;
+    hyphens: auto;
+    word-break: break-word;
+    word-wrap: break-word;
+    color: #5f6368;
+    text-align: center;
+  }
+
+  .profile-wrapper {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 800px;
+  }
+
+  .profile-card {
+    border-radius: 8px;
+    border: 1px solid #dadce0;
+    background-color: #fff;
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 2rem;
+
+    .mat-subheader {
+      font-size: 1.375rem;
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.75rem;
+      hyphens: auto;
+      word-break: break-word;
+      word-wrap: break-word;
+      color: #202124;
+      display: flex;
+      padding-right: 0;
+      justify-content: space-between;
+    }
+  }
+}
+
+.profile-image {
+  width: 150px;
+  height: 150px;
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+
+  .img-wrapper {
+    box-align: center;
+    align-items: center;
+    display: flex;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+
+    img {
+      width: 100%;
+      height: 100%;
+      text-align: center;
+    }
+  }
+
+  .profile-image-edit {
+    transition: opacity .2s ease-in-out;
+    background-color: rgba(32, 33, 36, 0.6);
+    bottom: 0;
+    height: 33%;
+    left: 0;
+    position: absolute;
+    right: 0;
+    opacity: 0;
+
+    .profile-image-edit-effect {
+      background-image: url(/assets/images/camera.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: 24px 24px;
+      height: 100%;
+      opacity: .8;
+    }
+  }
+
+  &:hover {
+    cursor: pointer;
+
+    .profile-image-edit {
+      opacity: 1;
+    }
+  }
+}
+
+.profile-info {
+  .profile-info-prop {
+    display: inline-block;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.54);
+    margin-right: 20px;
+    min-width: 100px;
+  }
+
+  .profile-info-value {
+    display: inline-block;
+
+  }
+}
+
+.profile-info.profile-info--photo {
+  height: 90px;
+
+  .mat-line {
+    display: flex;
+    align-items: center;
+  }
+}

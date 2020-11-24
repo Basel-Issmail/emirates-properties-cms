@@ -1,80 +1,16 @@
 <form class="epform" [formGroup]="agentForm" #formDirective="ngForm">
     <div class="epform-breadcrumb">
         <div class="return">
-            <a mat-icon-button [routerLink]="['/agents']">
+            <a mat-icon-button [routerLink]="['/agent-profile']">
                 <mat-icon>arrow_back</mat-icon>
             </a>
-            <h1 class="epform-title">Agents</h1>
+            <h1 class="epform-title">Agent profile</h1>
         </div>
-        <div *ngIf="formType.type === FormTypes.add">
-            <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary"
-                (click)="addNew(formDirective)">Add new agent</button>
-        </div>
-        <div *ngIf="formType.type === FormTypes.edit">
-            <button type="submit" mat-flat-button color="primary" (click)="edit()">Edit agent</button>
-        </div>
+        <button type="submit" mat-flat-button color="primary" (click)="edit()">Edit agent</button>
     </div>
 
     <div class="form-row">
         <div class="form-left_col">
-            <div class="epform-card" formGroupName=user>
-                <div mat-subheader>
-                    <div>Account holder Info </div>
-                </div>
-                <div class="form">
-
-                    <table class="form-field" cellspacing="0">
-                        <tr>
-                            <td>
-                                <mat-form-field class="form-field">
-                                    <mat-label>First name *</mat-label>
-                                    <input matInput formControlName="first_name">
-                                    <mat-error *ngIf="nestedUserFormControl.first_name.hasError('required')">
-                                        First name is <strong>required</strong>
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-                            <td>
-                                <mat-form-field class="form-field">
-                                    <mat-label>Last name *</mat-label>
-                                    <input matInput formControlName="last_name">
-                                    <mat-error *ngIf="nestedUserFormControl.last_name.hasError('required')">
-                                        Last name is <strong>required</strong>
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td [attr.colspan]="(formType.type === FormTypes.add)? 1: 2">
-                                <mat-form-field class="form-field">
-                                    <mat-label>Email *</mat-label>
-                                    <input type="email" matInput formControlName="email">
-                                    <mat-error *ngIf="nestedUserFormControl.email.hasError('required')">
-                                        Email is <strong>required</strong>
-                                    </mat-error>
-                                    <mat-error *ngIf="nestedUserFormControl.email.hasError('email')">
-                                        Email is <strong>not valid</strong>
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-                            <td *ngIf="formType.type === FormTypes.add">
-                                <mat-form-field class="form-field">
-                                    <mat-label>Password *</mat-label>
-                                    <input [type]="isPassVisible? 'text': 'password'" matInput
-                                        formControlName="password">
-                                    <button type="button" mat-button matSuffix mat-icon-button
-                                        (click)="isPassVisible = !isPassVisible">
-                                        <mat-icon>{{isPassVisible? 'visibility':'visibility_off'}}</mat-icon>
-                                    </button>
-                                    <mat-error *ngIf="nestedUserFormControl.email.hasError('password')">
-                                        Password is <strong>required</strong>
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-                        </tr>
-                    </table>
-                </div>
-            </div>
             <div class="epform-card">
                 <div mat-subheader>
                     <div>Agent Info </div>
@@ -183,25 +119,6 @@
                     <div>Additional Info</div>
                 </div>
                 <div class="form">
-                    <mat-form-field class="form-field" *ngIf="role === 'admin'">
-                        <mat-label>Company *</mat-label>
-                        <mat-select formControlName="company_id">
-                            <mat-form-field class="autocomplete-form-field" style="width: 100%;padding-bottom: 0;">
-                                <input placeholder="Search" matInput [formControl]="companyFormControl" type="text">
-                            </mat-form-field>
-                            <mat-option *ngFor="let company of filteredCompanies$ | async" [value]="company.id">
-                                {{company.name }}
-                            </mat-option>
-                        </mat-select>
-                        <mat-error *ngIf="agentFormControl.company_id.hasError('required')">
-                            Company is <strong>required</strong>
-                        </mat-error>
-                    </mat-form-field>
-                    <mat-form-field class="form-field" *ngIf="role === 'Company'">
-                        <mat-label>Company *</mat-label>
-                        <input type="text" formControlName="company_id" [hidden]="true">
-                        <input type="text" matInput [ngModel]="filteredCompanies$[0].name" [ngModelOptions]="{standalone: true}" readonly>
-                    </mat-form-field>
                     <mat-form-field class="form-field">
                         <mat-label>Nationality</mat-label>
                         <mat-select formControlName="nationality_id">

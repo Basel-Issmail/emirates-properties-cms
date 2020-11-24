@@ -1,0 +1,131 @@
+<div class="profile" *ngIf="(agent$ | async).data as agent">
+    <div class="profile-image">
+        <div class="img-wrapper">
+            <img [src]="agent.logo? imageBaseUrl + agent.logo:'assets/images/agent-profile.png'"
+                alt="Profile Picture">
+        </div>
+        <div class="profile-image-edit">
+            <div class="profile-image-edit-effect"></div>
+        </div>
+        <input type="file" style="opacity: 0;width: 100%;height: 100%;position: absolute;cursor: pointer; top: 0"
+            (change)="onFileChange(input.files)" #input>
+    </div>
+    <h1 class="profile-title">Agent Info</h1>
+    <!-- <div class="profile-caption">Basic info, like your name and photo, that you use on Emitates Properties CMS</div> -->
+    <div class="profile-wrapper">
+        <div class="profile-card  mat-elevation-z1">
+            <mat-list>
+                <div mat-subheader>
+                    <div>Basic Info</div>
+                    <button mat-icon-button [matMenuTriggerFor]="profileEdit">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                </div>
+                <mat-menu #profileEdit="matMenu" xPosition="before">
+                    <button mat-menu-item [routerLink]="['/agent-profile/edit']">
+                        <mat-icon>edit</mat-icon>
+                        <span>Edit basic info</span>
+                    </button>
+                </mat-menu>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Name</div>
+                        <div class="profile-info-value"> {{agent.name}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Position</div>
+                        <div class="profile-info-value"> {{agent.position}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">BRN</div>
+                        <div class="profile-info-value"> {{agent.brn}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Experienced since</div>
+                        <div class="profile-info-value"> {{agent.experienced_since}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Company</div>
+                        <div class="profile-info-value"> {{agent.company?.name}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Nationality</div>
+                        <div class="profile-info-value"> {{agent.nationality?.name}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Languages</div>
+                        <div class="profile-info-value"> {{agent.languages}}</div>
+                    </div>
+                </mat-list-item>
+
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Areas</div>
+                        <div class="profile-info-value"> {{agent.areas}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item style="height: 100%;" class="profile-info">
+                    <div style="display: flex;padding-top: 1rem;padding-bottom: 1rem;">
+                        <div class="profile-info-prop">Description</div>
+                        <div class="profile-info-value"> {{agent.description}}</div>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+
+        <div class="profile-card mat-elevation-z1">
+            <mat-list>
+                <h2 mat-subheader>
+                    <div>Contact Info</div>
+                </h2>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Linkedin</div>
+                        <div class="profile-info-value"> {{agent.linkedin}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Phone number</div>
+                        <div class="profile-info-value"> {{agent.phone}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Whatsapp number</div>
+                        <div class="profile-info-value"> {{agent.whatsapp_number}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Email</div>
+                        <div class="profile-info-value"> {{agent.email}}</div>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+</div>

@@ -30,6 +30,7 @@ const routes: Routes = [
       { path: 'countries', loadChildren: () => import('../features/country/country.module').then(m => m.CountryModule) },
       { path: 'cities', loadChildren: () => import('../features/city/city.module').then(m => m.CityModule) },
       { path: 'company-profile', loadChildren: () => import('../features/company-profile/company-profile.module').then(m => m.CompanyProfileModule) },
+      { path: 'agent-profile', loadChildren: () => import('../features/agent-profile/agent-profile.module').then(m => m.AgentProfileModule) },
       { path: '', redirectTo: 'dashboard' },
     ]
   }

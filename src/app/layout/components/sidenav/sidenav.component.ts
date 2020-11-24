@@ -14,7 +14,8 @@ export class SidenavComponent implements OnInit {
       children: [
         { title: 'Dashboard', permission: ['admin', 'Company', 'Agent'], url: '/dashboard', icon: 'dashboard' },
         { title: 'CMS account', permission: ['admin', 'Company', 'Agent'], url: '/profile', icon: 'account_circle' },
-        { title: 'Company profile', permission: ['Company'], url: '/company-profile', icon: 'domain' }
+        { title: 'Company profile', permission: ['Company'], url: '/company-profile', icon: 'domain' },
+        { title: 'Agent profile', permission: ['Agent'], url: '/agent-profile', icon: 'support_agent' }
       ]
     },
     {
