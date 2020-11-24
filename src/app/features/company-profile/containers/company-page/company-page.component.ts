@@ -58,7 +58,7 @@ export class CompanyPageComponent implements OnInit {
         }
         this.imageService.uploadImage(CoreApis.uploadPhoto, file, 'photo').subscribe((response: any) => {
           this.sharedCrudService.post(CompanyProfileApis.update, { ...this.company, logo: response.body.data.url }, 'Company logo updated')
-            .subscribe(response => {
+            .subscribe((response: any) => {
               this.company = response.data;
             });
 
