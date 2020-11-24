@@ -8,6 +8,7 @@ import { first, map, startWith, switchMap } from 'rxjs/operators';
 import { AgentsApis } from '../../agents.constants';
 import { Observable } from 'rxjs';
 import * as moment from 'moment';
+import { AuthService } from 'src/app/features/auth/services/auth.service';
 
 @Component({
   selector: 'ep-agents-form',
@@ -32,16 +33,17 @@ export class AgentsFormComponent implements OnInit {
   filteredLanguages$: Observable<any[]>;
   areaFormControl = new FormControl('');
   filteredAreas$: Observable<any[]>;
-
+  role: any;
   test: any = [];
 
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
-    private router: Router,
+    private auth: AuthService,
     private formTypeService: FormTypeService,
     private sharedCrudService: SharedCrudService) { }
 
   ngOnInit(): void {
+    this.role = this.auth.user.role;
     this.formType = this.formTypeService.getFormTypeWithId(this.route);
 
     const passwordValidators = [];
@@ -73,11 +75,15 @@ export class AgentsFormComponent implements OnInit {
     });
 
     // autocomplete data
-    this.filteredCompanies$ = this.companyFormControl.valueChanges.pipe(
-      startWith(''),
-      map(userInputValue => this.route.snapshot.data.buidler.company_list.
-        filter(itemObj => itemObj.name.toLowerCase().indexOf(userInputValue) === 0)));
-
+    if (this.role === 'admin') {
+      this.filteredCompanies$ = this.companyFormControl.valueChanges.pipe(
+        startWith(''),
+        map(userInputValue => this.route.snapshot.data.buidler.company_list.
+          filter(itemObj => itemObj.name.toLowerCase().indexOf(userInputValue) === 0)));
+    } else {
+      this.filteredCompanies$ = this.route.snapshot.data.buidler.company_list;
+      this.agentFormControl.company_id.setValue(this.filteredCompanies$[0].id);
+    }
     this.filteredNationalities$ = this.nationalityFormControl.valueChanges.pipe(
       startWith(''),
       map(userInputValue => this.route.snapshot.data.buidler.nationalities_list.

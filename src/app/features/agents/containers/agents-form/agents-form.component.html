@@ -183,7 +183,7 @@
                     <div>Additional Info</div>
                 </div>
                 <div class="form">
-                    <mat-form-field class="form-field">
+                    <mat-form-field class="form-field" *ngIf="role === 'admin'">
                         <mat-label>Company *</mat-label>
                         <mat-select formControlName="company_id">
                             <mat-form-field class="autocomplete-form-field" style="width: 100%;padding-bottom: 0;">
@@ -196,6 +196,25 @@
                         <mat-error *ngIf="agentFormControl.company_id.hasError('required')">
                             Company is <strong>required</strong>
                         </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="form-field" *ngIf="role === 'admin'">
+                        <mat-label>Company *</mat-label>
+                        <mat-select formControlName="company_id">
+                            <mat-form-field class="autocomplete-form-field" style="width: 100%;padding-bottom: 0;">
+                                <input placeholder="Search" matInput [formControl]="companyFormControl" type="text">
+                            </mat-form-field>
+                            <mat-option *ngFor="let company of filteredCompanies$ | async" [value]="company.id">
+                                {{company.name }}
+                            </mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="agentFormControl.company_id.hasError('required')">
+                            Company is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="form-field" *ngIf="role === 'Company'">
+                        <mat-label>Company *</mat-label>
+                        <input type="text" formControlName="company_id" [hidden]="true">
+                        <input type="text" matInput [ngModel]="filteredCompanies$[0].name" [ngModelOptions]="{standalone: true}" readonly>
                     </mat-form-field>
                     <mat-form-field class="form-field">
                         <mat-label>Nationality</mat-label>
