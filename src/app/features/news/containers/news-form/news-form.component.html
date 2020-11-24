@@ -1,7 +1,7 @@
 <form class="epform" [formGroup]="newsForm" #formDirective="ngForm">
     <div class="epform-breadcrumb">
         <div class="return">
-            <a mat-icon-button [routerLink]="['/news']">
+            <a mat-icon-button [routerLink]="['/blog']">
                 <mat-icon>arrow_back</mat-icon>
             </a>
             <h1 class="epform-title">Blog</h1>
@@ -51,13 +51,14 @@
                             </td>
                         </tr>
                     </table>
-                    <mat-form-field class="form-field">
-                        <mat-label>Description *</mat-label>
-                        <textarea matInput formControlName="content"></textarea>
-                        <mat-error *ngIf="newsFormControl.content.hasError('required')">
-                            Content is <strong>required</strong>
-                        </mat-error>
-                    </mat-form-field>
+                </div>
+            </div>
+            <div class="epform-card">
+                <div mat-subheader>
+                    <div>Content</div>
+                </div>
+                <div class="form">
+                    <quill-editor [styles]="{height: '200px'}" formControlName="content"></quill-editor>
                 </div>
             </div>
             <div class="epform-card">
@@ -120,7 +121,7 @@
                         </mat-error>
                     </mat-form-field>
                     <mat-form-field class="form-field">
-                        <mat-label>Meta keywords</mat-label>
+                        <mat-label>Meta keywords *</mat-label>
                         <input matInput formControlName="meta_keywords">
                         <mat-error *ngIf="newsFormControl.meta_keywords.hasError('required')">
                             Meta keywords is <strong>required</strong>

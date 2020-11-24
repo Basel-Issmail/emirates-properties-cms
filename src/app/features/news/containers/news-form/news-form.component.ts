@@ -17,7 +17,7 @@ import { environment } from 'src/environments/environment';
 })
 export class NewsFormComponent implements OnInit {
   newsForm: FormGroup;
-  emptyNewsObj = { active: true, brief: '', content: '', date: '', meta_description: '', meta_keywords: '', meta_title: '', name: '', url: '', media: '' };
+  emptyNewsObj = { active: true, brief: '', content: ' ', date: '', meta_description: '', meta_keywords: '', meta_title: '', name: '', url: '', media: '' };
   formType = null;
   FormTypes = FormTypes;
 
@@ -39,7 +39,7 @@ export class NewsFormComponent implements OnInit {
     this.newsForm = this.fb.group({
       active: [true],
       brief: ['', Validators.required],
-      content: ['', Validators.required],
+      content: [' ', Validators.required],
       date: ['', Validators.required],
       meta_description: ['', Validators.required],
       meta_keywords: ['', Validators.required],

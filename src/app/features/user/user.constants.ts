@@ -12,7 +12,6 @@ export enum UserApis {
     update = 'uac/users/update',
     updateDraft = 'uac/users/update-draft',
     builder = 'uac/users/builder',
-    getRoles = 'uac/roles/get-all',
     changePassword = 'uac/users/change-password'
 }
 

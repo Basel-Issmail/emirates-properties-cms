@@ -16,12 +16,9 @@ import { UserApis } from '../../user.constants';
 export class UserFormComponent implements OnInit {
   isPassVisible = false;
   userForm: FormGroup;
-  emptyUserObj = { active: true, first_name: '', last_name: '', email: '', password: '', role: '', mobile: '' };
+  emptyUserObj = { active: true, first_name: '', last_name: '', email: '', password: '', role: 'admin', mobile: '' };
   formType = null;
   FormTypes = FormTypes;
-  // data to autocomplete
-  roleFormControl = new FormControl('');
-  filteredRoles$: Observable<any[]>;
 
   constructor(private fb: FormBuilder,
     private route: ActivatedRoute,
@@ -43,27 +40,14 @@ export class UserFormComponent implements OnInit {
       last_name: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', passwordValidators],
-      role: ['', Validators.required],
+      role: ['admin'],
       mobile: [''],
     });
-
-    // autocomplete data
-    this.sharedCrudService.get(UserApis.getRoles, {}).pipe(map((val: any) => {
-      val.data.forEach(roleItem => {
-        roleItem = Number(roleItem);
-      });
-      return val.data
-    })).
-      subscribe(response => {
-        this.filteredRoles$ = this.roleFormControl.valueChanges.pipe(
-          startWith(''),
-          map(userInputValue => response.filter(itemObj => itemObj.name.toLowerCase().indexOf(userInputValue) === 0)));
-      })
 
     if (this.formType.type === FormTypes.edit) {
       this.sharedCrudService.getItemDetails(UserApis.getDetails, this.formType.id)
         .pipe(first(), map(val => {
-          val.role = val.roles.map(res => res.id);
+          val.role = 'admin';
           return val;
         }))
         .subscribe(x => this.userForm.patchValue(x));

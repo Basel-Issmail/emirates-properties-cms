@@ -68,34 +68,11 @@
                                 </mat-form-field>
                             </td>
                         </tr>
-
-                        <tr>
-                            <td>
-                                <mat-form-field class="form-field">
-                                    <mat-label>Role *</mat-label>
-                                    <mat-select formControlName="role" multiple>
-                                        <mat-form-field class="autocomplete-form-field"
-                                            style="width: 100%;padding-bottom: 0;">
-                                            <input placeholder="Search" matInput [formControl]="roleFormControl"
-                                                type="text">
-                                        </mat-form-field>
-                                        <mat-option *ngFor="let role of filteredRoles$ | async" [value]="role.id">
-                                            {{role.name }}
-                                        </mat-option>
-                                    </mat-select>
-                                    <mat-error *ngIf="userFormControl.role.hasError('required')">
-                                        Role is <strong>required</strong>
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-                            <td>
-                                <mat-form-field class="form-field">
-                                    <mat-label>Mobile number</mat-label>
-                                    <input matInput formControlName="mobile">
-                                </mat-form-field>
-                            </td>
-                        </tr>
                     </table>
+                    <mat-form-field class="form-field">
+                        <mat-label>Mobile number</mat-label>
+                        <input matInput formControlName="mobile">
+                    </mat-form-field>
                 </div>
             </div>
         </div>
