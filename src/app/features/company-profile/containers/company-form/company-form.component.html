@@ -1,0 +1,91 @@
+<form class="epform" [formGroup]="companyForm" #formDirective="ngForm">
+    <div class="epform-breadcrumb">
+        <div class="return">
+            <a mat-icon-button [routerLink]="['/company-profile']">
+                <mat-icon>arrow_back</mat-icon>
+            </a>
+            <h1 class="epform-title">Company profile</h1>
+        </div>
+        <button type="submit" mat-flat-button color="primary" (click)="edit()">Edit company</button>
+    </div>
+
+    <div class="form-row">
+        <div class="form-left_col">
+            <div class="epform-card">
+                <div mat-subheader>
+                    <div>Company Info </div>
+                </div>
+                <div class="form">
+                    <table class="form-field" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>Name *</mat-label>
+                                    <input matInput formControlName="name">
+                                    <mat-error *ngIf="companyFormControl.name.hasError('required')">
+                                        Name is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>ORN number *</mat-label>
+                                    <input matInput formControlName="orn_number">
+                                    <mat-error *ngIf="companyFormControl.orn_number.hasError('required')">
+                                        ORN number is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                    </table>
+                    <mat-form-field class="form-field">
+                        <mat-label>Description</mat-label>
+                        <textarea matInput formControlName="description"></textarea>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="epform-card">
+                <div mat-subheader>
+                    <div>Media</div>
+                </div>
+                <div class="form">
+                    <ep-image-uploader #imageUploader [buttonCaption]="'Select Image'" [aspectRatio]="1"
+                        [url]="uploadPhoto" id="page-image" [pathPrefix]="imageBaseUrl"
+                        (triggerChange)="getImage($event)" [max]="1"
+                        [uploadedFiles]="(companyFormControl.logo.value)? [{path: companyFormControl.logo.value}] : []">
+                    </ep-image-uploader>
+                </div>
+            </div>
+        </div>
+        <div class="form-right_col">
+            <div class="epform-card">
+                <div mat-subheader>
+                    <div>Contact Info</div>
+                </div>
+                <div class="form">
+                    <mat-form-field class="form-field">
+                        <mat-label>Head office</mat-label>
+                        <input matInput formControlName="head_office">
+                    </mat-form-field>
+                    <mat-form-field class="form-field">
+                        <mat-label>Phone number *</mat-label>
+                        <input matInput formControlName="phone">
+                        <mat-error *ngIf="companyFormControl.phone.hasError('required')">
+                            Phone number is <strong>required</strong>
+                        </mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="form-field">
+                        <mat-label>Email *</mat-label>
+                        <input type="email" matInput formControlName="email">
+                        <mat-error *ngIf="companyFormControl.email.hasError('required')">
+                            Email is <strong>required</strong>
+                        </mat-error>
+                        <mat-error *ngIf="companyFormControl.email.hasError('email')">
+                            Email is <strong>not valid</strong>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>

@@ -111,7 +111,7 @@
                     <div>Media</div>
                 </div>
                 <div class="form">
-                    <ep-image-uploader #imageUploader [buttonCaption]="'Select Image'" [url]="uploadPhoto"
+                    <ep-image-uploader #imageUploader [buttonCaption]="'Select Image'" [aspectRatio]="1" [url]="uploadPhoto"
                         id="page-image" [pathPrefix]="imageBaseUrl" (triggerChange)="getImage($event)" [max]="1"
                         [uploadedFiles]="(companyFormControl.logo.value)? [{path: companyFormControl.logo.value}] : []">
                     </ep-image-uploader>

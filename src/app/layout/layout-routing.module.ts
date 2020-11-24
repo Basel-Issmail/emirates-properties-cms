@@ -29,6 +29,7 @@ const routes: Routes = [
       { path: 'blog', loadChildren: () => import('../features/news/news.module').then(m => m.NewsModule) },
       { path: 'countries', loadChildren: () => import('../features/country/country.module').then(m => m.CountryModule) },
       { path: 'cities', loadChildren: () => import('../features/city/city.module').then(m => m.CityModule) },
+      { path: 'company-profile', loadChildren: () => import('../features/company-profile/company-profile.module').then(m => m.CompanyProfileModule) },
       { path: '', redirectTo: 'dashboard' },
     ]
   }

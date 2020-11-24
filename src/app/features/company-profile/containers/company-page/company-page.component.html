@@ -1,0 +1,81 @@
+<div class="profile" *ngIf="(company$ | async).data as company">
+    <div class="profile-image">
+        <div class="img-wrapper">
+            <img [src]="company.logo? imageBaseUrl + company.logo:'assets/images/company-logo.png'"
+                alt="Profile Picture">
+        </div>
+        <div class="profile-image-edit">
+            <div class="profile-image-edit-effect"></div>
+        </div>
+        <input type="file" style="opacity: 0;width: 100%;height: 100%;position: absolute;cursor: pointer; top: 0"
+            (change)="onFileChange(input.files)" #input>
+    </div>
+    <h1 class="profile-title">Company Info</h1>
+    <!-- <div class="profile-caption">Basic info, like your name and photo, that you use on Emitates Properties CMS</div> -->
+    <div class="profile-wrapper">
+        <div class="profile-card  mat-elevation-z1">
+            <mat-list>
+                <div mat-subheader>
+                    <div>Basic Info</div>
+                    <button mat-icon-button [matMenuTriggerFor]="profileEdit">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                </div>
+                <mat-menu #profileEdit="matMenu" xPosition="before">
+                    <button mat-menu-item [routerLink]="['/company-profile/edit']">
+                        <mat-icon>edit</mat-icon>
+                        <span>Edit basic info</span>
+                    </button>
+                </mat-menu>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Name</div>
+                        <div class="profile-info-value"> {{company.name}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">ORN number</div>
+                        <div class="profile-info-value"> {{company.orn_number}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item style="height: 100%;" class="profile-info">
+                    <div style="display: flex;padding-top: 1rem;padding-bottom: 1rem;">
+                        <div class="profile-info-prop">Description</div>
+                        <div class="profile-info-value"> {{company.description}}</div>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+
+        <div class="profile-card mat-elevation-z1">
+            <mat-list>
+                <h2 mat-subheader>
+                    <div>Contact Info</div>
+                </h2>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Head office</div>
+                        <div class="profile-info-value"> {{company.head_office}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Phone number</div>
+                        <div class="profile-info-value"> {{company.phone}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="profile-info">
+                    <div mat-line>
+                        <div class="profile-info-prop">Email</div>
+                        <div class="profile-info-value"> {{company.email}}</div>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+</div>

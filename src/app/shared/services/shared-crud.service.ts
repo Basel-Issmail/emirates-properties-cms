@@ -21,8 +21,15 @@ export class SharedCrudService {
     return this.http.get<any[]>(url, { params });
   }
 
-  getItemDetails(url, id) {
-    return this.http.get(`${url}/${id}`).pipe(map((response: any) => response.data));
+  post(url, params, message) {
+    return this.http.post(url, params).pipe(map(response => {
+      if (message) this.handleSuccess(message);
+      return response;
+    }));
+  }
+
+  getItemDetails(url, id = null) {
+    return this.http.get(`${url}${(id ? '/' + id : '')}`).pipe(map((response: any) => response.data));
   }
 
   getDraftItemDetails(url, id) {
@@ -61,8 +68,8 @@ export class SharedCrudService {
     }));
   }
 
-  editItem(url, item, id) {
-    return this.http.put(`${url}/${id}`, item).pipe(map(response => {
+  editItem(url, item, id = null) {
+    return this.http.put(`${url}${(id ? '/' + id : '')}`, item).pipe(map(response => {
       this.handleSuccess('Updated successfully');
       return response;
     }));
