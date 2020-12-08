@@ -42,7 +42,8 @@ export class SidenavComponent implements OnInit {
       title: 'Administrator', permission: ['admin'],
       children: [
         { title: 'Pages', permission: ['admin'], url: '/pages', icon: 'file_copy' },
-        { title: 'Settings', permission: ['admin'], url: '/settings', icon: 'settings_input_composite' },
+        // { title: 'Settings', permission: ['admin'], url: '/settings', icon: 'settings_input_composite' },
+        { title: 'Social Links', permission: ['admin'], url: '/social-links', icon: 'facebook' },
         { title: 'Blog', permission: ['admin'], url: '/blog', icon: 'cast' },
         { title: 'Countries', permission: ['admin'], url: '/countries', icon: 'public' },
         { title: 'Cities', permission: ['admin'], url: '/cities', icon: 'location_on' }

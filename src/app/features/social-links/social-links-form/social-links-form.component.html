@@ -1,0 +1,83 @@
+<form class="epform" [formGroup]="settingsForm" #formDirective="ngForm">
+    <div class="epform-breadcrumb">
+        <div class="return">
+            <a mat-icon-button [routerLink]="['/social-links']">
+                <mat-icon>arrow_back</mat-icon>
+            </a>
+            <h1 class="epform-title">Social links</h1>
+        </div>
+        <div *ngIf="formType.type === FormTypes.add">
+            <button type="submit" mat-flat-button style="margin-left: 1rem;" color="primary"
+                (click)="addNew(formDirective)">Add new settings</button>
+        </div>
+        <div *ngIf="formType.type === FormTypes.edit">
+            <button type="submit" mat-flat-button color="primary" (click)="edit()">Edit settings</button>
+        </div>
+    </div>
+
+    <div class="form-row">
+        <div class="form-col">
+            <div class="epform-card">
+                <div mat-subheader>
+                    <div>Social links Info </div>
+                </div>
+                <div class="form">
+                    <table class="form-field" cellspacing="0">
+                        <tr>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>Name *</mat-label>
+                                    <input matInput formControlName="name">
+                                    <mat-error *ngIf="settingsFormControl.name.hasError('required')">
+                                        Name is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>Title *</mat-label>
+                                    <input matInput formControlName="title">
+                                    <mat-error *ngIf="settingsFormControl.title.hasError('required')">
+                                        Title is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>Code *</mat-label>
+                                    <input matInput formControlName="code">
+                                    <mat-error *ngIf="settingsFormControl.code.hasError('required')">
+                                        Code is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                            <td>
+                                <mat-form-field class="form-field">
+                                    <mat-label>URL *</mat-label>
+                                    <input matInput formControlName="url">
+                                    <mat-error *ngIf="settingsFormControl.url.hasError('required')">
+                                        URL is <strong>required</strong>
+                                    </mat-error>
+                                </mat-form-field>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            <div class="epform-card">
+                <div mat-subheader>
+                    <div>Media</div>
+                </div>
+                <div class="form">
+                    <ep-image-uploader #imageUploader [crop]="true" [aspectRatio]="1" buttonCaption="Select Icon"
+                        [url]="uploadPhoto" id="page-image" [pathPrefix]="imageBaseUrl"
+                        (triggerChange)="getImage($event)" [max]="1"
+                        [uploadedFiles]="(settingsFormControl.icon && settingsFormControl.icon.value)? [{path: settingsFormControl.icon.value}] : []">
+                    </ep-image-uploader>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
