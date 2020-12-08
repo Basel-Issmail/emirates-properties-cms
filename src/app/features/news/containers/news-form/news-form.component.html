@@ -68,7 +68,7 @@
                 <div class="form">
                     <ep-image-uploader #imageUploader buttonCaption="Select news images" style="margin-bottom: 1rem;display: block;"
                         [allowCaption]="true" [crop]="true" [url]="uploadPhoto" (triggerChange)="getImages($event)"
-                        [firstMain]="true"
+                        [firstMain]="true" [aspectRatio]="4"
                         [uploadedFiles]="(newsFormControl.media.value)?newsFormControl.media.value: []"
                         [pathPrefix]="imageBaseUrl"></ep-image-uploader>
                 </div>
