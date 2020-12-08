@@ -1,0 +1,40 @@
+<div class="contact-us">
+    <div class="contact-us-wrapper">
+        <div class="contact-us-card  mat-elevation-z1">
+            <mat-list>
+                <div mat-subheader>
+                    <div>Contact us Info</div>
+                    <button mat-icon-button [matMenuTriggerFor]="contactUsEdit">
+                        <mat-icon>more_vert</mat-icon>
+                    </button>
+                </div>
+                <mat-menu #contactUsEdit="matMenu" xPosition="before">
+                    <button mat-menu-item [routerLink]="['/contact-us/edit']">
+                        <mat-icon>edit</mat-icon>
+                        <span>Edit basic info</span>
+                    </button>
+                </mat-menu>
+                <mat-list-item class="contact-us-info">
+                    <div mat-line>
+                        <div class="contact-us-info-prop">Mobile</div>
+                        <div class="contact-us-info-value"> {{contactInfo.mobile}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="contact-us-info">
+                    <div mat-line>
+                        <div class="contact-us-info-prop">Whatsapp</div>
+                        <div class="contact-us-info-value"> {{contactInfo.whatsapp}}</div>
+                    </div>
+                </mat-list-item>
+                <mat-divider></mat-divider>
+                <mat-list-item class="contact-us-info">
+                    <div mat-line>
+                        <div class="contact-us-info-prop">Email</div>
+                        <div class="contact-us-info-value"> {{contactInfo.email}}</div>
+                    </div>
+                </mat-list-item>
+            </mat-list>
+        </div>
+    </div>
+</div>

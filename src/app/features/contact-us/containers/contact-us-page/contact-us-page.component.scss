@@ -1,0 +1,64 @@
+.contact-us {
+  padding: 1rem;
+
+  .mat-divider {
+    margin-left: 16px;
+    margin-right: 16px;
+  }
+
+  .contact-us-wrapper {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 800px;
+  }
+
+  .contact-us-card {
+    border-radius: 8px;
+    border: 1px solid #dadce0;
+    background-color: #fff;
+    box-sizing: border-box;
+    overflow: hidden;
+    width: 100%;
+    margin-top: 2rem;
+
+    .mat-subheader {
+      font-size: 1.375rem;
+      font-weight: 400;
+      letter-spacing: 0;
+      line-height: 1.75rem;
+      hyphens: auto;
+      word-break: break-word;
+      word-wrap: break-word;
+      color: #202124;
+      display: flex;
+      padding-right: 0;
+      justify-content: space-between;
+    }
+  }
+}
+
+.contact-us-info {
+  .contact-us-info-prop {
+    display: inline-block;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    color: rgba(0, 0, 0, 0.54);
+    margin-right: 20px;
+    min-width: 100px;
+  }
+
+  .contact-us-info-value {
+    display: inline-block;
+
+  }
+}
+
+.contact-us-info.contact-us-info--photo {
+  height: 90px;
+
+  .mat-line {
+    display: flex;
+    align-items: center;
+  }
+}

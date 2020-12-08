@@ -1,0 +1,60 @@
+<div class="profileform">
+    <div class="profileform-wrapper">
+        <div class="profileform-breadcrumb">
+            <button mat-icon-button [routerLink]="['/contact-us']">
+                <mat-icon>arrow_back</mat-icon>
+            </button>
+            <h1 class="profileform-title">Contact us info</h1>
+        </div>
+        <div class="profileform-card mat-elevation-z1">
+            <div mat-subheader>
+                <div>Basic Info</div>
+            </div>
+            <form class="form" [formGroup]="contactForm" (ngSubmit)="onSubmit()">
+                <mat-form-field class="form-field">
+                    <mat-label>Email *</mat-label>
+                    <input type="email" matInput formControlName="email">
+                    <mat-error
+                        *ngIf="contactFormControl.email.hasError('email') && !contactFormControl.email.hasError('required')">
+                        Please enter a valid email address
+                    </mat-error>
+                    <mat-error *ngIf="contactFormControl.email.hasError('required')">
+                        Email is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-field">
+                    <mat-label>Mobile number *</mat-label>
+                    <input matInput formControlName="mobile">
+                    <mat-error *ngIf="contactFormControl.mobile.hasError('required')">
+                        Mobile number is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+
+                <mat-form-field class="form-field">
+                    <mat-label>Whatsapp number *</mat-label>
+                    <input matInput formControlName="whatsapp">
+                    <mat-error *ngIf="contactFormControl.whatsapp.hasError('required')">
+                        Whatsapp number is <strong>required</strong>
+                    </mat-error>
+                </mat-form-field>
+                <div class="epform-card">
+                    <div class="form">
+                        <agm-map [latitude]="mapCoords.lat" [longitude]="mapCoords.lng" [disableDefaultUI]="false"
+                            (mapClick)="placeMarker($event)">
+                            <agm-marker [latitude]="marker.lat" [longitude]="marker.lng" [markerDraggable]="true"
+                                (dragEnd)="placeMarker($event)">
+                                <agm-info-window>
+                                    <strong>City location</strong>
+                                </agm-info-window>
+                            </agm-marker>
+                        </agm-map>
+                    </div>
+                </div>
+                <div class="form-submit">
+                    <button type="submit" color="primary" mat-raised-button>Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

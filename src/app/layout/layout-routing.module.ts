@@ -26,6 +26,7 @@ const routes: Routes = [
       { path: 'permissions', loadChildren: () => import('../features/permission/permission.module').then(m => m.PermissionModule) },
       // { path: 'settings', loadChildren: () => import('../features/settings/settings.module').then(m => m.SettingsModule) },
       { path: 'social-links', loadChildren: () => import('../features/social-links/social-links.module').then(m => m.SocialLinksModule) },
+      { path: 'contact-us', loadChildren: () => import('../features/contact-us/contact-us.module').then(m => m.ContactUsModule) },
       // { path: 'careers', loadChildren: () => import('../features/career/career.module').then(m => m.CareerModule) },
       { path: 'blog', loadChildren: () => import('../features/news/news.module').then(m => m.NewsModule) },
       { path: 'countries', loadChildren: () => import('../features/country/country.module').then(m => m.CountryModule) },
