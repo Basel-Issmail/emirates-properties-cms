@@ -43,47 +43,15 @@
                                 </mat-form-field>
                             </td>
                         </tr>
-                        <tr>
-                            <td colspan="2">
-                                <mat-form-field class="form-field">
-                                    <mat-label>Type *</mat-label>
-                                    <mat-select formControlName="type">
-                                        <mat-form-field class="autocomplete-form-field"
-                                            style="width: 100%;padding-bottom: 0;">
-                                            <input placeholder="Search" matInput [formControl]="typeFormControl"
-                                                type="text">
-                                        </mat-form-field>
-                                        <mat-option *ngFor="let type of filteredTypes$ | async" [value]="type.id">
-                                            {{type.name }}
-                                        </mat-option>
-                                    </mat-select>
-
-                                    <mat-error *ngIf="pagesFormControl.type.hasError('required')">
-                                        Type is <strong>required</strong>
-                                    </mat-error>
-                                </mat-form-field>
-                            </td>
-                            <!-- <td>
-                                <mat-form-field class="form-field">
-                                    <mat-label>Parent</mat-label>
-                                    <mat-select formControlName="parent_id">
-                                        <mat-form-field class="autocomplete-form-field"
-                                            style="width: 100%;padding-bottom: 0;">
-                                            <input placeholder="Search" matInput [formControl]="parentFormControl"
-                                                type="text">
-                                        </mat-form-field>
-                                        <mat-option *ngFor="let parent of filteredParents$ | async" [value]="parent.id">
-                                            {{parent.name }}
-                                        </mat-option>
-                                    </mat-select>
-                                </mat-form-field>
-                            </td> -->
-                        </tr>
                     </table>
-                    <mat-form-field class="form-field">
-                        <mat-label>Content</mat-label>
-                        <textarea matInput formControlName="content"></textarea>
-                    </mat-form-field>
+                </div>
+            </div>
+            <div class="epform-card">
+                <div mat-subheader>
+                    <div>Content</div>
+                </div>
+                <div class="form">
+                    <quill-editor [styles]="{height: '200px'}" formControlName="content"></quill-editor>
                 </div>
             </div>
             <div class="epform-card">
@@ -135,33 +103,6 @@
                         </mat-select>
                         <mat-error *ngIf="pagesFormControl.language.hasError('required')">
                             Language is <strong>required</strong>
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-slide-toggle (change)="clearPublishingInputs($event)" formControlName="publish_in_date"
-                        color="primary" [labelPosition]="'before'">
-                        Publish in date
-                    </mat-slide-toggle>
-
-                    <mat-form-field class="form-field">
-                        <mat-label>Publishing start date</mat-label>
-                        <input matInput [matDatepicker]="publishStartDatePicker" formControlName="publish_start_date"
-                            [disabled]="!pagesFormControl.publish_in_date.value">
-                        <mat-datepicker-toggle matSuffix [for]="publishStartDatePicker"></mat-datepicker-toggle>
-                        <mat-datepicker #publishStartDatePicker></mat-datepicker>
-                        <mat-error *ngIf="pagesFormControl.publish_start_date.hasError('required')">
-                            Publishing start date is <strong>required</strong>
-                        </mat-error>
-                    </mat-form-field>
-
-                    <mat-form-field class="form-field">
-                        <mat-label>Publishing end date</mat-label>
-                        <input matInput [matDatepicker]="publishEndDatePicker" formControlName="publish_end_date"
-                            [disabled]="!pagesFormControl.publish_in_date.value">
-                        <mat-datepicker-toggle matSuffix [for]="publishEndDatePicker"></mat-datepicker-toggle>
-                        <mat-datepicker #publishEndDatePicker></mat-datepicker>
-                        <mat-error *ngIf="pagesFormControl.publish_end_date.hasError('required')">
-                            Publishing end date is <strong>required</strong>
                         </mat-error>
                     </mat-form-field>
                 </div>

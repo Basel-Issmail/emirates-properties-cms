@@ -19,8 +19,8 @@ import { environment } from 'src/environments/environment';
 export class PagesFormComponent implements OnInit {
   pagesForm: FormGroup;
   emptyPagesObj = {
-    active: true, name: '', type: '', url: '', ident: '', content: '', heading: '', image: '', language: '', meta_description: '',
-    meta_title: '', parent_id: 0, publish_end_date: '', publish_start_date: '', sort_order: 0
+    active: true, name: '', url: '', ident: '', content: ' ', heading: '', image: '', language: '', meta_description: '',
+    meta_title: '', parent_id: 0, sort_order: 0
   };
   formType = null;
   FormTypes = FormTypes;
@@ -50,19 +50,15 @@ export class PagesFormComponent implements OnInit {
     this.pagesForm = this.fb.group({
       active: [true],
       name: ['', Validators.required],
-      type: ['', Validators.required],
       url: ['', Validators.required],
       ident: ['', Validators.required],
-      content: [''],
+      content: [' '],
       heading: [''],
       image: [''],
-      language: ['', Validators.required],
+      language: [''],
       meta_description: [''],
       meta_title: [''],
       parent_id: [0],
-      publish_end_date: [''],
-      publish_in_date: [true],
-      publish_start_date: [''],
       sort_order: [0],
     });
 
@@ -75,12 +71,6 @@ export class PagesFormComponent implements OnInit {
       this.pagesFormControl.url.setValue(url);
       this.pagesFormControl.meta_title.setValue(value);
     });
-
-    // autocomplete data
-    this.filteredTypes$ = this.typeFormControl.valueChanges.pipe(
-      startWith(''),
-      map(userInputValue => this.route.snapshot.data.buidler.type_list.
-        filter(itemObj => itemObj.name.toLowerCase().indexOf(userInputValue) === 0)));
 
     this.filteredParents$ = this.parentFormControl.valueChanges.pipe(
       startWith(''),
@@ -113,8 +103,6 @@ export class PagesFormComponent implements OnInit {
   get prcessedData() {
     return {
       ...this.pagesForm.value,
-      publish_start_date: (this.pagesFormControl.publish_start_date.value) ? moment(this.pagesFormControl.publish_start_date.value).format('YYYY-MM-DD') : '',
-      publish_end_date: (this.pagesFormControl.publish_end_date.value) ? moment(this.pagesFormControl.publish_end_date.value).format('YYYY-MM-DD') : '',
       image: (Array.isArray(this.images) && this.images.length > 0) ? this.images[0].path : ''
     }
   }

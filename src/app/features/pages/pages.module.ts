@@ -6,6 +6,7 @@ import { PagesTableComponent } from './containers/pages-table/pages-table.compon
 import { SharedModule } from 'src/app/shared/shared.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PagesFormComponent } from './containers/pages-form/pages-form.component';
+import { QuillModule } from 'ngx-quill';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { PagesFormComponent } from './containers/pages-form/pages-form.component
     PagesRoutingModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    QuillModule.forRoot()
   ]
 })
 export class PagesModule { }
