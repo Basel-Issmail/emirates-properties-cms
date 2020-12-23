@@ -19,7 +19,7 @@ import { MemberPasswordFormComponent } from './containers/member-password-form/m
     FormsModule,
     ReactiveFormsModule,
     AgmCoreModule.forRoot({
-      apiKey: 'AIzaSyA5PmefmUHSxICSAawq3mDYlI09Lb2sq9Q'
+      apiKey: 'AIzaSyAuK90MO4imqznsQZziJnQMcgnFDorupkU'
     }),
   ]
 })

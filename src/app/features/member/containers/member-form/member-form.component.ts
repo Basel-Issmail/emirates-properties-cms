@@ -117,9 +117,11 @@ export class MemberFormComponent implements OnInit {
   }
 
   markerDragEnd(m: Marker, $event) {
+    console.log($event);
+    
     const location = {
-      latitude: $event.latLng.lat(),
-      longitude: $event.latLng.lng()
+      latitude: $event.coords.lat,
+      longitude: $event.coords.lng
     };
     this.refreshLocation(location);
   }
